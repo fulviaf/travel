@@ -37,19 +37,39 @@
     body {
       font-family: 'Noto Sans TC', 'Plus Jakarta Sans', sans-serif;
       background-color: #f2fafb;
-      background-image: 
-        linear-gradient(to bottom, rgba(242, 250, 251, 0.88), rgba(235, 248, 248, 0.90), rgba(242, 250, 251, 0.92)),
-        url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=75');
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-      background-repeat: no-repeat;
       padding-bottom: calc(4.6rem + env(safe-area-inset-bottom, 16px));
       padding-top: env(safe-area-inset-top, 0px);
       min-height: 100vh;
       min-height: 100dvh;
       display: flex;
       flex-direction: column;
+      position: relative;
+    }
+
+    /* 🏖️ 專門解決 iOS / Web App 獨立全螢幕下背景無法 fixed 的固定圖層 */
+    .app-fixed-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100vw;
+      height: 100vh;
+      height: 100dvh;
+      z-index: -1;
+      pointer-events: none;
+      background-color: #f2fafb;
+      background-image: 
+        linear-gradient(to bottom, rgba(242, 250, 251, 0.88), rgba(235, 248, 248, 0.90), rgba(242, 250, 251, 0.92)),
+        url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=75');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      -webkit-transform: translateZ(0);
+      transform: translateZ(0);
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      will-change: transform;
     }
 
     /* 確保所有分頁在手機上永遠有足夠高度，防止短內容時導航欄浮起移位 */
@@ -102,6 +122,9 @@
   </style>
 </head>
 <body class="text-[#13353e] selection:bg-[#C1EAEA] selection:text-[#0b242b]">
+
+  <!-- 🏖️ 物理固定背景層 (保證 iOS 桌面 App 模式下背景紋絲不動) -->
+  <div class="app-fixed-bg" aria-hidden="true"></div>
 
   <!-- ==================== 頂部極簡手機 Header ==================== -->
   <header class="sticky top-0 z-30 bg-gradient-to-r from-[#C1EAEA] to-[#89C8EF] backdrop-blur-md border-b border-[#7cbfe6] shadow-xs px-4 py-3">
