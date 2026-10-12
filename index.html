@@ -8,7 +8,8 @@
   
   <!-- 📱 iOS 加至主畫面專用 Meta 設定與專屬高清 App Icon (直接指定 GitHub 實體 PNG) -->
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <!-- 改用 default 讓 iOS 時間與電量自動以深色/黑色字體清晰顯示，徹底告別反白撞色 -->
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="行程管家">
   <meta name="theme-color" content="#C1EAEA">
   <!-- 🌐 瀏覽器標籤頁專用 Favicon (解決地球仔圖標) -->
@@ -38,7 +39,8 @@
       font-family: 'Noto Sans TC', 'Plus Jakarta Sans', sans-serif;
       background-color: #f2fafb;
       padding-bottom: calc(4.6rem + env(safe-area-inset-bottom, 16px));
-      padding-top: calc(5.4rem + env(safe-area-inset-top, 0px));
+      /* 精準配合頂部固定 Header 高度，消除多餘空白 */
+      padding-top: calc(4.2rem + env(safe-area-inset-top, 24px));
       min-height: 100vh;
       min-height: 100dvh;
       display: flex;
@@ -95,7 +97,8 @@
       -webkit-backface-visibility: hidden;
       backface-visibility: hidden;
       will-change: transform;
-      padding-top: max(env(safe-area-inset-top, 0px), 10px);
+      /* 自動避開 iOS 狀態列/動態島，確保文字與按鈕穩穩處於可視安全區 */
+      padding-top: calc(env(safe-area-inset-top, 20px) + 4px);
     }
 
     /* 📱 底部固定導航欄硬體加速鎖定，杜絕 iOS / Android 滑動及切換時移位 */
@@ -142,9 +145,9 @@
   <!-- 🏖️ 物理固定背景層 (保證 iOS 桌面 App 模式下背景紋絲不動) -->
   <div class="app-fixed-bg" aria-hidden="true"></div>
 
-  <!-- ==================== 頂部極簡手機 Header (完美避開 iOS 時間/電量狀態列，實心顯色) ==================== -->
-  <header class="top-header-fixed bg-gradient-to-r from-[#a2e6e6] to-[#7fc2ec] border-b border-[#6cb1db] shadow-sm px-4 pb-2.5">
-    <div class="max-w-md mx-auto flex items-center justify-between pt-1">
+  <!-- ==================== 頂部極簡手機 Header (實心底色＋安全下移，杜絕狀態列重疊) ==================== -->
+  <header class="top-header-fixed bg-[#b2e8e8] border-b border-[#8ad3d3] shadow-xs px-4 pb-2">
+    <div class="max-w-md mx-auto flex items-center justify-between">
       <div class="flex items-center gap-2 min-w-0">
         <span class="text-2xl shrink-0">🌴</span>
         <div class="min-w-0">
@@ -154,7 +157,7 @@
       </div>
       <!-- 右側功能按鈕群：加至桌面 + 機票編號快速複製 (深色文字高對比度) -->
       <div class="flex items-center gap-1.5 shrink-0 ml-2">
-        <button id="pwa-install-btn" onclick="openModal('install-guide-modal')" class="bg-white/95 text-[#082a32] font-black text-xs px-2.5 py-1.5 rounded-xl border border-[#7cc7c7] shadow-xs flex items-center gap-1 active:bg-[#e4f7f7]">
+        <button id="pwa-install-btn" onclick="openModal('install-guide-modal')" class="bg-white text-[#082a32] font-black text-xs px-2.5 py-1.5 rounded-xl border border-[#7cc7c7] shadow-xs flex items-center gap-1 active:bg-[#e4f7f7]">
           <span>📲</span>
           <span class="hidden xs:inline">加至桌面</span>
           <span class="xs:hidden">安裝</span>
