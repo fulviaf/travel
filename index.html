@@ -11,7 +11,10 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="行程管家">
   <meta name="theme-color" content="#C1EAEA">
-  <link rel="icon" type="image/png" href="https://fulviaf.github.io/travel/apple-touch-icon.png">
+  <!-- 🌐 瀏覽器標籤頁專用 Favicon (解決地球仔圖標) -->
+  <link rel="shortcut icon" type="image/png" href="https://fulviaf.github.io/travel/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://fulviaf.github.io/travel/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="https://fulviaf.github.io/travel/apple-touch-icon.png">
   <link rel="apple-touch-icon" href="https://fulviaf.github.io/travel/apple-touch-icon.png">
   <link rel="apple-touch-icon" sizes="180x180" href="https://fulviaf.github.io/travel/apple-touch-icon.png">
   
@@ -26,6 +29,11 @@
       box-sizing: border-box;
     }
 
+    html {
+      height: 100%;
+      height: -webkit-fill-available;
+    }
+
     body {
       font-family: 'Noto Sans TC', 'Plus Jakarta Sans', sans-serif;
       background-color: #f2fafb;
@@ -36,8 +44,36 @@
       background-position: center;
       background-attachment: fixed;
       background-repeat: no-repeat;
-      padding-bottom: calc(4.2rem + env(safe-area-inset-bottom, 12px));
+      padding-bottom: calc(4.6rem + env(safe-area-inset-bottom, 16px));
       padding-top: env(safe-area-inset-top, 0px);
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* 確保所有分頁在手機上永遠有足夠高度，防止短內容時導航欄浮起移位 */
+    main {
+      flex: 1 0 auto;
+      min-height: calc(100dvh - 5.5rem);
+    }
+
+    .app-view {
+      min-height: calc(100dvh - 12rem);
+    }
+
+    /* 📱 底部固定導航欄硬體加速鎖定，杜絕 iOS / Android 滑動及切換時移位 */
+    .bottom-nav-fixed {
+      position: fixed !important;
+      bottom: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      width: 100% !important;
+      -webkit-transform: translateZ(0);
+      transform: translateZ(0);
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      will-change: transform;
     }
 
     .font-thai {
@@ -93,7 +129,7 @@
   </header>
 
   <!-- ==================== 主內容容器 (專為手機寬度 max-w-md 設計) ==================== -->
-  <main class="max-w-md mx-auto px-3.5 pt-3 space-y-4">
+  <main class="max-w-md mx-auto px-3.5 pt-3 space-y-4 w-full">
 
     <!-- ✈️ 來回航班摘要快捷膠囊 (手機大字易讀，去程＋回程齊全) -->
     <div class="bg-white/95 backdrop-blur-md rounded-2xl p-3 border border-[#cdeced] shadow-xs space-y-2 text-xs font-bold text-[#143d46]">
@@ -1052,7 +1088,7 @@
   </main>
 
   <!-- ==================== 📱 底部固定導航欄 (Bottom Navigation Bar) ==================== -->
-  <nav class="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-lg border-t border-[#ccebeb] shadow-lg pb-[env(safe-area-inset-bottom,8px)]">
+  <nav class="bottom-nav-fixed z-40 bg-white/95 backdrop-blur-lg border-t border-[#ccebeb] shadow-lg pb-[env(safe-area-inset-bottom,8px)]">
     <div class="max-w-md mx-auto grid grid-cols-4 h-[50px] items-center px-2">
       <!-- 導航 1: 行程 -->
       <button onclick="switchView('itinerary')" id="nav-itinerary" class="nav-item flex flex-col items-center justify-center h-full text-[#1b7382] font-black transition-all gap-0.5">
@@ -1491,7 +1527,8 @@
         activeNav.classList.add('text-[#1b7382]', 'font-black');
       }
 
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      // 即時回頂（避免長短分頁切換時產生平滑滾動計算誤差與跳動）
+      window.scrollTo(0, 0);
     }
 
     // ==================== 「給司機看」全螢幕大字體功能 ====================
