@@ -2,28 +2,45 @@
 <html lang="zh-HK">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🇹🇭 泰國芭堤雅＆曼谷 慢活家庭假期 2026</title>
+  <!-- 防止 iPhone 輸入文字時畫面無故縮放 (maximum-scale=1.0, user-scalable=no) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>🇹🇭 泰國旅行本</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Lucide Icons -->
-  <script src="https://unpkg.com/lucide@latest"></script>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800;900&family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Sans+Thai:wght@500;700;900&display=swap');
     
+    * {
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+      box-sizing: border-box;
+    }
+
     body {
       font-family: 'Noto Sans TC', 'Plus Jakarta Sans', sans-serif;
       background-color: #f2fafb;
-      /* 固定全螢幕芭堤雅海灘度假桌布 */
       background-image: 
         linear-gradient(to bottom, rgba(242, 250, 251, 0.88), rgba(235, 248, 248, 0.90), rgba(242, 250, 251, 0.92)),
-        url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80');
+        url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=75');
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
       background-repeat: no-repeat;
+      padding-bottom: calc(4.2rem + env(safe-area-inset-bottom, 12px));
+      padding-top: env(safe-area-inset-top, 0px);
     }
 
+    .font-thai {
+      font-family: 'Noto Sans Thai', sans-serif;
+    }
+
+    /* 嚴禁使用 Hover 偽類，純採用 active:scale 觸控回饋 */
+    button:active, a:active {
+      transform: scale(0.97);
+      opacity: 0.92;
+    }
+
+    /* 隱藏滾動條 */
     .scrollbar-none::-webkit-scrollbar {
       display: none;
     }
@@ -31,1770 +48,945 @@
       -ms-overflow-style: none;
       scrollbar-width: none;
     }
+
+    /* 防止 iOS 輸入框聚焦時自動放大 (字型至少 16px) */
+    input, textarea, select {
+      font-size: 16px !important;
+    }
   </style>
 </head>
-<body class="min-h-screen text-[#163840] pb-20 selection:bg-[#C1EAEA] selection:text-[#112d33]">
+<body class="text-[#13353e] selection:bg-[#C1EAEA] selection:text-[#0b242b]">
 
-  <!-- 頂部 Hero 橫幅：#C1EAEA 晨曦清透漸層風格 -->
-  <header class="relative bg-gradient-to-r from-[#bde7e7] via-[#cbf0f0] to-[#e2f7f7] text-[#13353e] shadow-md border-b border-[#aee2e2]">
-    <div class="max-w-4xl mx-auto px-4 py-8 sm:py-10">
-      
-      <!-- 標籤與副標題 -->
-      <div class="inline-flex items-center gap-2 bg-white/70 backdrop-blur-md px-3.5 py-1 rounded-full text-xs sm:text-sm font-bold text-[#1a4a54] mb-3 border border-white/60 shadow-sm">
-        <span>🌴 慢活渡假模式</span>
-        <span>•</span>
-        <span>14/10 - 18/10/2026 (5天4夜)</span>
-      </div>
-
-      <h1 class="text-3xl sm:text-4xl font-black tracking-tight text-[#0f2e37] mb-2">
-        泰國芭堤雅＋曼谷慢活假期
-      </h1>
-      
-      <p class="text-[#245763] text-sm sm:text-base font-semibold">
-        節奏從容・悠然享受專屬家庭時光
-      </p>
-
-      <!-- 快速航班資訊卡 -->
-      <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3.5 text-xs sm:text-sm">
-        <!-- 去程卡片 -->
-        <div class="bg-white/80 backdrop-blur-md border border-white/80 rounded-2xl p-3.5 flex items-center justify-between shadow-sm">
-          <div>
-            <div class="text-[11px] font-bold text-[#356f7c] flex items-center gap-1">
-              <i data-lucide="plane-takeoff" class="w-3.5 h-3.5 text-[#1b7382]"></i>
-              去程 • 14/10 (Wed) 國泰 CX717
-            </div>
-            <div class="text-base font-extrabold text-[#0f2e37] mt-0.5">09:00 HKG ➔ 11:00 BKK</div>
-          </div>
-          <button onclick="copyRef('FT6JYI')" class="bg-[#C1EAEA] hover:bg-[#aee0e0] text-[#0f343c] font-black text-xs px-2.5 py-1.5 rounded-xl border border-[#9edada] shadow-sm transition active:scale-95 flex items-center gap-1">
-            <i data-lucide="copy" class="w-3 h-3"></i>
-            <span id="copy-btn-text">Ref: FT6JYI</span>
-          </button>
+  <!-- ==================== 頂部極簡手機 Header ==================== -->
+  <header class="sticky top-0 z-30 bg-[#C1EAEA]/95 backdrop-blur-md border-b border-[#a4dddd] shadow-xs px-4 py-3">
+    <div class="max-w-md mx-auto flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <span class="text-2xl">🌴</span>
+        <div>
+          <h1 class="text-base font-black text-[#0c2e36] tracking-tight leading-tight">泰國慢活家庭假期</h1>
+          <p class="text-[11px] font-bold text-[#235864]">芭堤雅＆曼谷 • 14/10 - 18/10/2026</p>
         </div>
-
-        <!-- 回程卡片 -->
-        <div class="bg-white/80 backdrop-blur-md border border-white/80 rounded-2xl p-3.5 flex items-center justify-between shadow-sm">
-          <div>
-            <div class="text-[11px] font-bold text-[#356f7c] flex items-center gap-1">
-              <i data-lucide="plane-landing" class="w-3.5 h-3.5 text-[#1b7382]"></i>
-              回程 • 18/10 (Sun) 國泰 CX654
-            </div>
-            <div class="text-base font-extrabold text-[#0f2e37] mt-0.5">15:00 BKK ➔ 18:50 HKG</div>
-          </div>
-          <span class="text-xs bg-[#ead9c1] text-[#4d381c] font-extrabold px-2.5 py-1 rounded-xl border border-[#ded0b9]">
-          免趕急
-        </span>
       </div>
+      <!-- 機票編號快速一鍵複製按鈕 (大拇指友好) -->
+      <button onclick="copyRef('FT6JYI')" class="bg-white text-[#0f343c] font-black text-xs px-3 py-2 rounded-xl border border-[#9ddada] shadow-xs flex items-center gap-1.5 active:bg-[#e4f7f7]">
+        <svg class="w-3.5 h-3.5 text-[#1b7382]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+        <span id="header-ref-text">FT6JYI</span>
+      </button>
     </div>
-
   </header>
 
-  <main class="max-w-4xl mx-auto px-4 mt-6 space-y-6">
+  <!-- ==================== 主內容容器 (專為手機寬度 max-w-md 設計) ==================== -->
+  <main class="max-w-md mx-auto px-3.5 pt-3 space-y-4">
 
-    <!-- 狀態 Dashboard & 實用小工具 (4 列佈局) -->
-    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-      <!-- 機場接機 -->
-      <button onclick="openModal('pickup-modal')" class="bg-white/90 backdrop-blur-md p-3.5 rounded-2xl shadow-sm border border-[#d6eff0] hover:shadow-md hover:border-[#aee2e2] transition text-left group">
-        <div class="text-xs text-[#527d86] font-medium group-hover:text-[#163840] transition">Day 1 機場接送</div>
-        <div class="text-sm font-black text-[#134954] mt-1 flex items-center justify-between">
-          <span>Gate 4 接機</span>
-          <span class="text-[10px] bg-[#C1EAEA]/50 text-[#0d404b] font-extrabold px-1.5 py-0.5 rounded border border-[#a6dede]">指引</span>
-        </div>
-      </button>
+    <!-- ✈️ 來回航班摘要快捷膠囊 (手機大字易讀，去程＋回程齊全) -->
+    <div class="bg-white/95 backdrop-blur-md rounded-2xl p-3 border border-[#cdeced] shadow-xs space-y-2 text-xs font-bold text-[#143d46]">
+      <!-- 去程 -->
+      <div class="flex items-center gap-2">
+        <span class="bg-[#dcf4f4] text-[#0d454f] text-[10px] font-black px-2 py-0.5 rounded-md shrink-0">去程 14/10</span>
+        <span class="text-[11px] sm:text-xs">CX717 (09:00 HKG ➔ 11:00 BKK)</span>
+      </div>
+      <!-- 分隔微線 -->
+      <div class="border-t border-[#e2f3f4]"></div>
+      <!-- 回程 -->
+      <div class="flex items-center gap-2">
+        <span class="bg-[#e4f7f7] text-[#0b4d59] text-[10px] font-black px-2 py-0.5 rounded-md shrink-0">回程 18/10</span>
+        <span class="text-[11px] sm:text-xs">CX654 (15:00 BKK ➔ 18:50 HKG)</span>
+      </div>
+    </div>
 
-      <!-- The Sky Gallery 預約 -->
-      <div class="bg-white/90 backdrop-blur-md p-3.5 rounded-2xl shadow-sm border border-[#ecd9c3] relative overflow-hidden">
-        <div class="text-xs text-[#8c6b45] font-medium">Day 2 懸崖晚餐</div>
-        <div class="text-sm font-black text-[#8f581c] mt-1">18:00 C47 枱</div>
-        <div class="text-[10px] text-[#785936] mt-0.5 font-medium">已包 THB 3000 券</div>
+    <!-- ==================== 頁面視圖 1: 行程表 (預設顯示) ==================== -->
+    <section id="view-itinerary" class="app-view space-y-3.5">
+      
+      <!-- 🗓️ 水平滑動的日程切換膠囊 (大按鈕，單手拇指好按) -->
+      <div class="flex items-center gap-2 overflow-x-auto scrollbar-none py-1">
+        <button onclick="filterDay('all')" id="tab-all" class="day-tab flex-1 min-w-[76px] py-2.5 px-3 rounded-2xl text-xs font-black text-center bg-[#13353e] text-white shadow-xs border border-[#13353e]">
+          全部
+        </button>
+        <button onclick="filterDay(1)" id="tab-1" class="day-tab flex-1 min-w-[76px] py-2.5 px-3 rounded-2xl text-xs font-black text-center bg-white/90 text-[#255b66] border border-[#cbebeb] shadow-xs">
+          Day 1
+        </button>
+        <button onclick="filterDay(2)" id="tab-2" class="day-tab flex-1 min-w-[76px] py-2.5 px-3 rounded-2xl text-xs font-black text-center bg-white/90 text-[#255b66] border border-[#cbebeb] shadow-xs">
+          Day 2
+        </button>
+        <button onclick="filterDay(3)" id="tab-3" class="day-tab flex-1 min-w-[76px] py-2.5 px-3 rounded-2xl text-xs font-black text-center bg-white/90 text-[#255b66] border border-[#cbebeb] shadow-xs">
+          Day 3
+        </button>
+        <button onclick="filterDay(4)" id="tab-4" class="day-tab flex-1 min-w-[76px] py-2.5 px-3 rounded-2xl text-xs font-black text-center bg-white/90 text-[#255b66] border border-[#cbebeb] shadow-xs">
+          Day 4
+        </button>
+        <button onclick="filterDay(5)" id="tab-5" class="day-tab flex-1 min-w-[76px] py-2.5 px-3 rounded-2xl text-xs font-black text-center bg-white/90 text-[#255b66] border border-[#cbebeb] shadow-xs">
+          Day 5
+        </button>
       </div>
 
-      <!-- 匯率換算機 (1฿ ≈ $0.23 / 實算 0.2369) -->
-      <div class="bg-white/90 backdrop-blur-md p-3.5 rounded-2xl shadow-sm border border-[#d6eff0] flex flex-col justify-between">
+      <!-- 🌤️ 當地天氣與時差穿搭提示 (手機大字版) -->
+      <div class="bg-white/95 backdrop-blur-md rounded-2xl p-3.5 border border-[#cdeced] shadow-xs space-y-2">
         <div class="flex items-center justify-between">
-          <span class="text-xs text-[#527d86] font-medium">泰銖匯率換算</span>
-          <span class="text-[10px] text-[#0d404b] bg-[#C1EAEA]/60 px-1.5 py-0.5 rounded font-bold border border-[#a6dede]">1฿ ≈ $0.23</span>
-        </div>
-        <div class="flex items-center gap-1 mt-1.5">
-          <input type="number" id="thb-input" value="1000" oninput="calcExchange()" class="w-16 text-xs font-bold border border-[#c1e2e4] rounded-lg px-1.5 py-1 focus:outline-[#1b7382] bg-white text-[#163840]" placeholder="THB">
-          <span class="text-[11px] text-[#69919a]">฿ ≈</span>
-          <span id="hkd-result" class="text-xs font-black text-[#134954]">HK$236.90</span>
-        </div>
-      </div>
-
-      <!-- 預約清單彈窗 -->
-      <button onclick="openModal('booking-modal')" class="bg-white/90 backdrop-blur-md p-3.5 rounded-2xl shadow-sm border border-[#d6eff0] hover:shadow-md hover:border-[#aee2e2] transition text-left group">
-        <div class="text-xs text-[#527d86] font-medium group-hover:text-[#163840] transition">行程預約狀態</div>
-        <div class="text-sm font-black text-[#235882] mt-1 flex items-center justify-between">
-          <span>預訂總覽</span>
-          <span class="text-[10px] bg-[#dbeefe] text-[#1e40af] font-extrabold px-1.5 py-0.5 rounded border border-[#bfdbfe]">清單</span>
-        </div>
-      </button>
-    </div>
-
-    <!-- 📍 雙欄即時工具：左側美食雷達 + 右側 Grab 叫車 (iOS) -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
-      <!-- 左邊：所在地周邊美食雷達 -->
-      <div class="bg-gradient-to-r from-[#fef9c3]/90 via-[#fffbeb]/90 to-[#fef3c7]/90 backdrop-blur-md border border-[#fef08a] rounded-2xl p-3 sm:p-3.5 shadow-sm flex items-center justify-between gap-2.5">
-        <div class="flex items-center gap-2.5 min-w-0">
-          <div class="w-9 h-9 rounded-xl bg-[#fde047]/60 flex items-center justify-center text-lg shadow-xs shrink-0">
-            🍽️
-          </div>
-          <div class="min-w-0">
-            <div class="text-xs sm:text-sm font-black text-[#713f12] flex items-center gap-1.5">
-              <span class="truncate">周邊美食雷達</span>
-              <span class="text-[10px] bg-[#ca8a04] text-white px-1.5 py-0.2 rounded-md font-bold shrink-0">即時 GPS</span>
-            </div>
-            <div class="text-[11px] text-[#854d0e] truncate">GPS 探索身邊高分泰菜與咖啡廳</div>
-          </div>
-        </div>
-        <button onclick="findMyNearbyFood()" class="shrink-0 bg-[#eab308] hover:bg-[#ca8a04] text-[#422006] hover:text-white font-black text-xs px-3 py-2 rounded-xl transition shadow-sm border border-[#facc15] flex items-center gap-1 active:scale-95">
-          <i data-lucide="compass" class="w-3.5 h-3.5"></i>
-          <span>搵美食</span>
-        </button>
-      </div>
-
-      <!-- 右邊：Grab 即時叫車按鈕 (iOS App) -->
-      <div class="bg-gradient-to-r from-[#ecfdf5]/90 via-[#f0fdf4]/90 to-[#dcfce7]/90 backdrop-blur-md border border-[#a7f3d0] rounded-2xl p-3 sm:p-3.5 shadow-sm flex items-center justify-between gap-2.5">
-        <div class="flex items-center gap-2.5 min-w-0">
-          <div class="w-9 h-9 rounded-xl bg-[#34d399]/30 flex items-center justify-center text-lg shadow-xs shrink-0">
-            🚕
-          </div>
-          <div class="min-w-0">
-            <div class="text-xs sm:text-sm font-black text-[#065f46] flex items-center gap-1.5">
-              <span class="truncate">Grab 專車接送</span>
-              <span class="text-[10px] bg-[#059669] text-white px-1.5 py-0.2 rounded-md font-bold shrink-0">iOS App</span>
-            </div>
-            <div class="text-[11px] text-[#047857] truncate">泰國點對點即時叫車／免講價直達</div>
-          </div>
-        </div>
-        <button onclick="openGrabApp()" class="shrink-0 bg-[#00B14F] hover:bg-[#009643] text-white font-black text-xs px-3.5 py-2 rounded-xl transition shadow-sm border border-[#009643] flex items-center gap-1.5 active:scale-95">
-          <i data-lucide="car" class="w-3.5 h-3.5"></i>
-          <span>打開 Grab</span>
-        </button>
-      </div>
-    </div>
-
-    <!-- 雙五星住宿資訊 (附 Google Maps 連結、泰文地址與一鍵複製) -->
-    <div class="bg-white/95 backdrop-blur-md rounded-3xl p-5 shadow-sm border border-[#cdeced]">
-      <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
-        <div class="flex items-center gap-2">
-          <span class="text-xl">🏨</span>
-          <div>
-            <h2 class="text-base sm:text-lg font-black text-[#0f2e37]">雙五星住宿資訊</h2>
-            <p class="text-[11px] text-[#527d86]">點擊即可開啟 Google Maps 導航，或一鍵複製泰文地址出示給專車司機</p>
-          </div>
-        </div>
-        <span class="text-xs bg-[#e4f7f7] text-[#0d4d59] font-black px-2.5 py-1 rounded-xl border border-[#c1eaea]">2 晚芭堤雅 + 2 晚曼谷</span>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <!-- 芭堤雅 Hilton -->
-        <div class="bg-[#f7fdfd] border border-[#cdeced] rounded-2xl p-4 flex flex-col justify-between hover:border-[#9edada] hover:shadow-sm transition">
-          <div class="space-y-2.5">
-            <div class="flex items-center justify-between">
-              <span class="text-[11px] font-black text-[#134954] bg-[#C1EAEA]/60 px-2 py-0.5 rounded-md border border-[#a6dede]">
-                🏖️ 芭堤雅 (Pattaya) • 14/10 - 16/10 (2晚)
-              </span>
-              <span class="text-[11px] text-amber-700 font-bold flex items-center gap-0.5">
-                ★ 4.6 全海景
-              </span>
-            </div>
+          <div class="flex items-center gap-2">
+            <span class="text-xl" id="weather-icon">🌤️</span>
             <div>
-              <h3 class="text-base font-black text-[#0f2e37]">Hilton Pattaya（芭堤雅希爾頓酒店）</h3>
-              <p class="text-[11px] text-[#527d86] mt-0.5">直通 Central Pattaya 購物中心上蓋，海景無邊際泳池</p>
-            </div>
-            
-            <!-- 地址與泰文司機專用資訊 -->
-            <div class="text-xs text-slate-600 bg-white/90 p-3 rounded-xl border border-slate-100 space-y-2">
-              <div class="flex items-start gap-1.5">
-                <span class="font-bold text-[#134954] shrink-0">📍 英文地址：</span>
-                <span class="leading-relaxed text-[11px]">333/101 Moo 9 Nongprue, Bang Lamung, Chon Buri 20260</span>
-              </div>
-              <div class="flex items-start justify-between gap-1.5 pt-1.5 border-t border-slate-100 bg-[#f0fbfb]/50 p-2 rounded-lg">
-                <div class="leading-relaxed text-[11px] text-slate-700">
-                  <span class="font-bold text-[#134954]">🚕 司機泰文：</span><br>
-                  <span id="pattaya-addr-th">โรงแรมฮิลตัน พัทยา 333/101 หมู่ 9 ต.หนองปรือ อ.บางละมุง จ.ชลบุรี 20260</span>
-                </div>
-                <button onclick="copyAddress('pattaya-addr-th', this)" class="shrink-0 bg-[#C1EAEA] hover:bg-[#aee0e0] text-[#0f343c] font-black text-[10px] px-2 py-1 rounded-md border border-[#9edada] shadow-xs transition active:scale-95">
-                  📋 複製
-                </button>
-              </div>
-              <div class="flex items-center gap-1.5 text-[11px] text-slate-500 pt-0.5">
-                <span class="font-bold text-[#134954]">📞 前台電話：</span>
-                <a href="tel:+6638253000" class="hover:text-[#1b7382] underline font-semibold">+66 38 253 000</a>
+              <div class="text-xs font-black text-[#0f2e37]" id="weather-city-title">芭堤雅 即時天氣</div>
+              <div class="text-[10px] text-[#55828c]">
+                泰國時間 <span id="thai-local-time" class="font-extrabold text-[#0e3b44]">--:--</span> (慢香港 1 小時)
               </div>
             </div>
           </div>
-
-          <div class="mt-3 pt-2">
-            <a href="https://maps.google.com/?cid=248139876403356248" target="_blank" rel="noopener noreferrer" class="w-full bg-[#C1EAEA] hover:bg-[#aee0e0] text-[#0f343c] font-black text-xs py-2 px-3 rounded-xl transition flex items-center justify-center gap-1.5 shadow-sm border border-[#9edada]">
-              <i data-lucide="map-pin" class="w-3.5 h-3.5 text-[#0d404b]"></i>
-              <span>開啟 Google Maps 導航 (芭堤雅 Hilton)</span>
-            </a>
-          </div>
-        </div>
-
-        <!-- 曼谷 Grande Centre Point Prestige -->
-        <div class="bg-[#f7fdfd] border border-[#cdeced] rounded-2xl p-4 flex flex-col justify-between hover:border-[#9edada] hover:shadow-sm transition">
-          <div class="space-y-2.5">
-            <div class="flex items-center justify-between">
-              <span class="text-[11px] font-black text-[#134954] bg-[#C1EAEA]/60 px-2 py-0.5 rounded-md border border-[#a6dede]">
-                🏙️ 曼谷 (Bangkok) • 16/10 - 18/10 (2晚)
-              </span>
-              <span class="text-[11px] text-amber-700 font-bold flex items-center gap-0.5">
-                ★ 4.7 頂級旗艦
-              </span>
-            </div>
-            <div>
-              <h3 class="text-base font-black text-[#0f2e37]">Grande Centre Point Prestige Bangkok（曼谷臻尚格蘭德中心點酒店）</h3>
-              <p class="text-[11px] text-[#527d86] mt-0.5">步行 2-3 分鐘直達四面佛與 CentralWorld，大堂享免費茶點</p>
-            </div>
-
-            <!-- 地址與泰文司機專用資訊 -->
-            <div class="text-xs text-slate-600 bg-white/90 p-3 rounded-xl border border-slate-100 space-y-2">
-              <div class="flex items-start gap-1.5">
-                <span class="font-bold text-[#134954] shrink-0">📍 英文地址：</span>
-                <span class="leading-relaxed text-[11px]">153 Ratchadamri Rd, Khwaeng Lumphini, Pathum Wan, Bangkok 10330</span>
-              </div>
-              <div class="flex items-start justify-between gap-1.5 pt-1.5 border-t border-slate-100 bg-[#f0fbfb]/50 p-2 rounded-lg">
-                <div class="leading-relaxed text-[11px] text-slate-700">
-                  <span class="font-bold text-[#134954]">🚕 司機泰文：</span><br>
-                  <span id="bangkok-addr-th">โรงแรม แกรนด์ เซนเตอร์ พอยต์ เพรสทีจ 153 ถนนราชดำริห์ แขวงลุมพินี เขตปทุมวัน กรุงเทพฯ 10330</span>
-                </div>
-                <button onclick="copyAddress('bangkok-addr-th', this)" class="shrink-0 bg-[#C1EAEA] hover:bg-[#aee0e0] text-[#0f343c] font-black text-[10px] px-2 py-1 rounded-md border border-[#9edada] shadow-xs transition active:scale-95">
-                  📋 複製
-                </button>
-              </div>
-              <div class="flex items-center gap-1.5 text-[11px] text-slate-500 pt-0.5">
-                <span class="font-bold text-[#134954]">📞 前台電話：</span>
-                <a href="tel:+6621241888" class="hover:text-[#1b7382] underline font-semibold">+66 2 124 1888</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="mt-3 pt-2">
-            <a href="https://maps.google.com/?cid=16879076745552941477" target="_blank" rel="noopener noreferrer" class="w-full bg-[#C1EAEA] hover:bg-[#aee0e0] text-[#0f343c] font-black text-xs py-2 px-3 rounded-xl transition flex items-center justify-center gap-1.5 shadow-sm border border-[#9edada]">
-              <i data-lucide="map-pin" class="w-3.5 h-3.5 text-[#0d404b]"></i>
-              <span>開啟 Google Maps 導航 (曼谷 Grande Centre Point)</span>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Gemini AI 智慧伴遊專區 -->
-    <div class="bg-gradient-to-r from-white/90 via-[#f0fbfb]/90 to-white/90 backdrop-blur-md border border-[#c4e8e8] rounded-3xl p-5 shadow-sm">
-      <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
-        <div>
-          <div class="inline-flex items-center gap-1.5 bg-[#C1EAEA] text-[#0f3b44] px-2.5 py-1 rounded-full text-xs font-bold border border-[#a3dede]">
-            <span>✨ Gemini AI 智慧伴遊助手</span>
-          </div>
-          <h2 class="text-base sm:text-lg font-black mt-1 text-[#0f2e37]">家庭旅遊智能工具包</h2>
-        </div>
-        <div class="text-[11px] text-[#527d86] font-medium">家庭同行・點餐／避塞車／即時應變</div>
-      </div>
-
-      <!-- AI 工具卡片按鈕 (4 列佈局) -->
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-        <!-- 1. AI 行程管家 -->
-        <button onclick="openAiFeature('advisor')" class="bg-white hover:bg-[#eaf8f8] border border-[#c9ebeb] active:scale-95 rounded-2xl p-3 text-left transition shadow-sm flex flex-col justify-between">
-          <div class="text-2xl mb-1">🤖</div>
-          <div>
-            <div class="text-xs font-bold text-[#0f2e37]">慢活 AI 管家</div>
-            <div class="text-[10px] text-[#527d86]">全家同行・彈性排程</div>
-          </div>
-        </button>
-
-        <!-- 2. 泰語發音 TTS -->
-        <button onclick="openAiFeature('tts')" class="bg-white hover:bg-[#eaf8f8] border border-[#c9ebeb] active:scale-95 rounded-2xl p-3 text-left transition shadow-sm flex flex-col justify-between">
-          <div class="text-2xl mb-1">🔊</div>
-          <div>
-            <div class="text-xs font-bold text-[#0f2e37]">實用語音念泰文</div>
-            <div class="text-[10px] text-[#527d86]">點餐／問路／按摩</div>
-          </div>
-        </button>
-
-        <!-- 3. 菜單視覺翻譯 -->
-        <button onclick="openAiFeature('vision')" class="bg-white hover:bg-[#eaf8f8] border border-[#c9ebeb] active:scale-95 rounded-2xl p-3 text-left transition shadow-sm flex flex-col justify-between">
-          <div class="text-2xl mb-1">📸</div>
-          <div>
-            <div class="text-xs font-bold text-[#0f2e37]">菜單拍照解讀</div>
-            <div class="text-[10px] text-[#8c6b45]">辨識熟食・風味提醒</div>
-          </div>
-        </button>
-
-        <!-- 4. 塞車／突發「B計劃」雷達 -->
-        <button onclick="openAiFeature('planb')" class="bg-white hover:bg-[#eaf8f8] border border-[#c9ebeb] active:scale-95 rounded-2xl p-3 text-left transition shadow-sm flex flex-col justify-between">
-          <div class="text-2xl mb-1">🚕</div>
-          <div>
-            <div class="text-xs font-bold text-[#0f2e37]">「B計劃」應變雷達</div>
-            <div class="text-[10px] text-[#527d86]">塞車避堵・就近歇腳</div>
-          </div>
-        </button>
-      </div>
-    </div>
-
-    <!-- 日程切換 Tab：水滴毛玻璃膠囊 Dock -->
-    <div class="bg-white/80 backdrop-blur-md p-1.5 sm:p-2 rounded-2xl sm:rounded-3xl border border-[#cdeced] shadow-sm flex items-center gap-1.5 overflow-x-auto scrollbar-none">
-      <button onclick="filterDay('all')" id="tab-all" class="day-tab flex items-center gap-1.5 px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl sm:rounded-2xl text-xs sm:text-sm font-black bg-gradient-to-r from-[#b6e7e7] to-[#ccf2f2] text-[#0a353e] shadow-sm border border-[#8fd7d7] ring-2 ring-[#c1eaea]/50 transition-all duration-200 whitespace-nowrap active:scale-95">
-        <span>🗓️</span>
-        <span>全部總覽</span>
-      </button>
-      <button onclick="filterDay(1)" id="tab-1" class="day-tab flex items-center gap-1.5 px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl sm:rounded-2xl text-xs sm:text-sm font-bold text-[#456d75] hover:text-[#0b3842] hover:bg-white/90 border border-transparent hover:border-[#cdeced] transition-all duration-200 whitespace-nowrap active:scale-95">
-        <span>🌊</span>
-        <span>Day 1 <span class="text-[11px] font-medium opacity-80">(14/10)</span></span>
-      </button>
-      <button onclick="filterDay(2)" id="tab-2" class="day-tab flex items-center gap-1.5 px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl sm:rounded-2xl text-xs sm:text-sm font-bold text-[#456d75] hover:text-[#0b3842] hover:bg-white/90 border border-transparent hover:border-[#cdeced] transition-all duration-200 whitespace-nowrap active:scale-95">
-        <span>🌅</span>
-        <span>Day 2 <span class="text-[11px] font-medium opacity-80">(15/10)</span></span>
-      </button>
-      <button onclick="filterDay(3)" id="tab-3" class="day-tab flex items-center gap-1.5 px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl sm:rounded-2xl text-xs sm:text-sm font-bold text-[#456d75] hover:text-[#0b3842] hover:bg-white/90 border border-transparent hover:border-[#cdeced] transition-all duration-200 whitespace-nowrap active:scale-95">
-        <span>🛕</span>
-        <span>Day 3 <span class="text-[11px] font-medium opacity-80">(16/10)</span></span>
-      </button>
-      <button onclick="filterDay(4)" id="tab-4" class="day-tab flex items-center gap-1.5 px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl sm:rounded-2xl text-xs sm:text-sm font-bold text-[#456d75] hover:text-[#0b3842] hover:bg-white/90 border border-transparent hover:border-[#cdeced] transition-all duration-200 whitespace-nowrap active:scale-95">
-        <span>🛍️</span>
-        <span>Day 4 <span class="text-[11px] font-medium opacity-80">(17/10)</span></span>
-      </button>
-      <button onclick="filterDay(5)" id="tab-5" class="day-tab flex items-center gap-1.5 px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl sm:rounded-2xl text-xs sm:text-sm font-bold text-[#456d75] hover:text-[#0b3842] hover:bg-white/90 border border-transparent hover:border-[#cdeced] transition-all duration-200 whitespace-nowrap active:scale-95">
-        <span>✈️</span>
-        <span>Day 5 <span class="text-[11px] font-medium opacity-80">(18/10)</span></span>
-      </button>
-    </div>
-
-    <!-- 🌤️ 當地即時天氣、時差與行程穿搭建議 Widget (依所選日程自動更新城市與貼士) -->
-    <div id="weather-outfit-widget" class="bg-gradient-to-r from-white/95 via-[#f0fbfb]/95 to-white/95 backdrop-blur-md rounded-3xl p-4 sm:p-5 shadow-sm border border-[#cdeced] space-y-3">
-      <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-2.5">
-        <div class="flex items-center gap-2">
-          <span class="text-2xl" id="weather-icon">🌤️</span>
-          <div>
-            <div class="flex items-center gap-2">
-              <h3 class="text-xs sm:text-sm font-black text-[#0f2e37]" id="weather-city-title">芭堤雅 (Pattaya) 當地即時天氣</h3>
-              <span class="text-[10px] bg-[#e4f7f7] text-[#0d4d59] font-bold px-2 py-0.5 rounded-md border border-[#c1eaea]" id="weather-tag">海島微風</span>
-            </div>
-            <div class="text-[11px] text-[#527d86] flex items-center gap-2 mt-0.5">
-              <span>🕒 泰國時間：<strong id="thai-local-time" class="text-[#0f2e37] font-bold">--:--</strong></span>
-              <span class="text-slate-300">•</span>
-              <span class="text-[#134954] font-medium">比香港慢 1 小時 (GMT+7)</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="flex items-center gap-3 bg-white/90 px-3 py-1.5 rounded-2xl border border-[#d6eff0] shadow-xs">
           <div class="text-right">
-            <div class="text-xs sm:text-sm font-black text-[#0f2e37]" id="weather-temp-display">--°C</div>
-            <div class="text-[10px] text-[#527d86]" id="weather-condition-text">載入天氣中...</div>
+            <span class="text-sm font-black text-[#0f2e37]" id="weather-temp-display">29°C</span>
+            <div class="text-[10px] text-[#4d7b85]" id="weather-condition-text">晴時多雲</div>
           </div>
-          <button onclick="refreshCurrentWeather()" title="更新即時天氣" class="text-[#1b7382] hover:text-[#0f343c] p-1 rounded-lg hover:bg-[#e4f7f7] transition active:scale-95">
-            <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
-          </button>
+        </div>
+        <div class="bg-[#f0fbfb] p-2.5 rounded-xl border border-[#c7ebeb] text-[11px] text-slate-700 leading-relaxed">
+          <strong class="text-[#0d4d59]" id="outfit-title">穿搭貼士：</strong>
+          <span id="outfit-detail">車廂冷氣充足必備薄外套；著舒適平底健步鞋。</span>
         </div>
       </div>
 
-      <!-- 當天行程行李與穿搭建議 -->
-      <div class="bg-[#f7fdfd] rounded-2xl p-3 border border-[#cdeced] flex items-start gap-2.5 text-xs text-slate-700">
-        <div class="text-lg shrink-0 mt-0.5">🧳</div>
-        <div class="space-y-1">
-          <div class="font-bold text-[#134954] flex items-center gap-1.5">
-            <span id="outfit-title">Day 1 行李與穿搭建議</span>
-            <span class="text-[10px] bg-[#C1EAEA]/50 text-[#0d404b] font-bold px-1.5 py-0.2 rounded">行程專屬提醒</span>
-          </div>
-          <p id="outfit-detail" class="text-slate-600 leading-relaxed text-[11px] sm:text-xs">
-            機艙與冷氣專車必備輕薄外套保暖；海島日間氣候暖和（約29°C），抵達酒店後建議換穿透氣休閒服與防滑平底鞋，輕鬆漫步商場。
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <!-- 行程卡片列表 (Day 1 - 5) -->
-    <div id="itinerary-cards" class="space-y-4">
-
-      <!-- DAY 1 -->
-      <div class="day-card bg-white/95 backdrop-blur-md rounded-3xl p-5 sm:p-6 shadow-sm border border-[#cdeced] transition hover:shadow-md" data-day="1">
-        <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
-          <div>
-            <span class="text-xs font-extrabold text-[#0d4d59] bg-[#e4f7f7] px-2.5 py-1 rounded-full border border-[#c1eaea]">DAY 1 • 14/10 (三)</span>
-            <h2 class="text-base sm:text-lg font-black text-[#0f2e37] mt-1.5">香港飛曼谷 ➔ 直奔芭堤雅 Hilton 全海景</h2>
-          </div>
-          <span class="text-xs bg-[#f0fbfb] text-[#2a616b] font-bold px-2.5 py-1 rounded-lg border border-[#c8ebeb]">宿：Hilton Pattaya</span>
-        </div>
-        <div class="space-y-3 text-xs sm:text-sm text-slate-700">
-          <div class="flex gap-3">
-            <span class="font-extrabold text-[#134954] shrink-0 w-12">上午</span>
-            <p>國泰 CX717 抵達 BKK 機場 ➔ 2F Gate 4 AOT 會合 Klook 專車 ➔ 直達芭堤雅 Hilton（車上舒服小睡約 1.5 - 2 小時）。</p>
-          </div>
-          <div class="flex gap-3">
-            <span class="font-extrabold text-[#134954] shrink-0 w-12">中午</span>
-            <p>辦理 Check-in 入房欣賞全海景放鬆 ➔ 搭專用電梯直落 Central Pattaya 商場吹冷氣、品嚐咖啡、隨性漫步。</p>
-          </div>
-          <div class="flex gap-3">
-            <span class="font-extrabold text-[#134954] shrink-0 w-12">夜晚</span>
-            <p>Hilton 頂樓景觀餐廳或商場內悠閒享用精緻泰菜 ➔ 酒店 eforea Spa 享受水療或早點休息補眠。</p>
-          </div>
-        </div>
-
-        <!-- 景點詳細資訊（摺疊卡片 Accordion） -->
-        <div class="mt-4 pt-3 border-t border-slate-100 space-y-2">
-          <div class="text-[11px] font-extrabold text-[#3a6872] flex items-center justify-between">
-            <span class="flex items-center gap-1.5">
-              <i data-lucide="layers" class="w-3.5 h-3.5 text-[#1b7382]"></i>
-              景點詳細資訊（點擊展開）：
-            </span>
-            <span class="text-[10px] text-[#69919a] font-normal">平時收起 • 點擊查看特色與附近美食</span>
-          </div>
-
-          <!-- Central Pattaya 商場 (商場性質：不顯示門票，專注美食、樓層特點與舒適貼士) -->
-          <div class="border border-[#cdeced] rounded-2xl bg-[#f7fdfd] overflow-hidden transition hover:border-[#a6dede]">
-            <button onclick="toggleAccordion('acc-day1-cp')" class="w-full px-3.5 py-2.5 flex items-center justify-between text-left text-xs font-bold text-[#0f2e37] hover:bg-[#eef9f9] transition">
-              <div class="flex items-center gap-2">
-                <span class="text-sm">🏬</span>
-                <span>Central Pattaya 購物中心</span>
-                <span class="text-[10px] bg-[#C1EAEA]/50 text-[#0d404b] font-extrabold px-1.5 py-0.5 rounded border border-[#a6dede]">商場休閒</span>
-              </div>
-              <div class="flex items-center gap-1 text-slate-400">
-                <span class="text-[10px] text-[#527d86]">詳情</span>
-                <span id="acc-day1-cp-arrow" class="transition-transform duration-200 text-xs">▼</span>
-              </div>
-            </button>
-            <div id="acc-day1-cp" class="hidden px-3.5 pb-3 pt-2 border-t border-[#d8f1f1] text-[11px] sm:text-xs text-slate-700 space-y-2 bg-white/70">
-              <div class="flex items-start gap-2">
-                <span class="font-extrabold text-[#134954] shrink-0">🍽️ 推薦美食：</span>
-                <span class="text-slate-600">地庫 Food Park 各式地道平價泰菜、After You 人氣蜜糖吐司/雪糕刨冰、鼎泰豐及多家景觀泰菜。</span>
-              </div>
-              <div class="flex items-start gap-2">
-                <span class="font-extrabold text-[#134954] shrink-0">🏬 樓層亮點：</span>
-                <span class="text-slate-600">B 樓大型超市有齊泰國伴手禮水果乾；直通海灘路 (Beach Road)，出門即是海濱步道。</span>
-              </div>
-              <div class="flex items-start gap-2">
-                <span class="font-extrabold text-[#134954] shrink-0">💡 舒適貼士：</span>
-                <span class="text-slate-600">Hilton 酒店有專屬電梯直落商場上蓋，全程平路無斜坡，隨時可搭電梯回房歇息。</span>
-              </div>
-              <div class="pt-2 flex justify-end gap-2 border-t border-slate-100">
-                <button onclick="findNearbyFood('Central Pattaya')" class="inline-flex items-center gap-1 text-[11px] font-bold bg-[#fef3c7] hover:bg-[#fde68a] text-[#854d0e] px-2.5 py-1 rounded-lg border border-[#fcd34d] shadow-xs transition active:scale-95">
-                  <i data-lucide="utensils" class="w-3 h-3 text-[#b45309]"></i>
-                  <span>搵周邊美食</span>
-                </button>
-                <button onclick="navPlace('Central Pattaya', 'https://maps.google.com/?cid=987721190354433283')" class="inline-flex items-center gap-1 text-[11px] font-bold bg-[#C1EAEA] hover:bg-[#aee0e0] text-[#0f343c] px-2.5 py-1 rounded-lg border border-[#9edada] shadow-xs transition active:scale-95">
-                  <i data-lucide="map-pin" class="w-3 h-3 text-[#1b7382]"></i>
-                  <span>導航地圖</span>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Hilton Pattaya 水療與高空景觀 (奢華飯店休閒性質) -->
-          <div class="border border-[#cdeced] rounded-2xl bg-[#f7fdfd] overflow-hidden transition hover:border-[#a6dede]">
-            <button onclick="toggleAccordion('acc-day1-hilton')" class="w-full px-3.5 py-2.5 flex items-center justify-between text-left text-xs font-bold text-[#0f2e37] hover:bg-[#eef9f9] transition">
-              <div class="flex items-center gap-2">
-                <span class="text-sm">🏨</span>
-                <span>Hilton Pattaya（eforea Spa & Horizon 景觀餐廳）</span>
-                <span class="text-[10px] bg-[#C1EAEA]/50 text-[#0d404b] font-extrabold px-1.5 py-0.5 rounded border border-[#a6dede]">高空水療</span>
-              </div>
-              <div class="flex items-center gap-1 text-slate-400">
-                <span class="text-[10px] text-[#527d86]">詳情</span>
-                <span id="acc-day1-hilton-arrow" class="transition-transform duration-200 text-xs">▼</span>
-              </div>
-            </button>
-            <div id="acc-day1-hilton" class="hidden px-3.5 pb-3 pt-2 border-t border-[#d8f1f1] text-[11px] sm:text-xs text-slate-700 space-y-2 bg-white/70">
-              <div class="flex items-start gap-2">
-                <span class="font-extrabold text-[#134954] shrink-0">🍸 高空景觀：</span>
-                <span class="text-slate-600">34F Horizon Rooftop 坐擁芭堤雅無敵全海灣夕陽晚景，特調 Mocktail 與精緻炭烤海鮮。</span>
-              </div>
-              <div class="flex items-start gap-2">
-                <span class="font-extrabold text-[#134954] shrink-0">💆 舒壓水療：</span>
-                <span class="text-slate-600">eforea Spa 高級香氛精油療程，環境靜謐香氛療癒，旅途第一天極佳舒壓。</span>
-              </div>
-              <div class="flex items-start gap-2">
-                <span class="font-extrabold text-[#134954] shrink-0">💡 留意事項：</span>
-                <span class="text-slate-600">頂樓夜間海風微涼建議攜帶薄外套；Horizon 高空餐廳晚間有 Smart Casual 著裝要求（避免拖鞋背心）。</span>
-              </div>
-              <div class="pt-2 flex justify-end gap-2 border-t border-slate-100">
-                <button onclick="findNearbyFood('Hilton Pattaya')" class="inline-flex items-center gap-1 text-[11px] font-bold bg-[#fef3c7] hover:bg-[#fde68a] text-[#854d0e] px-2.5 py-1 rounded-lg border border-[#fcd34d] shadow-xs transition active:scale-95">
-                  <i data-lucide="utensils" class="w-3 h-3 text-[#b45309]"></i>
-                  <span>搵周邊美食</span>
-                </button>
-                <button onclick="navPlace('Hilton Pattaya', 'https://maps.google.com/?cid=248139876403356248')" class="inline-flex items-center gap-1 text-[11px] font-bold bg-[#C1EAEA] hover:bg-[#aee0e0] text-[#0f343c] px-2.5 py-1 rounded-lg border border-[#9edada] shadow-xs transition active:scale-95">
-                  <i data-lucide="map-pin" class="w-3 h-3 text-[#1b7382]"></i>
-                  <span>導航地圖</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+      <!-- 快捷叫車與美食雷達大按鈕 (一隻拇指即可點擊) -->
+      <div class="grid grid-cols-2 gap-2.5">
+        <a href="https://www.google.com/maps/search/?api=1&query=restaurants" target="_blank" rel="noopener noreferrer" class="h-12 bg-[#fef9c3] border border-[#fef08a] rounded-2xl px-3 flex items-center justify-center gap-2 font-black text-xs text-[#713f12] shadow-xs">
+          <svg class="w-4 h-4 text-[#a16207]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+          <span>周邊美食雷達</span>
+        </a>
+        <button onclick="openGrabApp()" class="h-12 bg-[#ecfdf5] border border-[#a7f3d0] rounded-2xl px-3 flex items-center justify-center gap-2 font-black text-xs text-[#065f46] shadow-xs">
+          <svg class="w-4 h-4 text-[#059669]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg>
+          <span>打開 Grab 叫車</span>
+        </button>
       </div>
 
-      <!-- DAY 2 -->
-      <div class="day-card bg-white/95 backdrop-blur-md rounded-3xl p-5 sm:p-6 shadow-sm border border-[#cdeced] transition hover:shadow-md" data-day="2">
-        <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
-          <div>
-            <span class="text-xs font-extrabold text-[#0d4d59] bg-[#e4f7f7] px-2.5 py-1 rounded-full border border-[#c1eaea]">DAY 2 • 15/10 (四)</span>
-            <h2 class="text-base sm:text-lg font-black text-[#0f2e37] mt-1.5">芭堤雅海陸暢遊 ➔ The Sky Gallery 懸崖夕陽</h2>
-          </div>
-          <!-- ⭐ 點擊一鍵開啟 LINE App (iOS) 按鈕 -->
-          <button onclick="openLineApp()" title="一鍵開啟 iOS LINE 應用程式查看預約" class="inline-flex items-center gap-1.5 text-xs bg-[#e4f7f7] hover:bg-[#C1EAEA] text-[#0d4d59] font-black px-2.5 py-1 rounded-xl border border-[#c1eaea] transition active:scale-95 shadow-xs">
-            <span>⭐ 已訂 C47 枱</span>
-          </button>
-        </div>
+      <!-- 行程卡列表容器 -->
+      <div id="itinerary-cards" class="space-y-3.5">
 
-        <!-- 🚗 預約包車提醒事項 (Pattaya to Bangkok) -->
-        <div class="mb-4 bg-gradient-to-r from-[#fff7ed] via-[#fffbf5] to-[#fff7ed] border border-[#fed7aa] rounded-2xl p-3 sm:p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-xs">
-          <div class="flex items-start sm:items-center gap-2.5">
-            <div class="w-9 h-9 rounded-xl bg-[#ffedd5] text-[#ea580c] flex items-center justify-center text-lg font-bold shrink-0 border border-[#fed7aa]">
-              🚗
-            </div>
+        <!-- ==================== DAY 1 ==================== -->
+        <div class="day-card bg-white/95 rounded-3xl p-4 shadow-xs border border-[#cdeced] space-y-3" data-day="1">
+          <div class="flex items-center justify-between border-b border-slate-100 pb-2">
             <div>
-              <div class="text-xs sm:text-sm font-black text-[#9a3412] flex items-center gap-1.5">
-                <span>提示事項：預約明天跨市專車</span>
-                <span class="text-[10px] bg-[#ea580c] text-white px-1.5 py-0.2 rounded-md font-bold">待預訂</span>
+              <span class="text-[10px] font-black text-[#0d4d59] bg-[#e4f7f7] px-2.5 py-0.5 rounded-full border border-[#c1eaea]">DAY 1 • 14/10 (三)</span>
+              <h2 class="text-sm font-black text-[#0c2e36] mt-1">香港飛曼谷 ➔ 芭堤雅 Hilton 全海景</h2>
+            </div>
+            <button onclick="openModal('pickup-modal')" class="h-8 bg-[#C1EAEA] text-[#0b333c] text-[11px] font-black px-2.5 rounded-xl border border-[#9edada] flex items-center gap-1">
+              接機指引
+            </button>
+          </div>
+
+          <div class="space-y-2 text-xs text-slate-700">
+            <div class="flex gap-2">
+              <span class="font-extrabold text-[#134954] shrink-0 w-9">上午</span>
+              <p>抵達 BKK 機場 ➔ 2F Gate 4 會合專車 ➔ 直達芭堤雅 Hilton（車上小睡 1.5-2 小時）。</p>
+            </div>
+            <div class="flex gap-2">
+              <span class="font-extrabold text-[#134954] shrink-0 w-9">中午</span>
+              <p>辦理 check-in 入房 ➔ 專用電梯直落 Central Pattaya 商場。</p>
+            </div>
+            <div class="flex gap-2">
+              <span class="font-extrabold text-[#134954] shrink-0 w-9">夜晚</span>
+              <p>商場內或海景餐廳晚餐 ➔ 酒店 eforea Spa 水療舒壓或早點休息。</p>
+            </div>
+          </div>
+
+          <!-- 景點折疊與給司機看按鈕 (加大拇指操作面積) -->
+          <div class="space-y-2 pt-2 border-t border-slate-100">
+            <!-- Central Pattaya -->
+            <div class="bg-[#f7fdfd] border border-[#cdeced] rounded-2xl p-2.5 space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="font-black text-xs text-[#0c2e36]">🏬 Central Pattaya 購物中心</span>
+                <span class="text-[10px] bg-[#C1EAEA]/60 text-[#0d404b] px-2 py-0.5 rounded-md font-bold">商場休閒</span>
               </div>
-              <div class="text-[11px] text-[#c2410c] mt-0.5">
-                記得提早預約明天 (Day 3) 由 <strong>Pattaya Hilton ➔ Bangkok 酒店</strong> 專車（車程約 2 小時）。
+              <p class="text-[11px] text-slate-600">直通酒店上蓋，地庫大型超市美食街、After You 雪糕刨冰。</p>
+              <div class="grid grid-cols-2 gap-2 pt-1">
+                <button onclick="showDriverModal('Central Pattaya 購物中心', 'ห้างเซ็นทรัล พัทยา (Central Pattaya)\n333/99 หมู่ 9 ถนนพัทยาสาย 1 อ.บางละมุง จ.ชลบุรี')" class="h-10 bg-[#ffedd5] border border-[#fed7aa] text-[#9a3412] font-black text-xs rounded-xl flex items-center justify-center gap-1.5 shadow-xs">
+                  <svg class="w-4 h-4 text-[#ea580c]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 10h10"/><path d="M7 14h10"/></svg>
+                  <span>給司機看 (泰文)</span>
+                </button>
+                <button onclick="navPlace('Central Pattaya', 'https://maps.google.com/?cid=987721190354433283')" class="h-10 bg-[#C1EAEA] border border-[#9edada] text-[#0f343c] font-black text-xs rounded-xl flex items-center justify-center gap-1.5 shadow-xs">
+                  <svg class="w-4 h-4 text-[#1b7382]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                  <span>地圖導航</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Hilton Pattaya -->
+            <div class="bg-[#f7fdfd] border border-[#cdeced] rounded-2xl p-2.5 space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="font-black text-xs text-[#0c2e36]">🏨 Hilton Pattaya（芭堤雅希爾頓）</span>
+                <span class="text-[10px] bg-[#C1EAEA]/60 text-[#0d404b] px-2 py-0.5 rounded-md font-bold">住宿酒店</span>
+              </div>
+              <div class="grid grid-cols-2 gap-2 pt-1">
+                <button onclick="showDriverModal('芭堤雅希爾頓酒店 (Hilton Pattaya)', 'โรงแรมฮิลตัน พัทยา\n333/101 หมู่ 9 ต.หนองปรือ อ.บางละมุง จ.ชลบุรี 20260\n(อยู่บนห้างเซ็นทรัล พัทยา)')" class="h-10 bg-[#ffedd5] border border-[#fed7aa] text-[#9a3412] font-black text-xs rounded-xl flex items-center justify-center gap-1.5 shadow-xs">
+                  <svg class="w-4 h-4 text-[#ea580c]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 10h10"/><path d="M7 14h10"/></svg>
+                  <span>給司機看 (泰文)</span>
+                </button>
+                <button onclick="navPlace('Hilton Pattaya', 'https://maps.google.com/?cid=248139876403356248')" class="h-10 bg-[#C1EAEA] border border-[#9edada] text-[#0f343c] font-black text-xs rounded-xl flex items-center justify-center gap-1.5 shadow-xs">
+                  <svg class="w-4 h-4 text-[#1b7382]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                  <span>地圖導航</span>
+                </button>
               </div>
             </div>
           </div>
-          <button onclick="openKlookApp()" title="一鍵開啟 iOS Klook App" class="self-start sm:self-auto shrink-0 bg-[#FF5B00] hover:bg-[#e05000] text-white font-black text-xs px-3.5 py-2 rounded-xl transition shadow-sm border border-[#e05000] flex items-center gap-1.5 active:scale-95">
-            <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
-            <span>打開 Klook App</span>
+        </div>
+
+        <!-- ==================== DAY 2 ==================== -->
+        <div class="day-card bg-white/95 rounded-3xl p-4 shadow-xs border border-[#cdeced] space-y-3" data-day="2">
+          <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+            <div>
+              <span class="text-[10px] font-black text-[#0d4d59] bg-[#e4f7f7] px-2.5 py-0.5 rounded-full border border-[#c1eaea]">DAY 2 • 15/10 (四)</span>
+              <h2 class="text-sm font-black text-[#0c2e36] mt-1">海陸暢遊 ➔ The Sky Gallery 懸崖夕陽</h2>
+            </div>
+            <!-- LINE 預約一鍵大按鈕 -->
+            <button onclick="openLineApp()" class="h-8 bg-[#06C755] text-white text-[11px] font-black px-3 rounded-xl border border-[#05a847] flex items-center gap-1 shadow-xs">
+              ⭐ C47 枱 (LINE)
+            </button>
+          </div>
+
+          <!-- Klook 專車預約大橫幅 -->
+          <div class="bg-[#fff7ed] border border-[#fed7aa] rounded-2xl p-3 flex items-center justify-between gap-2">
+            <div class="min-w-0">
+              <div class="text-xs font-black text-[#9a3412]">提示：預訂明日跨市包車</div>
+              <div class="text-[10px] text-[#c2410c] truncate">Pattaya Hilton ➔ 曼谷酒店 (約2小時)</div>
+            </div>
+            <button onclick="openKlookApp()" class="shrink-0 h-9 bg-[#FF5B00] text-white font-black text-xs px-3 rounded-xl shadow-xs">
+              開啟 Klook
+            </button>
+          </div>
+
+          <div class="space-y-2 text-xs text-slate-700">
+            <div class="flex gap-2">
+              <span class="font-extrabold text-[#134954] shrink-0 w-9">上午</span>
+              <p>酒店海景早餐，享受無邊際海景泳池休閒時光。</p>
+            </div>
+            <div class="flex gap-2">
+              <span class="font-extrabold text-[#134954] shrink-0 w-9">中午</span>
+              <p>芭堤雅老虎園 (搭冷氣觀光車巡遊) ➔ 中天海灘午餐 ➔ 四方水上市場乘手搖木船。</p>
+            </div>
+            <div class="flex gap-2">
+              <span class="font-extrabold text-[#134954] shrink-0 w-9">夜晚</span>
+              <p><strong class="text-[#0c2e36]">18:00 準時入座 The Sky Gallery（已訂 C47 枱）</strong> 享懸崖海風夕陽晚餐 ➔ Walking Street 感受街景 ➔ 專車回房。</p>
+            </div>
+          </div>
+
+          <!-- 景點給司機看卡片 -->
+          <div class="space-y-2 pt-2 border-t border-slate-100">
+            <!-- The Sky Gallery -->
+            <div class="bg-[#f7fdfd] border border-[#cdeced] rounded-2xl p-2.5 space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="font-black text-xs text-[#0c2e36]">🌅 The Sky Gallery 懸崖餐廳</span>
+                <span class="text-[10px] bg-[#ead9c1] text-[#4d381c] px-2 py-0.5 rounded-md font-bold">已付 THB 3000 券</span>
+              </div>
+              <div class="grid grid-cols-2 gap-2 pt-1">
+                <button onclick="showDriverModal('The Sky Gallery 懸崖餐廳', 'ร้านอาหาร เดอะ สกาย แกลเลอรี่ พัทยา (The Sky Gallery)\n400 หมู่ 12 ถ.ราชวรุณ เขาพระตำหนัก พัทยา จ.ชลบุรี')" class="h-10 bg-[#ffedd5] border border-[#fed7aa] text-[#9a3412] font-black text-xs rounded-xl flex items-center justify-center gap-1.5 shadow-xs">
+                  <svg class="w-4 h-4 text-[#ea580c]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 10h10"/><path d="M7 14h10"/></svg>
+                  <span>給司機看 (泰文)</span>
+                </button>
+                <button onclick="navPlace('The Sky Gallery', 'https://maps.google.com/?cid=14151300337356777282')" class="h-10 bg-[#C1EAEA] border border-[#9edada] text-[#0f343c] font-black text-xs rounded-xl flex items-center justify-center gap-1.5 shadow-xs">
+                  <svg class="w-4 h-4 text-[#1b7382]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                  <span>地圖導航</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- 老虎園 Tiger Park -->
+            <div class="bg-[#f7fdfd] border border-[#cdeced] rounded-2xl p-2.5 space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="font-black text-xs text-[#0c2e36]">🐅 芭堤雅老虎園 (Tiger Park)</span>
+                <span class="text-[10px] bg-[#C1EAEA]/60 text-[#0d404b] px-2 py-0.5 rounded-md font-bold">冷氣觀光車</span>
+              </div>
+              <div class="grid grid-cols-2 gap-2 pt-1">
+                <button onclick="showDriverModal('芭堤雅老虎園 (Tiger Park)', 'ไทเกอร์ พาร์ค พัทยา (Tiger Park Pattaya)\n349/9 หมู่ 12 ถ.สุขุมวิท ต.หนองปรือ อ.บางละมุง จ.ชลบุรี')" class="h-10 bg-[#ffedd5] border border-[#fed7aa] text-[#9a3412] font-black text-xs rounded-xl flex items-center justify-center gap-1.5 shadow-xs">
+                  <svg class="w-4 h-4 text-[#ea580c]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 10h10"/><path d="M7 14h10"/></svg>
+                  <span>給司機看 (泰文)</span>
+                </button>
+                <button onclick="navPlace('Tiger Park Pattaya', 'https://maps.google.com/?cid=16944305323584580917')" class="h-10 bg-[#C1EAEA] border border-[#9edada] text-[#0f343c] font-black text-xs rounded-xl flex items-center justify-center gap-1.5 shadow-xs">
+                  <svg class="w-4 h-4 text-[#1b7382]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                  <span>地圖導航</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==================== DAY 3 ==================== -->
+        <div class="day-card bg-white/95 rounded-3xl p-4 shadow-xs border border-[#cdeced] space-y-3" data-day="3">
+          <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+            <div>
+              <span class="text-[10px] font-black text-[#0d4d59] bg-[#e4f7f7] px-2.5 py-0.5 rounded-full border border-[#c1eaea]">DAY 3 • 16/10 (五)</span>
+              <h2 class="text-sm font-black text-[#0c2e36] mt-1">直奔曼谷 ➔ 四面佛 ➔ 按摩放鬆</h2>
+            </div>
+            <span class="text-[11px] bg-[#f0fbfb] text-[#20535c] font-bold px-2 py-0.5 rounded-lg border border-[#c8ebeb]">宿曼谷旗艦</span>
+          </div>
+
+          <div class="space-y-2 text-xs text-slate-700">
+            <div class="flex gap-2">
+              <span class="font-extrabold text-[#134954] shrink-0 w-9">上午</span>
+              <p>酒店悠閒早餐，退房 ➔ 專車奔往曼谷全新旗艦酒店（車程約 2 小時）。</p>
+            </div>
+            <div class="flex gap-2">
+              <span class="font-extrabold text-[#134954] shrink-0 w-9">中午</span>
+              <p>入住 Grande Centre Point Prestige ➔ 大堂享免費咖啡 ➔ 步行 2 分鐘朝拜四面佛、逛 CentralWorld。</p>
+            </div>
+            <div class="flex gap-2">
+              <span class="font-extrabold text-[#134954] shrink-0 w-9">夜晚</span>
+              <p>商場品嚐精緻泰菜 ➔ 享受預約之 Let's Relax Spa（徹底舒緩雙腿）。</p>
+            </div>
+          </div>
+
+          <div class="space-y-2 pt-2 border-t border-slate-100">
+            <!-- 曼谷 Grande Centre Point -->
+            <div class="bg-[#f7fdfd] border border-[#cdeced] rounded-2xl p-2.5 space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="font-black text-xs text-[#0c2e36]">🏨 Grande Centre Point Prestige Bangkok</span>
+                <span class="text-[10px] bg-[#C1EAEA]/60 text-[#0d404b] px-2 py-0.5 rounded-md font-bold">曼谷酒店</span>
+              </div>
+              <div class="grid grid-cols-2 gap-2 pt-1">
+                <button onclick="showDriverModal('曼谷臻尚格蘭德中心點酒店', 'โรงแรม แกรนด์ เซนเตอร์ พอยต์ เพรสทีจ\n153 ถนนราชดำริ แขวงลุมพินี เขตปทุมวัน กรุงเทพฯ 10330\n(Grande Centre Point Prestige Bangkok)')" class="h-10 bg-[#ffedd5] border border-[#fed7aa] text-[#9a3412] font-black text-xs rounded-xl flex items-center justify-center gap-1.5 shadow-xs">
+                  <svg class="w-4 h-4 text-[#ea580c]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 10h10"/><path d="M7 14h10"/></svg>
+                  <span>給司機看 (泰文)</span>
+                </button>
+                <button onclick="navPlace('Grande Centre Point Prestige', 'https://maps.google.com/?cid=16879076745552941477')" class="h-10 bg-[#C1EAEA] border border-[#9edada] text-[#0f343c] font-black text-xs rounded-xl flex items-center justify-center gap-1.5 shadow-xs">
+                  <svg class="w-4 h-4 text-[#1b7382]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                  <span>地圖導航</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- 四面佛 -->
+            <div class="bg-[#f7fdfd] border border-[#cdeced] rounded-2xl p-2.5 space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="font-black text-xs text-[#0c2e36]">🛕 四面佛 (Erawan Shrine)</span>
+                <span class="text-[10px] bg-[#C1EAEA]/60 text-[#0d404b] px-2 py-0.5 rounded-md font-bold">祈福</span>
+              </div>
+              <p class="text-[11px] text-slate-600">免費入場，敬請於壇內官方攤檔購買香燭（約 25-50฿/套）。</p>
+              <div class="grid grid-cols-2 gap-2 pt-1">
+                <button onclick="showDriverModal('四面佛 (Erawan Shrine)', 'ศาลท้าวมหาพรหม โรงแรมเอราวัณ (Erawan Shrine)\nสี่แยกราชประสงค์ แขวงลุมพินี เขตปทุมวัน กรุงเทพฯ')" class="h-10 bg-[#ffedd5] border border-[#fed7aa] text-[#9a3412] font-black text-xs rounded-xl flex items-center justify-center gap-1.5 shadow-xs">
+                  <svg class="w-4 h-4 text-[#ea580c]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 10h10"/><path d="M7 14h10"/></svg>
+                  <span>給司機看 (泰文)</span>
+                </button>
+                <button onclick="navPlace('Erawan Shrine', 'https://maps.google.com/?cid=3529163743388898900')" class="h-10 bg-[#C1EAEA] border border-[#9edada] text-[#0f343c] font-black text-xs rounded-xl flex items-center justify-center gap-1.5 shadow-xs">
+                  <svg class="w-4 h-4 text-[#1b7382]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                  <span>地圖導航</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==================== DAY 4 ==================== -->
+        <div class="day-card bg-white/95 rounded-3xl p-4 shadow-xs border border-[#cdeced] space-y-3" data-day="4">
+          <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+            <div>
+              <span class="text-[10px] font-black text-[#0d4d59] bg-[#e4f7f7] px-2.5 py-0.5 rounded-full border border-[#c1eaea]">DAY 4 • 17/10 (六)</span>
+              <h2 class="text-sm font-black text-[#0c2e36] mt-1">曼谷旗艦商圈 ➔ ICONSIAM 湄南河夕陽</h2>
+            </div>
+            <span class="text-[11px] bg-[#f0fbfb] text-[#20535c] font-bold px-2 py-0.5 rounded-lg border border-[#c8ebeb]">平路冷氣</span>
+          </div>
+
+          <div class="space-y-2 text-xs text-slate-700">
+            <div class="flex gap-2">
+              <span class="font-extrabold text-[#134954] shrink-0 w-9">上午</span>
+              <p>酒店悠閒早餐 ➔ 漫步 Siam Paragon 或全新 ONE Bangkok，室內吹冷氣。</p>
+            </div>
+            <div class="flex gap-2">
+              <span class="font-extrabold text-[#134954] shrink-0 w-9">中午</span>
+              <p>商場品嚐精緻泰菜 ➔ 午後回酒店客廳休息茶聚，避開日曬。</p>
+            </div>
+            <div class="flex gap-2">
+              <span class="font-extrabold text-[#134954] shrink-0 w-9">夜晚</span>
+              <p>專車往 ICONSIAM（逛冷氣室內水上市場 SOOKSIAM、河畔噴泉水舞秀、夜景晚餐）。</p>
+            </div>
+          </div>
+
+          <div class="space-y-2 pt-2 border-t border-slate-100">
+            <!-- ICONSIAM -->
+            <div class="bg-[#f7fdfd] border border-[#cdeced] rounded-2xl p-2.5 space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="font-black text-xs text-[#0c2e36]">⛴️ ICONSIAM 暹羅天地</span>
+                <span class="text-[10px] bg-[#C1EAEA]/60 text-[#0d404b] px-2 py-0.5 rounded-md font-bold">室內水上市場</span>
+              </div>
+              <div class="grid grid-cols-2 gap-2 pt-1">
+                <button onclick="showDriverModal('ICONSIAM 暹羅天地', 'ไอคอนสยาม (ICONSIAM)\n299 ถนนเจริญนคร แขวงคลองต้นไทร เขตคลองสาน กรุงเทพฯ 10600')" class="h-10 bg-[#ffedd5] border border-[#fed7aa] text-[#9a3412] font-black text-xs rounded-xl flex items-center justify-center gap-1.5 shadow-xs">
+                  <svg class="w-4 h-4 text-[#ea580c]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 10h10"/><path d="M7 14h10"/></svg>
+                  <span>給司機看 (泰文)</span>
+                </button>
+                <button onclick="navPlace('ICONSIAM', 'https://maps.google.com/?cid=1612497051803357940')" class="h-10 bg-[#C1EAEA] border border-[#9edada] text-[#0f343c] font-black text-xs rounded-xl flex items-center justify-center gap-1.5 shadow-xs">
+                  <svg class="w-4 h-4 text-[#1b7382]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                  <span>地圖導航</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==================== DAY 5 ==================== -->
+        <div class="day-card bg-white/95 rounded-3xl p-4 shadow-xs border border-[#cdeced] space-y-3" data-day="5">
+          <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+            <div>
+              <span class="text-[10px] font-black text-[#0d4d59] bg-[#e4f7f7] px-2.5 py-0.5 rounded-full border border-[#c1eaea]">DAY 5 • 18/10 (日)</span>
+              <h2 class="text-sm font-black text-[#0c2e36] mt-1">曼谷 ➔ 香港甜蜜歸家</h2>
+            </div>
+            <span class="text-[11px] bg-[#e4f7f7] text-[#0d4d59] font-black px-2 py-0.5 rounded-lg border border-[#c1eaea]">國泰 CX654</span>
+          </div>
+
+          <div class="space-y-2 text-xs text-slate-700">
+            <div class="flex gap-2">
+              <span class="font-extrabold text-[#134954] shrink-0 w-9">上午</span>
+              <p>酒店悠閒早餐，整理行李辦理退房。</p>
+            </div>
+            <div class="flex gap-2">
+              <span class="font-extrabold text-[#134954] shrink-0 w-9">中午</span>
+              <p>11:30 專車直達 BKK 機場辦理登機過關、退稅海關蓋章（4F Gate 10）與逛免稅店。</p>
+            </div>
+            <div class="flex gap-2">
+              <span class="font-extrabold text-[#134954] shrink-0 w-9">夜晚</span>
+              <p>搭乘 CX654（15:00 起飛），18:50 平安返抵香港！</p>
+            </div>
+          </div>
+
+          <div class="space-y-2 pt-2 border-t border-slate-100">
+            <div class="bg-[#f7fdfd] border border-[#cdeced] rounded-2xl p-2.5 space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="font-black text-xs text-[#0c2e36]">✈️ 素萬那普機場 (BKK Airport)</span>
+                <span class="text-[10px] bg-[#C1EAEA]/60 text-[#0d404b] px-2 py-0.5 rounded-md font-bold">出境返港</span>
+              </div>
+              <div class="grid grid-cols-2 gap-2 pt-1">
+                <button onclick="showDriverModal('曼谷素萬那普機場 (BKK)', 'ท่าอากาศยานสุวรรณภูมิ (Suvarnabhumi Airport)\nอาคารผู้โดยสารขาออก ชั้น 4 (Departure Hall 4th Fl)')" class="h-10 bg-[#ffedd5] border border-[#fed7aa] text-[#9a3412] font-black text-xs rounded-xl flex items-center justify-center gap-1.5 shadow-xs">
+                  <svg class="w-4 h-4 text-[#ea580c]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 10h10"/><path d="M7 14h10"/></svg>
+                  <span>給司機看 (泰文)</span>
+                </button>
+                <button onclick="navPlace('Suvarnabhumi Airport', 'https://maps.google.com/?cid=12643594950346394595')" class="h-10 bg-[#C1EAEA] border border-[#9edada] text-[#0f343c] font-black text-xs rounded-xl flex items-center justify-center gap-1.5 shadow-xs">
+                  <svg class="w-4 h-4 text-[#1b7382]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                  <span>地圖導航</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 🧳 執行李清單 (只在全部總覽顯示) -->
+      <div id="packing-checklist-section" class="bg-white/95 rounded-3xl p-4 shadow-xs border border-[#cdeced] space-y-3">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+          <div>
+            <h3 class="text-xs font-black text-[#0f2e37]">🧳 執行李 Check List</h3>
+            <p class="text-[10px] text-[#527d86]">點擊打勾核對</p>
+          </div>
+          <span id="pack-progress" class="text-[11px] bg-[#e4f7f7] text-[#0d4d59] font-black px-2.5 py-1 rounded-xl border border-[#c1eaea]">
+            已準備 0 / 8 項
+          </span>
+        </div>
+
+        <div class="space-y-1.5 text-xs">
+          <label class="flex items-center gap-3 p-2 bg-[#f7fdfd] rounded-xl border border-[#cdeced] pack-item">
+            <input type="checkbox" onchange="updatePackProgress()" class="w-5 h-5 rounded text-[#1b7382] focus:ring-0">
+            <span>全家護照 (有效期 6 個月以上)</span>
+          </label>
+          <label class="flex items-center gap-3 p-2 bg-[#f7fdfd] rounded-xl border border-[#cdeced] pack-item">
+            <input type="checkbox" onchange="updatePackProgress()" class="w-5 h-5 rounded text-[#1b7382] focus:ring-0">
+            <span>泰國 SIM 卡 / eSIM / 漫遊數據</span>
+          </label>
+          <label class="flex items-center gap-3 p-2 bg-[#f7fdfd] rounded-xl border border-[#cdeced] pack-item">
+            <input type="checkbox" onchange="updatePackProgress()" class="w-5 h-5 rounded text-[#1b7382] focus:ring-0">
+            <span>泰銖現金、信用卡及已開海外提款</span>
+          </label>
+          <label class="flex items-center gap-3 p-2 bg-[#f7fdfd] rounded-xl border border-[#cdeced] pack-item">
+            <input type="checkbox" onchange="updatePackProgress()" class="w-5 h-5 rounded text-[#1b7382] focus:ring-0">
+            <span>外置充電器尿袋 (必須隨身帶不可託運)</span>
+          </label>
+          <label class="flex items-center gap-3 p-2 bg-[#f7fdfd] rounded-xl border border-[#cdeced] pack-item">
+            <input type="checkbox" onchange="updatePackProgress()" class="w-5 h-5 rounded text-[#1b7382] focus:ring-0">
+            <span>隨身防冷氣薄外套 (專車/商場冷氣足)</span>
+          </label>
+          <label class="flex items-center gap-3 p-2 bg-[#f7fdfd] rounded-xl border border-[#cdeced] pack-item">
+            <input type="checkbox" onchange="updatePackProgress()" class="w-5 h-5 rounded text-[#1b7382] focus:ring-0">
+            <span>防曬用品、太陽眼鏡、遮陽帽</span>
+          </label>
+          <label class="flex items-center gap-3 p-2 bg-[#f7fdfd] rounded-xl border border-[#cdeced] pack-item">
+            <input type="checkbox" onchange="updatePackProgress()" class="w-5 h-5 rounded text-[#1b7382] focus:ring-0">
+            <span>常備藥品 (腸胃藥、暈車藥、防蚊水)</span>
+          </label>
+          <label class="flex items-center gap-3 p-2 bg-[#f7fdfd] rounded-xl border border-[#cdeced] pack-item">
+            <input type="checkbox" onchange="updatePackProgress()" class="w-5 h-5 rounded text-[#1b7382] focus:ring-0">
+            <span>舒適平底健步鞋 (商場平路漫步)</span>
+          </label>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ==================== 頁面視圖 2: 雙五星酒店 ==================== -->
+    <section id="view-hotels" class="app-view hidden space-y-3.5">
+      <div class="bg-white/95 rounded-3xl p-4 border border-[#cdeced] shadow-xs space-y-3">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+          <div>
+            <h2 class="text-sm font-black text-[#0f2e37]">🏨 雙五星豪華住宿</h2>
+            <p class="text-[10px] text-[#527d86]">點擊「給司機看」全螢幕大字出示</p>
+          </div>
+          <span class="text-[10px] bg-[#e4f7f7] text-[#0d4d59] font-black px-2 py-0.5 rounded-lg border border-[#c1eaea]">2晚芭堤雅 + 2晚曼谷</span>
+        </div>
+
+        <!-- 芭堤雅 Hilton -->
+        <div class="bg-[#f7fdfd] border border-[#cdeced] rounded-2xl p-3.5 space-y-2.5">
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] font-black text-[#134954] bg-[#C1EAEA]/60 px-2 py-0.5 rounded-md">
+              🏖️ 芭堤雅 (Pattaya) • 14/10 - 16/10
+            </span>
+            <span class="text-xs text-amber-700 font-bold">★ 4.6</span>
+          </div>
+          <div>
+            <h3 class="text-sm font-black text-[#0f2e37]">Hilton Pattaya（芭堤雅希爾頓）</h3>
+            <p class="text-[11px] text-[#527d86]">直通 Central Pattaya 上蓋，無邊際泳池</p>
+          </div>
+          <div class="text-[11px] text-slate-600 bg-white p-2.5 rounded-xl border border-slate-100 space-y-1">
+            <div><strong>英文：</strong> 333/101 Moo 9 Nongprue, Bang Lamung, Chon Buri 20260</div>
+            <div><strong>電話：</strong> <a href="tel:+6638253000" class="underline text-[#1b7382]">+66 38 253 000</a></div>
+          </div>
+          <div class="grid grid-cols-2 gap-2 pt-1">
+            <button onclick="showDriverModal('芭堤雅希爾頓酒店 (Hilton Pattaya)', 'โรงแรมฮิลตัน พัทยา\n333/101 หมู่ 9 ต.หนองปรือ อ.บางละมุง จ.ชลบุรี 20260\n(อยู่บนห้างเซ็นทรัล พัทยา)')" class="h-11 bg-[#ffedd5] border border-[#fed7aa] text-[#9a3412] font-black text-xs rounded-xl flex items-center justify-center gap-1.5 shadow-xs">
+              <svg class="w-4 h-4 text-[#ea580c]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 10h10"/><path d="M7 14h10"/></svg>
+              <span>給司機看 (泰文)</span>
+            </button>
+            <button onclick="navPlace('Hilton Pattaya', 'https://maps.google.com/?cid=248139876403356248')" class="h-11 bg-[#C1EAEA] border border-[#9edada] text-[#0f343c] font-black text-xs rounded-xl flex items-center justify-center gap-1.5 shadow-xs">
+              <svg class="w-4 h-4 text-[#1b7382]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span>地圖導航</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 曼谷 Grande Centre Point -->
+        <div class="bg-[#f7fdfd] border border-[#cdeced] rounded-2xl p-3.5 space-y-2.5">
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] font-black text-[#134954] bg-[#C1EAEA]/60 px-2 py-0.5 rounded-md">
+              🏙️ 曼谷 (Bangkok) • 16/10 - 18/10
+            </span>
+            <span class="text-xs text-amber-700 font-bold">★ 4.7</span>
+          </div>
+          <div>
+            <h3 class="text-sm font-black text-[#0f2e37]">Grande Centre Point Prestige Bangkok</h3>
+            <p class="text-[11px] text-[#527d86]">步行 2 分鐘直達四面佛與 CentralWorld</p>
+          </div>
+          <div class="text-[11px] text-slate-600 bg-white p-2.5 rounded-xl border border-slate-100 space-y-1">
+            <div><strong>英文：</strong> 153 Ratchadamri Rd, Lumphini, Bangkok 10330</div>
+            <div><strong>電話：</strong> <a href="tel:+6621241888" class="underline text-[#1b7382]">+66 2 124 1888</a></div>
+          </div>
+          <div class="grid grid-cols-2 gap-2 pt-1">
+            <button onclick="showDriverModal('曼谷臻尚格蘭德中心點酒店', 'โรงแรม แกรนด์ เซนเตอร์ พอยต์ เพรสทีจ\n153 ถนนราชดำริ แขวงลุมพินี เขตปทุมวัน กรุงเทพฯ 10330\n(Grande Centre Point Prestige Bangkok)')" class="h-11 bg-[#ffedd5] border border-[#fed7aa] text-[#9a3412] font-black text-xs rounded-xl flex items-center justify-center gap-1.5 shadow-xs">
+              <svg class="w-4 h-4 text-[#ea580c]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 10h10"/><path d="M7 14h10"/></svg>
+              <span>給司機看 (泰文)</span>
+            </button>
+            <button onclick="navPlace('Grande Centre Point Prestige', 'https://maps.google.com/?cid=16879076745552941477')" class="h-11 bg-[#C1EAEA] border border-[#9edada] text-[#0f343c] font-black text-xs rounded-xl flex items-center justify-center gap-1.5 shadow-xs">
+              <svg class="w-4 h-4 text-[#1b7382]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span>地圖導航</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 頁面視圖 3: 實用工具箱 (匯率 + 泰語 + 預訂) ==================== -->
+    <section id="view-tools" class="app-view hidden space-y-3.5">
+      <!-- 匯率即時換算大卡片 (1฿ ≈ $0.23 / 實算 0.2369) -->
+      <div class="bg-white/95 rounded-3xl p-4 border border-[#cdeced] shadow-xs space-y-3">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-1.5">
+            <span class="text-xl">💰</span>
+            <h3 class="text-xs font-black text-[#0f2e37]">泰銖匯率即時換算</h3>
+          </div>
+          <span class="text-[10px] bg-[#C1EAEA]/70 text-[#0d404b] px-2 py-0.5 rounded-md font-bold">1฿ ≈ $0.23</span>
+        </div>
+        <div class="bg-[#f0fbfb] p-3 rounded-2xl border border-[#c7ebeb] flex items-center justify-between gap-2">
+          <div class="flex items-center gap-2">
+            <input type="number" id="thb-input-tool" value="1000" oninput="calcExchangeTool()" class="w-24 text-base font-black border border-[#b2e2e4] rounded-xl px-2 py-2 bg-white text-[#163840] text-center" placeholder="THB">
+            <span class="text-xs font-bold text-[#55828c]">฿ ≈</span>
+          </div>
+          <span id="hkd-result-tool" class="text-base font-black text-[#134954]">HK$236.90</span>
+        </div>
+      </div>
+
+      <!-- 實用泰語發音清單 (點擊立即播放) -->
+      <div class="bg-white/95 rounded-3xl p-4 border border-[#cdeced] shadow-xs space-y-3">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-1.5">
+            <span class="text-xl">🔊</span>
+            <h3 class="text-xs font-black text-[#0f2e37]">實用旅行泰語 (離線發音)</h3>
+          </div>
+          <span class="text-[10px] text-[#527d86]">點擊播放</span>
+        </div>
+
+        <div class="space-y-2">
+          <div class="p-3 rounded-2xl bg-[#f7fdfd] border border-[#cdeced] flex items-center justify-between">
+            <div>
+              <div class="font-black text-xs text-[#0f2e37]">請小力一點 (按摩)</div>
+              <div class="text-[11px] text-[#1b7382] font-semibold">Bao Bao Noi (เบาๆ หน่อย)</div>
+            </div>
+            <button onclick="playThaiTTS('Chuay bao bao noi na khrap', this)" class="h-10 bg-[#C1EAEA] text-[#0f343c] text-xs font-black px-3.5 rounded-xl border border-[#9edada] flex items-center gap-1 shadow-xs">
+              <span>▶ 播音</span>
+            </button>
+          </div>
+
+          <div class="p-3 rounded-2xl bg-[#f7fdfd] border border-[#cdeced] flex items-center justify-between">
+            <div>
+              <div class="font-black text-xs text-[#0f2e37]">請不要辣 (微辣/不辣)</div>
+              <div class="text-[11px] text-[#1b7382] font-semibold">Mai Phet (ไม่เผ็ด)</div>
+            </div>
+            <button onclick="playThaiTTS('Mai Phet, mai sai phrik na khrap', this)" class="h-10 bg-[#C1EAEA] text-[#0f343c] text-xs font-black px-3.5 rounded-xl border border-[#9edada] flex items-center gap-1 shadow-xs">
+              <span>▶ 播音</span>
+            </button>
+          </div>
+
+          <div class="p-3 rounded-2xl bg-[#f7fdfd] border border-[#cdeced] flex items-center justify-between">
+            <div>
+              <div class="font-black text-xs text-[#0f2e37]">請問洗手間在哪裡？</div>
+              <div class="text-[11px] text-[#1b7382] font-semibold">Hong Nam Yoo Thee Nai</div>
+            </div>
+            <button onclick="playThaiTTS('Hong Nam Yoo Thee Nai khrap', this)" class="h-10 bg-[#C1EAEA] text-[#0f343c] text-xs font-black px-3.5 rounded-xl border border-[#9edada] flex items-center gap-1 shadow-xs">
+              <span>▶ 播音</span>
+            </button>
+          </div>
+
+          <div class="p-3 rounded-2xl bg-[#f7fdfd] border border-[#cdeced] flex items-center justify-between">
+            <div>
+              <div class="font-black text-xs text-[#0f2e37]">請問可以埋單嗎？</div>
+              <div class="text-[11px] text-[#1b7382] font-semibold">Check Bin (เช็คบิล)</div>
+            </div>
+            <button onclick="playThaiTTS('Check bin duay khrap', this)" class="h-10 bg-[#C1EAEA] text-[#0f343c] text-xs font-black px-3.5 rounded-xl border border-[#9edada] flex items-center gap-1 shadow-xs">
+              <span>▶ 播音</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 預訂狀態總覽 -->
+      <div class="bg-white/95 rounded-3xl p-4 border border-[#cdeced] shadow-xs space-y-2.5">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+          <h3 class="text-xs font-black text-[#0f2e37]">📋 行程預約狀態總覽</h3>
+          <span class="text-[10px] text-[#527d86]">5 項已確認</span>
+        </div>
+        <div class="space-y-1.5 text-xs">
+          <div class="flex justify-between p-2 rounded-xl bg-[#eefaf8] text-[#134d47]">
+            <span>國泰機票 (Ref: FT6JYI)</span>
+            <span class="font-extrabold text-[10px] bg-[#a8e6cf] text-[#0d4036] px-1.5 py-0.5 rounded">✅ 已確認</span>
+          </div>
+          <div class="flex justify-between p-2 rounded-xl bg-[#eefaf8] text-[#134d47]">
+            <span>Hilton Pattaya (2晚)</span>
+            <span class="font-extrabold text-[10px] bg-[#a8e6cf] text-[#0d4036] px-1.5 py-0.5 rounded">✅ 已確認</span>
+          </div>
+          <div class="flex justify-between p-2 rounded-xl bg-[#eefaf8] text-[#134d47]">
+            <span>Grande Centre Point (2晚)</span>
+            <span class="font-extrabold text-[10px] bg-[#a8e6cf] text-[#0d4036] px-1.5 py-0.5 rounded">✅ 已確認</span>
+          </div>
+          <div class="flex justify-between p-2 rounded-xl bg-[#eefaf8] text-[#134d47]">
+            <span>The Sky Gallery (C47 枱)</span>
+            <span class="font-extrabold text-[10px] bg-[#a8e6cf] text-[#0d4036] px-1.5 py-0.5 rounded">✅ 已確認</span>
+          </div>
+          <div class="flex justify-between p-2 rounded-xl bg-[#fff7ed] text-[#9a4f10]">
+            <span>Day 3 跨市包車</span>
+            <span class="font-extrabold text-[10px] bg-[#fed7aa] text-[#9a3412] px-1.5 py-0.5 rounded">待預訂</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 頁面視圖 4: Gemini AI 智慧伴遊 ==================== -->
+    <section id="view-ai" class="app-view hidden space-y-3.5">
+      <div class="bg-white/95 rounded-3xl p-4 border border-[#cdeced] shadow-xs space-y-3">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+          <div>
+            <div class="inline-flex items-center gap-1 bg-[#C1EAEA] text-[#0e3b44] text-[10px] font-black px-2 py-0.5 rounded-full">
+              ✨ Gemini AI 智慧伴遊
+            </div>
+            <h2 class="text-sm font-black text-[#0f2e37] mt-1">家庭旅遊隨身助手</h2>
+          </div>
+        </div>
+
+        <!-- 4 個大尺寸觸控卡片 (單手直接按) -->
+        <div class="grid grid-cols-2 gap-2.5">
+          <button onclick="openAiFeature('advisor')" class="h-20 bg-[#f7fdfd] border border-[#cdeced] rounded-2xl p-2.5 text-left flex flex-col justify-between shadow-xs">
+            <span class="text-2xl">🤖</span>
+            <div>
+              <div class="text-xs font-black text-[#0f2e37]">慢活 AI 管家</div>
+              <div class="text-[10px] text-[#527d86]">平路推薦・彈性排程</div>
+            </div>
+          </button>
+          <button onclick="openAiFeature('planb')" class="h-20 bg-[#f7fdfd] border border-[#cdeced] rounded-2xl p-2.5 text-left flex flex-col justify-between shadow-xs">
+            <span class="text-2xl">🚕</span>
+            <div>
+              <div class="text-xs font-black text-[#0f2e37]">「B計劃」雷達</div>
+              <div class="text-[10px] text-[#527d86]">塞車避堵・就近歇腳</div>
+            </div>
+          </button>
+          <button onclick="openAiFeature('vision')" class="h-20 bg-[#f7fdfd] border border-[#cdeced] rounded-2xl p-2.5 text-left flex flex-col justify-between shadow-xs">
+            <span class="text-2xl">📸</span>
+            <div>
+              <div class="text-xs font-black text-[#0f2e37]">菜單拍照解讀</div>
+              <div class="text-[10px] text-[#527d86]">風味分析・不辣提醒</div>
+            </div>
+          </button>
+          <button onclick="openAiFeature('tts')" class="h-20 bg-[#f7fdfd] border border-[#cdeced] rounded-2xl p-2.5 text-left flex flex-col justify-between shadow-xs">
+            <span class="text-2xl">🔊</span>
+            <div>
+              <div class="text-xs font-black text-[#0f2e37]">泰語即時發音</div>
+              <div class="text-[10px] text-[#527d86]">自訂字句念泰文</div>
+            </div>
           </button>
         </div>
-
-        <div class="space-y-3 text-xs sm:text-sm text-slate-700">
-          <div class="flex gap-3">
-            <span class="font-extrabold text-[#134954] shrink-0 w-12">上午</span>
-            <p>睡到自然醒，享用酒店海景早餐，無邊際海景泳池打卡拍照。</p>
-          </div>
-          <div class="flex gap-3">
-            <span class="font-extrabold text-[#134954] shrink-0 w-12">中午</span>
-            <p>專車前往芭堤雅老虎園 (Tiger Park) 拍照/搭觀光車 ➔ 中天海灘海景午餐 ➔ 四方水上市場搭手搖木船、食芒果糯米飯。</p>
-          </div>
-          <div class="flex gap-3">
-            <span class="font-extrabold text-[#134954] shrink-0 w-12">夜晚</span>
-            <p><strong class="font-bold text-[#0f2e37]">18:00 準時入座 The Sky Gallery（C47 枱）</strong> 坐懸崖大梳化邊吹海風邊賞夕陽夜景 ➔ 順遊 Walking Street 感受霓虹夜景 ➔ 專車回酒店。</p>
-          </div>
-        </div>
-
-        <!-- 景點詳細資訊（摺疊卡片 Accordion） -->
-        <div class="mt-4 pt-3 border-t border-slate-100 space-y-2">
-          <div class="text-[11px] font-extrabold text-[#3a6872] flex items-center justify-between">
-            <span class="flex items-center gap-1.5">
-              <i data-lucide="layers" class="w-3.5 h-3.5 text-[#1b7382]"></i>
-              景點詳細資訊（點擊展開）：
-            </span>
-            <span class="text-[10px] text-[#69919a] font-normal">平時收起 • 點擊查看特色與附近美食</span>
-          </div>
-
-          <!-- The Sky Gallery 懸崖餐廳 (景觀餐廳性質：菜色推薦、訂位確認、穿著貼士) -->
-          <div class="border border-[#cdeced] rounded-2xl bg-[#f7fdfd] overflow-hidden transition hover:border-[#a6dede]">
-            <button onclick="toggleAccordion('acc-day2-skygallery')" class="w-full px-3.5 py-2.5 flex items-center justify-between text-left text-xs font-bold text-[#0f2e37] hover:bg-[#eef9f9] transition">
-              <div class="flex items-center gap-2">
-                <span class="text-sm">🌅</span>
-                <span>The Sky Gallery 懸崖夕陽海景餐廳</span>
-                <span class="text-[10px] bg-[#ead9c1] text-[#4d381c] font-extrabold px-1.5 py-0.5 rounded border border-[#ded0b9]">已訂 C47 枱</span>
-              </div>
-              <div class="flex items-center gap-1 text-slate-400">
-                <span class="text-[10px] text-[#527d86]">詳情</span>
-                <span id="acc-day2-skygallery-arrow" class="transition-transform duration-200 text-xs">▼</span>
-              </div>
-            </button>
-            <div id="acc-day2-skygallery" class="hidden px-3.5 pb-3 pt-2 border-t border-[#d8f1f1] text-[11px] sm:text-xs text-slate-700 space-y-2 bg-white/70">
-              <div class="flex items-start gap-2">
-                <span class="font-extrabold text-[#134954] shrink-0">🍽️ 招牌必點：</span>
-                <span class="text-slate-600">蒜香黑椒炸軟殼蟹、菠蘿海鮮炒飯、泰式青咖喱雞、炭烤豬頸肉、鮮榨椰青與熱帶特飲（可備註 Mai Phet 不辣）。</span>
-              </div>
-              <div class="flex items-start gap-2">
-                <span class="font-extrabold text-[#134954] shrink-0">🌅 訂位確認：</span>
-                <span class="text-slate-600"><strong>已預約 18:00 C47 號懸崖沙發枱（5人）</strong>，已預付 THB 3,000 餐券可全額抵扣點餐。</span>
-              </div>
-              <div class="flex items-start gap-2">
-                <span class="font-extrabold text-[#134954] shrink-0">💡 前往提點：</span>
-                <span class="text-slate-600">17:45 - 18:15 為日落天色漸變黃金期，C47 懸崖大梳化視野絕佳；戶外臨海位置建議攜帶防蚊液與薄外套。</span>
-              </div>
-              <div class="pt-2 flex justify-end gap-2 border-t border-slate-100">
-                <button onclick="findNearbyFood('The Sky Gallery Pattaya')" class="inline-flex items-center gap-1 text-[11px] font-bold bg-[#fef3c7] hover:bg-[#fde68a] text-[#854d0e] px-2.5 py-1 rounded-lg border border-[#fcd34d] shadow-xs transition active:scale-95">
-                  <i data-lucide="utensils" class="w-3 h-3 text-[#b45309]"></i>
-                  <span>搵周邊美食</span>
-                </button>
-                <button onclick="navPlace('The Sky Gallery Pattaya', 'https://maps.google.com/?cid=14151300337356777282')" class="inline-flex items-center gap-1 text-[11px] font-bold bg-[#C1EAEA] hover:bg-[#aee0e0] text-[#0f343c] px-2.5 py-1 rounded-lg border border-[#9edada] shadow-xs transition active:scale-95">
-                  <i data-lucide="map-pin" class="w-3 h-3 text-[#1b7382]"></i>
-                  <span>導航地圖</span>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- 老虎園 Tiger Park (生態親子活動性質：門票與觀光車、活動特色) -->
-          <div class="border border-[#cdeced] rounded-2xl bg-[#f7fdfd] overflow-hidden transition hover:border-[#a6dede]">
-            <button onclick="toggleAccordion('acc-day2-tiger')" class="w-full px-3.5 py-2.5 flex items-center justify-between text-left text-xs font-bold text-[#0f2e37] hover:bg-[#eef9f9] transition">
-              <div class="flex items-center gap-2">
-                <span class="text-sm">🐅</span>
-                <span>芭堤雅老虎園 (Tiger Park Pattaya)</span>
-                <span class="text-[10px] bg-[#C1EAEA]/50 text-[#0d404b] font-extrabold px-1.5 py-0.5 rounded border border-[#a6dede]">生態活動</span>
-              </div>
-              <div class="flex items-center gap-1 text-slate-400">
-                <span class="text-[10px] text-[#527d86]">詳情</span>
-                <span id="acc-day2-tiger-arrow" class="transition-transform duration-200 text-xs">▼</span>
-              </div>
-            </button>
-            <div id="acc-day2-tiger" class="hidden px-3.5 pb-3 pt-2 border-t border-[#d8f1f1] text-[11px] sm:text-xs text-slate-700 space-y-2 bg-white/70">
-              <div class="flex items-start gap-2">
-                <span class="font-extrabold text-[#134954] shrink-0">🐾 體驗特色：</span>
-                <span class="text-slate-600">環境整潔開闊，近距離觀看各年齡層健康老虎嬉戲，可選擇合照或乘坐觀光車巡遊。</span>
-              </div>
-              <div class="flex items-start gap-2">
-                <span class="font-extrabold text-[#134954] shrink-0">🎫 門票與車票：</span>
-                <span class="text-slate-600">園區免入場費；坐冷氣觀光車遊園 (Safari Tram) 約 250-300฿/位；合照項目按老虎體型另計（約 600-800฿/項）。</span>
-              </div>
-              <div class="flex items-start gap-2">
-                <span class="font-extrabold text-[#134954] shrink-0">💡 慢活貼士：</span>
-                <span class="text-slate-600">全家同行建議<strong>乘坐冷氣觀光車巡遊</strong>最輕鬆免曬；園內咖啡廳可隔著落地大玻璃近距離看老虎玩水。</span>
-              </div>
-              <div class="pt-2 flex justify-end gap-2 border-t border-slate-100">
-                <button onclick="findNearbyFood('Tiger Park Pattaya')" class="inline-flex items-center gap-1 text-[11px] font-bold bg-[#fef3c7] hover:bg-[#fde68a] text-[#854d0e] px-2.5 py-1 rounded-lg border border-[#fcd34d] shadow-xs transition active:scale-95">
-                  <i data-lucide="utensils" class="w-3 h-3 text-[#b45309]"></i>
-                  <span>搵周邊美食</span>
-                </button>
-                <button onclick="navPlace('Tiger Park Pattaya', 'https://maps.google.com/?cid=16944305323584580917')" class="inline-flex items-center gap-1 text-[11px] font-bold bg-[#C1EAEA] hover:bg-[#aee0e0] text-[#0f343c] px-2.5 py-1 rounded-lg border border-[#9edada] shadow-xs transition active:scale-95">
-                  <i data-lucide="map-pin" class="w-3 h-3 text-[#1b7382]"></i>
-                  <span>導航地圖</span>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- 四方水上市場 (傳統特色市集性質：手搖船、地道水上小食、門票) -->
-          <div class="border border-[#cdeced] rounded-2xl bg-[#f7fdfd] overflow-hidden transition hover:border-[#a6dede]">
-            <button onclick="toggleAccordion('acc-day2-floating')" class="w-full px-3.5 py-2.5 flex items-center justify-between text-left text-xs font-bold text-[#0f2e37] hover:bg-[#eef9f9] transition">
-              <div class="flex items-center gap-2">
-                <span class="text-sm">🛶</span>
-                <span>四方水上市場 (Pattaya Floating Market)</span>
-                <span class="text-[10px] bg-[#C1EAEA]/50 text-[#0d404b] font-extrabold px-1.5 py-0.5 rounded border border-[#a6dede]">地道體驗</span>
-              </div>
-              <div class="flex items-center gap-1 text-slate-400">
-                <span class="text-[10px] text-[#527d86]">詳情</span>
-                <span id="acc-day2-floating-arrow" class="transition-transform duration-200 text-xs">▼</span>
-              </div>
-            </button>
-            <div id="acc-day2-floating" class="hidden px-3.5 pb-3 pt-2 border-t border-[#d8f1f1] text-[11px] sm:text-xs text-slate-700 space-y-2 bg-white/70">
-              <div class="flex items-start gap-2">
-                <span class="font-extrabold text-[#134954] shrink-0">🛶 水上體驗：</span>
-                <span class="text-slate-600">搭乘傳統手搖木船穿梭水上高腳木屋，河道微風徐徐，船伕划得平穩舒適。</span>
-              </div>
-              <div class="flex items-start gap-2">
-                <span class="font-extrabold text-[#134954] shrink-0">🍽️ 地道小食：</span>
-                <span class="text-slate-600">現做芒果糯米飯 (約 80-100฿)、現烤大頭蝦、木船泰式湯麵 (40-60฿)、炭烤椰絲小煎餅 (Khanom Buang)。</span>
-              </div>
-              <div class="flex items-start gap-2">
-                <span class="font-extrabold text-[#134954] shrink-0">🎫 門票參考：</span>
-                <span class="text-slate-600">外國遊客入場門票約 200฿；含手搖划艇套票約 350-400฿/人。</span>
-              </div>
-              <div class="flex items-start gap-2">
-                <span class="font-extrabold text-[#134954] shrink-0">💡 慢活貼士：</span>
-                <span class="text-slate-600">木棧道平坦寬敞，穿好走平底鞋即可；全程平路好走無陡坡。</span>
-              </div>
-              <div class="pt-2 flex justify-end gap-2 border-t border-slate-100">
-                <button onclick="findNearbyFood('Pattaya Floating Market')" class="inline-flex items-center gap-1 text-[11px] font-bold bg-[#fef3c7] hover:bg-[#fde68a] text-[#854d0e] px-2.5 py-1 rounded-lg border border-[#fcd34d] shadow-xs transition active:scale-95">
-                  <i data-lucide="utensils" class="w-3 h-3 text-[#b45309]"></i>
-                  <span>搵周邊美食</span>
-                </button>
-                <button onclick="navPlace('Pattaya Floating Market', 'https://maps.google.com/?cid=7143143329164055768')" class="inline-flex items-center gap-1 text-[11px] font-bold bg-[#C1EAEA] hover:bg-[#aee0e0] text-[#0f343c] px-2.5 py-1 rounded-lg border border-[#9edada] shadow-xs transition active:scale-95">
-                  <i data-lucide="map-pin" class="w-3 h-3 text-[#1b7382]"></i>
-                  <span>導航地圖</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
-
-      <!-- DAY 3 -->
-      <div class="day-card bg-white/95 backdrop-blur-md rounded-3xl p-5 sm:p-6 shadow-sm border border-[#cdeced] transition hover:shadow-md" data-day="3">
-        <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
-          <div>
-            <span class="text-xs font-extrabold text-[#0d4d59] bg-[#e4f7f7] px-2.5 py-1 rounded-full border border-[#c1eaea]">DAY 3 • 16/10 (五)</span>
-            <h2 class="text-base sm:text-lg font-black text-[#0f2e37] mt-1.5">悠閒早餐 ➔ 直奔曼谷 ➔ 四面佛 ➔ 按摩放鬆</h2>
-          </div>
-          <span class="text-xs bg-[#f0fbfb] text-[#2a616b] font-bold px-2.5 py-1 rounded-lg border border-[#c8ebeb]">宿：Grande Centre Point</span>
-        </div>
-        <div class="space-y-3 text-xs sm:text-sm text-slate-700">
-          <div class="flex gap-3">
-            <span class="font-extrabold text-[#134954] shrink-0 w-12">上午</span>
-            <p>酒店悠閒早餐，收拾行李退房 ➔ 專車直奔曼谷全新旗艦酒店（車程約 2 小時）。</p>
-          </div>
-          <div class="flex gap-3">
-            <span class="font-extrabold text-[#134954] shrink-0 w-12">中午</span>
-            <p>入住 Grande Centre Point Prestige Bangkok ➔ 大堂兌換免費咖啡與雪糕 ➔ 步行 2-3 分鐘拜四面佛祈福、順逛 CentralWorld。</p>
-          </div>
-          <div class="flex gap-3">
-            <span class="font-extrabold text-[#134954] shrink-0 w-12">夜晚</span>
-            <p>CentralWorld 品嚐泰菜 ➔ 享受預約好之 Let's Relax Spa（CentralWorld 或 The Market 分店）徹底舒壓放鬆。</p>
-          </div>
-        </div>
-
-        <!-- 景點詳細資訊（摺疊卡片 Accordion） -->
-        <div class="mt-4 pt-3 border-t border-slate-100 space-y-2">
-          <div class="text-[11px] font-extrabold text-[#3a6872] flex items-center justify-between">
-            <span class="flex items-center gap-1.5">
-              <i data-lucide="layers" class="w-3.5 h-3.5 text-[#1b7382]"></i>
-              景點詳細資訊（點擊展開）：
-            </span>
-            <span class="text-[10px] text-[#69919a] font-normal">平時收起 • 點擊查看特色與附近美食</span>
-          </div>
-
-          <!-- 四面佛 (宗教祈福性質：參拜順序、官方香燭公價避坑、許願禮儀) -->
-          <div class="border border-[#cdeced] rounded-2xl bg-[#f7fdfd] overflow-hidden transition hover:border-[#a6dede]">
-            <button onclick="toggleAccordion('acc-day3-erawan')" class="w-full px-3.5 py-2.5 flex items-center justify-between text-left text-xs font-bold text-[#0f2e37] hover:bg-[#eef9f9] transition">
-              <div class="flex items-center gap-2">
-                <span class="text-sm">🛕</span>
-                <span>四面佛 (Erawan Shrine)</span>
-                <span class="text-[10px] bg-[#C1EAEA]/50 text-[#0d404b] font-extrabold px-1.5 py-0.5 rounded border border-[#a6dede]">祈福朝拜</span>
-              </div>
-              <div class="flex items-center gap-1 text-slate-400">
-                <span class="text-[10px] text-[#527d86]">詳情</span>
-                <span id="acc-day3-erawan-arrow" class="transition-transform duration-200 text-xs">▼</span>
-              </div>
-            </button>
-            <div id="acc-day3-erawan" class="hidden px-3.5 pb-3 pt-2 border-t border-[#d8f1f1] text-[11px] sm:text-xs text-slate-700 space-y-2 bg-white/70">
-              <div class="flex items-start gap-2">
-                <span class="font-extrabold text-[#134954] shrink-0">🛕 參拜流程：</span>
-                <span class="text-slate-600">從正門正面開始順時針依次拜四面（第一面求事業功名、第二面求感情姻緣、第三面求財富資產、第四面求平安健康）。</span>
-              </div>
-              <div class="flex items-start gap-2">
-                <span class="font-extrabold text-[#134954] shrink-0">💐 香燭花串：</span>
-                <span class="text-slate-600"><strong>免費進場！</strong>敬請於神壇內部官方小賣部購買香燭（公價約 25-50฿/套），切勿理會外圍拉客小販。</span>
-              </div>
-              <div class="flex items-start gap-2">
-                <span class="font-extrabold text-[#134954] shrink-0">💡 禮儀須知：</span>
-                <span class="text-slate-600">心誠則靈，參拜完可於旁邊淨手處舀聖水洗手拂面祈求吉順。</span>
-              </div>
-              <div class="pt-2 flex justify-end gap-2 border-t border-slate-100">
-                <button onclick="findNearbyFood('Erawan Shrine Bangkok')" class="inline-flex items-center gap-1 text-[11px] font-bold bg-[#fef3c7] hover:bg-[#fde68a] text-[#854d0e] px-2.5 py-1 rounded-lg border border-[#fcd34d] shadow-xs transition active:scale-95">
-                  <i data-lucide="utensils" class="w-3 h-3 text-[#b45309]"></i>
-                  <span>搵周邊美食</span>
-                </button>
-                <button onclick="navPlace('Erawan Shrine Bangkok', 'https://maps.google.com/?cid=3529163743388898900')" class="inline-flex items-center gap-1 text-[11px] font-bold bg-[#C1EAEA] hover:bg-[#aee0e0] text-[#0f343c] px-2.5 py-1 rounded-lg border border-[#9edada] shadow-xs transition active:scale-95">
-                  <i data-lucide="map-pin" class="w-3 h-3 text-[#1b7382]"></i>
-                  <span>導航地圖</span>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- CentralWorld 購物中心 (商場性質：不顯示門票，專注聚餐、購物與天橋動線) -->
-          <div class="border border-[#cdeced] rounded-2xl bg-[#f7fdfd] overflow-hidden transition hover:border-[#a6dede]">
-            <button onclick="toggleAccordion('acc-day3-cw')" class="w-full px-3.5 py-2.5 flex items-center justify-between text-left text-xs font-bold text-[#0f2e37] hover:bg-[#eef9f9] transition">
-              <div class="flex items-center gap-2">
-                <span class="text-sm">🛍️</span>
-                <span>CentralWorld 購物中心</span>
-                <span class="text-[10px] bg-[#C1EAEA]/50 text-[#0d404b] font-extrabold px-1.5 py-0.5 rounded border border-[#a6dede]">旗艦商圈</span>
-              </div>
-              <div class="flex items-center gap-1 text-slate-400">
-                <span class="text-[10px] text-[#527d86]">詳情</span>
-                <span id="acc-day3-cw-arrow" class="transition-transform duration-200 text-xs">▼</span>
-              </div>
-            </button>
-            <div id="acc-day3-cw" class="hidden px-3.5 pb-3 pt-2 border-t border-[#d8f1f1] text-[11px] sm:text-xs text-slate-700 space-y-2 bg-white/70">
-              <div class="flex items-start gap-2">
-                <span class="font-extrabold text-[#134954] shrink-0">🍽️ 聚餐精選：</span>
-                <span class="text-slate-600">3F/7F Nara Thai Cuisine（米芝蓮名店精緻泰菜）、Kub Kao' Kub Pla（家常泰菜）、鼎泰豐（清淡安心）。</span>
-              </div>
-              <div class="flex items-start gap-2">
-                <span class="font-extrabold text-[#134954] shrink-0">🏬 購物熱點：</span>
-                <span class="text-slate-600">Central Food Hall 超大豪華超市泰國手信區、Naraya 旗艦店、Karmakamet / Panpuri 香氛專門店。</span>
-              </div>
-              <div class="flex items-start gap-2">
-                <span class="font-extrabold text-[#134954] shrink-0">💡 舒適貼士：</span>
-                <span class="text-slate-600">商場與酒店、BTS 站由全室內冷氣高架天橋 (R-Walk Skywalk) 連接，全平路無風雨日曬。</span>
-              </div>
-              <div class="pt-2 flex justify-end gap-2 border-t border-slate-100">
-                <button onclick="findNearbyFood('CentralWorld Bangkok')" class="inline-flex items-center gap-1 text-[11px] font-bold bg-[#fef3c7] hover:bg-[#fde68a] text-[#854d0e] px-2.5 py-1 rounded-lg border border-[#fcd34d] shadow-xs transition active:scale-95">
-                  <i data-lucide="utensils" class="w-3 h-3 text-[#b45309]"></i>
-                  <span>搵周邊美食</span>
-                </button>
-                <button onclick="navPlace('CentralWorld Bangkok', 'https://maps.google.com/?cid=14171986354817230340')" class="inline-flex items-center gap-1 text-[11px] font-bold bg-[#C1EAEA] hover:bg-[#aee0e0] text-[#0f343c] px-2.5 py-1 rounded-lg border border-[#9edada] shadow-xs transition active:scale-95">
-                  <i data-lucide="map-pin" class="w-3 h-3 text-[#1b7382]"></i>
-                  <span>導航地圖</span>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Let's Relax Spa (舒壓養生水療性質：療程推薦、茶點招待、溝通提示) -->
-          <div class="border border-[#cdeced] rounded-2xl bg-[#f7fdfd] overflow-hidden transition hover:border-[#a6dede]">
-            <button onclick="toggleAccordion('acc-day3-spa')" class="w-full px-3.5 py-2.5 flex items-center justify-between text-left text-xs font-bold text-[#0f2e37] hover:bg-[#eef9f9] transition">
-              <div class="flex items-center gap-2">
-                <span class="text-sm">💆</span>
-                <span>Let's Relax Spa（CentralWorld 或 The Market 分店）</span>
-                <span class="text-[10px] bg-[#C1EAEA]/50 text-[#0d404b] font-extrabold px-1.5 py-0.5 rounded border border-[#a6dede]">舒壓水療</span>
-              </div>
-              <div class="flex items-center gap-1 text-slate-400">
-                <span class="text-[10px] text-[#527d86]">詳情</span>
-                <span id="acc-day3-spa-arrow" class="transition-transform duration-200 text-xs">▼</span>
-              </div>
-            </button>
-            <div id="acc-day3-spa" class="hidden px-3.5 pb-3 pt-2 border-t border-[#d8f1f1] text-[11px] sm:text-xs text-slate-700 space-y-2 bg-white/70">
-              <div class="flex items-start gap-2">
-                <span class="font-extrabold text-[#134954] shrink-0">💆 推薦療程：</span>
-                <span class="text-slate-600">足部舒緩按摩 (Foot Massage 60分鐘約 500฿)、溫熱草本熱敷球泰式按摩 (Thai Massage with Herbal Compress 120分鐘約 1,200฿)。</span>
-              </div>
-              <div class="flex items-start gap-2">
-                <span class="font-extrabold text-[#134954] shrink-0">🍵 貼心招待：</span>
-                <span class="text-slate-600">療程結束後免費招待特製熱草本茶與香甜芒果糯米飯。</span>
-              </div>
-              <div class="flex items-start gap-2">
-                <span class="font-extrabold text-[#134954] shrink-0">💡 力度溝通：</span>
-                <span class="text-slate-600">按摩力度如需放輕可向師傅說「Bao Bao Noi (請小力一點)」。</span>
-              </div>
-              <div class="pt-2 flex justify-end gap-2 border-t border-slate-100">
-                <button onclick="findNearbyFood('Let\'s Relax Spa CentralWorld Bangkok')" class="inline-flex items-center gap-1 text-[11px] font-bold bg-[#fef3c7] hover:bg-[#fde68a] text-[#854d0e] px-2.5 py-1 rounded-lg border border-[#fcd34d] shadow-xs transition active:scale-95">
-                  <i data-lucide="utensils" class="w-3 h-3 text-[#b45309]"></i>
-                  <span>搵周邊美食</span>
-                </button>
-                <button onclick="navPlace('Let\'s Relax Spa CentralWorld Bangkok')" class="inline-flex items-center gap-1 text-[11px] font-bold bg-[#C1EAEA] hover:bg-[#aee0e0] text-[#0f343c] px-2.5 py-1 rounded-lg border border-[#9edada] shadow-xs transition active:scale-95">
-                  <i data-lucide="map-pin" class="w-3 h-3 text-[#1b7382]"></i>
-                  <span>導航地圖</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- DAY 4 -->
-      <div class="day-card bg-white/95 backdrop-blur-md rounded-3xl p-5 sm:p-6 shadow-sm border border-[#cdeced] transition hover:shadow-md" data-day="4">
-        <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
-          <div>
-            <span class="text-xs font-extrabold text-[#0d4d59] bg-[#e4f7f7] px-2.5 py-1 rounded-full border border-[#c1eaea]">DAY 4 • 17/10 (六)</span>
-            <h2 class="text-base sm:text-lg font-black text-[#0f2e37] mt-1.5">曼谷頂級商圈 ➔ ICONSIAM 湄南河夕陽夜景</h2>
-          </div>
-          <span class="text-xs bg-[#f0fbfb] text-[#2a616b] font-bold px-2.5 py-1 rounded-lg border border-[#c8ebeb]">平路冷氣行街</span>
-        </div>
-        <div class="space-y-3 text-xs sm:text-sm text-slate-700">
-          <div class="flex gap-3">
-            <span class="font-extrabold text-[#134954] shrink-0 w-12">上午</span>
-            <p>睡到自然醒，酒店悠閒早餐 ➔ 漫步 Siam Paragon 或全新 ONE Bangkok，全平路室內吹冷氣。</p>
-          </div>
-          <div class="flex gap-3">
-            <span class="font-extrabold text-[#134954] shrink-0 w-12">中午</span>
-            <p>商場品嚐精緻泰菜午餐 ➔ 午後返回酒店客廳休息聊天或享用下午茶點，避開正午日曬。</p>
-          </div>
-          <div class="flex gap-3">
-            <span class="font-extrabold text-[#134954] shrink-0 w-12">夜晚</span>
-            <p>專車前往 ICONSIAM（逛室內冷氣水上市場、河畔景觀餐廳晚餐、欣賞湄南河璀璨夜景）➔ 專車回酒店。</p>
-          </div>
-        </div>
-
-        <!-- 景點詳細資訊（摺疊卡片 Accordion） -->
-        <div class="mt-4 pt-3 border-t border-slate-100 space-y-2">
-          <div class="text-[11px] font-extrabold text-[#3a6872] flex items-center justify-between">
-            <span class="flex items-center gap-1.5">
-              <i data-lucide="layers" class="w-3.5 h-3.5 text-[#1b7382]"></i>
-              景點詳細資訊（點擊展開）：
-            </span>
-            <span class="text-[10px] text-[#69919a] font-normal">平時收起 • 點擊查看特色與附近美食</span>
-          </div>
-
-          <!-- ICONSIAM 暹羅天地 (大型複合地標商場：美食天地、噴泉匯演、舒適動線) -->
-          <div class="border border-[#cdeced] rounded-2xl bg-[#f7fdfd] overflow-hidden transition hover:border-[#a6dede]">
-            <button onclick="toggleAccordion('acc-day4-iconsiam')" class="w-full px-3.5 py-2.5 flex items-center justify-between text-left text-xs font-bold text-[#0f2e37] hover:bg-[#eef9f9] transition">
-              <div class="flex items-center gap-2">
-                <span class="text-sm">⛴️</span>
-                <span>ICONSIAM 暹羅天地（室內水上市場 SOOKSIAM）</span>
-                <span class="text-[10px] bg-[#C1EAEA]/50 text-[#0d404b] font-extrabold px-1.5 py-0.5 rounded border border-[#a6dede]">必到地標</span>
-              </div>
-              <div class="flex items-center gap-1 text-slate-400">
-                <span class="text-[10px] text-[#527d86]">詳情</span>
-                <span id="acc-day4-iconsiam-arrow" class="transition-transform duration-200 text-xs">▼</span>
-              </div>
-            </button>
-            <div id="acc-day4-iconsiam" class="hidden px-3.5 pb-3 pt-2 border-t border-[#d8f1f1] text-[11px] sm:text-xs text-slate-700 space-y-2 bg-white/70">
-              <div class="flex items-start gap-2">
-                <span class="font-extrabold text-[#134954] shrink-0">🍽️ 美食天地：</span>
-                <span class="text-slate-600">G 樓 SOOKSIAM 全冷氣集結泰國 77 府地道小吃（現烤大蝦、芒果糯米飯、手標泰奶）；6F 室內瀑布景觀餐廳（如 Thipsamai 泰式炒金邊粉）。</span>
-              </div>
-              <div class="flex items-start gap-2">
-                <span class="font-extrabold text-[#134954] shrink-0">⛲ 景觀匯演：</span>
-                <span class="text-slate-600">河畔戶外花園每晚約 18:30 及 20:00 呈獻大型璀璨音樂噴泉水舞秀，遠眺湄南河遊船美景。</span>
-              </div>
-              <div class="flex items-start gap-2">
-                <span class="font-extrabold text-[#134954] shrink-0">💡 舒適貼士：</span>
-                <span class="text-slate-600">室內水上市場地板乾爽、全平路無障礙升降機配套完善；傍晚過河路段容易塞車，包車建議提早出發。</span>
-              </div>
-              <div class="pt-2 flex justify-end gap-2 border-t border-slate-100">
-                <button onclick="findNearbyFood('ICONSIAM Bangkok')" class="inline-flex items-center gap-1 text-[11px] font-bold bg-[#fef3c7] hover:bg-[#fde68a] text-[#854d0e] px-2.5 py-1 rounded-lg border border-[#fcd34d] shadow-xs transition active:scale-95">
-                  <i data-lucide="utensils" class="w-3 h-3 text-[#b45309]"></i>
-                  <span>搵周邊美食</span>
-                </button>
-                <button onclick="navPlace('ICONSIAM Bangkok', 'https://maps.google.com/?cid=1612497051803357940')" class="inline-flex items-center gap-1 text-[11px] font-bold bg-[#C1EAEA] hover:bg-[#aee0e0] text-[#0f343c] px-2.5 py-1 rounded-lg border border-[#9edada] shadow-xs transition active:scale-95">
-                  <i data-lucide="map-pin" class="w-3 h-3 text-[#1b7382]"></i>
-                  <span>導航地圖</span>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Siam Paragon / One Bangkok (商圈性質：不顯示門票，手信、咖啡歇腳、平路冷氣) -->
-          <div class="border border-[#cdeced] rounded-2xl bg-[#f7fdfd] overflow-hidden transition hover:border-[#a6dede]">
-            <button onclick="toggleAccordion('acc-day4-siam')" class="w-full px-3.5 py-2.5 flex items-center justify-between text-left text-xs font-bold text-[#0f2e37] hover:bg-[#eef9f9] transition">
-              <div class="flex items-center gap-2">
-                <span class="text-sm">💎</span>
-                <span>Siam Paragon & One Bangkok 新商圈</span>
-                <span class="text-[10px] bg-[#C1EAEA]/50 text-[#0d404b] font-extrabold px-1.5 py-0.5 rounded border border-[#a6dede]">平路漫遊</span>
-              </div>
-              <div class="flex items-center gap-1 text-slate-400">
-                <span class="text-[10px] text-[#527d86]">詳情</span>
-                <span id="acc-day4-siam-arrow" class="transition-transform duration-200 text-xs">▼</span>
-              </div>
-            </button>
-            <div id="acc-day4-siam" class="hidden px-3.5 pb-3 pt-2 border-t border-[#d8f1f1] text-[11px] sm:text-xs text-slate-700 space-y-2 bg-white/70">
-              <div class="flex items-start gap-2">
-                <span class="font-extrabold text-[#134954] shrink-0">🏬 商圈亮點：</span>
-                <span class="text-slate-600">Paragon 地庫 Gourmet Market 買齊全泰國伴手禮水果乾；全新 One Bangkok 現代綠色庭園與藝術空間。</span>
-              </div>
-              <div class="flex items-start gap-2">
-                <span class="font-extrabold text-[#134954] shrink-0">☕ 歇腳推薦：</span>
-                <span class="text-slate-600">TWG Tea Salon、After You、Greyhound Cafe 寬敞沙發茶座。</span>
-              </div>
-              <div class="flex items-start gap-2">
-                <span class="font-extrabold text-[#134954] shrink-0">💡 慢活貼士：</span>
-                <span class="text-slate-600">商場空間極其寬敞，洗手間星級配備，全平路冷氣環境行得輕鬆。</span>
-              </div>
-              <div class="pt-2 flex justify-end gap-2 border-t border-slate-100">
-                <button onclick="findNearbyFood('Siam Paragon Bangkok')" class="inline-flex items-center gap-1 text-[11px] font-bold bg-[#fef3c7] hover:bg-[#fde68a] text-[#854d0e] px-2.5 py-1 rounded-lg border border-[#fcd34d] shadow-xs transition active:scale-95">
-                  <i data-lucide="utensils" class="w-3 h-3 text-[#b45309]"></i>
-                  <span>搵周邊美食</span>
-                </button>
-                <button onclick="navPlace('Siam Paragon Bangkok', 'https://maps.google.com/?cid=11476178565854079331')" class="inline-flex items-center gap-1 text-[11px] font-bold bg-[#C1EAEA] hover:bg-[#aee0e0] text-[#0f343c] px-2.5 py-1 rounded-lg border border-[#9edada] shadow-xs transition active:scale-95">
-                  <i data-lucide="map-pin" class="w-3 h-3 text-[#1b7382]"></i>
-                  <span>Siam Paragon</span>
-                </button>
-                <button onclick="navPlace('One Bangkok', 'https://maps.google.com/?cid=7967211463618493112')" class="inline-flex items-center gap-1 text-[11px] font-bold bg-[#C1EAEA] hover:bg-[#aee0e0] text-[#0f343c] px-2.5 py-1 rounded-lg border border-[#9edada] shadow-xs transition active:scale-95">
-                  <i data-lucide="map-pin" class="w-3 h-3 text-[#1b7382]"></i>
-                  <span>One Bangkok</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- DAY 5 -->
-      <div class="day-card bg-white/95 backdrop-blur-md rounded-3xl p-5 sm:p-6 shadow-sm border border-[#cdeced] transition hover:shadow-md" data-day="5">
-        <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
-          <div>
-            <span class="text-xs font-extrabold text-[#0d4d59] bg-[#e4f7f7] px-2.5 py-1 rounded-full border border-[#c1eaea]">DAY 5 • 18/10 (日)</span>
-            <h2 class="text-base sm:text-lg font-black text-[#0f2e37] mt-1.5">曼谷 ➔ 香港甜蜜歸家</h2>
-          </div>
-          <span class="text-xs bg-[#e4f7f7] text-[#0d4d59] font-black px-2.5 py-1 rounded-lg border border-[#c1eaea]">國泰 CX654 15:00</span>
-        </div>
-        <div class="space-y-3 text-xs sm:text-sm text-slate-700">
-          <div class="flex gap-3">
-            <span class="font-extrabold text-[#134954] shrink-0 w-12">上午</span>
-            <p>睡到自然醒，悠閒享用早餐，整理行李辦理退房。</p>
-          </div>
-          <div class="flex gap-3">
-            <span class="font-extrabold text-[#134954] shrink-0 w-12">中午</span>
-            <p><strong>直達機場：</strong> 11:30 專車直達 BKK 機場辦理登機過關、逛免稅店或 Lounge 休息。<br><span class="text-xs text-slate-400">（如想逛 Outlet 可 10:30 退房順遊 Siam Premium Outlets 約 1 小時）</span></p>
-          </div>
-          <div class="flex gap-3">
-            <span class="font-extrabold text-[#134954] shrink-0 w-12">夜晚</span>
-            <p>搭乘國泰客機 CX654（15:00 起飛），18:50 平安返抵香港，溫馨回家！</p>
-          </div>
-        </div>
-
-        <!-- 景點詳細資訊（摺疊卡片 Accordion） -->
-        <div class="mt-4 pt-3 border-t border-slate-100 space-y-2">
-          <div class="text-[11px] font-extrabold text-[#3a6872] flex items-center justify-between">
-            <span class="flex items-center gap-1.5">
-              <i data-lucide="layers" class="w-3.5 h-3.5 text-[#1b7382]"></i>
-              景點詳細資訊（點擊展開）：
-            </span>
-            <span class="text-[10px] text-[#69919a] font-normal">平時收起 • 點擊查看特色與附近美食</span>
-          </div>
-
-          <!-- Siam Premium Outlets (名牌購物村性質：不顯示門票，折扣特色、園區動線、機場順遊) -->
-          <div class="border border-[#cdeced] rounded-2xl bg-[#f7fdfd] overflow-hidden transition hover:border-[#a6dede]">
-            <button onclick="toggleAccordion('acc-day5-outlet')" class="w-full px-3.5 py-2.5 flex items-center justify-between text-left text-xs font-bold text-[#0f2e37] hover:bg-[#eef9f9] transition">
-              <div class="flex items-center gap-2">
-                <span class="text-sm">🛍️</span>
-                <span>Siam Premium Outlets Bangkok（選遊）</span>
-                <span class="text-[10px] bg-[#C1EAEA]/50 text-[#0d404b] font-extrabold px-1.5 py-0.5 rounded border border-[#a6dede]">名牌折扣</span>
-              </div>
-              <div class="flex items-center gap-1 text-slate-400">
-                <span class="text-[10px] text-[#527d86]">詳情</span>
-                <span id="acc-day5-outlet-arrow" class="transition-transform duration-200 text-xs">▼</span>
-              </div>
-            </button>
-            <div id="acc-day5-outlet" class="hidden px-3.5 pb-3 pt-2 border-t border-[#d8f1f1] text-[11px] sm:text-xs text-slate-700 space-y-2 bg-white/70">
-              <div class="flex items-start gap-2">
-                <span class="font-extrabold text-[#134954] shrink-0">🛍️ 折扣亮點：</span>
-                <span class="text-slate-600">泰國首座正牌 Premium Outlets，國際精品與運動休閒服飾折扣（35-70% off）。</span>
-              </div>
-              <div class="flex items-start gap-2">
-                <span class="font-extrabold text-[#134954] shrink-0">🌴 園區動線：</span>
-                <span class="text-slate-600">開闊露天歐陸園林綠化長廊，設有多處遮陽長椅與噴泉休憩點。</span>
-              </div>
-              <div class="flex items-start gap-2">
-                <span class="font-extrabold text-[#134954] shrink-0">💡 機場順遊：</span>
-                <span class="text-slate-600">距 BKK 機場僅約 15 分鐘車程；如時間寬裕可順道逗留 1 小時，行李放包車上免搬運。</span>
-              </div>
-              <div class="pt-2 flex justify-end gap-2 border-t border-slate-100">
-                <button onclick="findNearbyFood('Siam Premium Outlets Bangkok')" class="inline-flex items-center gap-1 text-[11px] font-bold bg-[#fef3c7] hover:bg-[#fde68a] text-[#854d0e] px-2.5 py-1 rounded-lg border border-[#fcd34d] shadow-xs transition active:scale-95">
-                  <i data-lucide="utensils" class="w-3 h-3 text-[#b45309]"></i>
-                  <span>搵周邊美食</span>
-                </button>
-                <button onclick="navPlace('Siam Premium Outlets Bangkok', 'https://maps.google.com/?cid=16692910224731857635')" class="inline-flex items-center gap-1 text-[11px] font-bold bg-[#C1EAEA] hover:bg-[#aee0e0] text-[#0f343c] px-2.5 py-1 rounded-lg border border-[#9edada] shadow-xs transition active:scale-95">
-                  <i data-lucide="map-pin" class="w-3 h-3 text-[#1b7382]"></i>
-                  <span>導航地圖</span>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- BKK 機場返港 (交通樞紐性質：退稅蓋章指南、登機前休養、時間建議) -->
-          <div class="border border-[#cdeced] rounded-2xl bg-[#f7fdfd] overflow-hidden transition hover:border-[#a6dede]">
-            <button onclick="toggleAccordion('acc-day5-airport')" class="w-full px-3.5 py-2.5 flex items-center justify-between text-left text-xs font-bold text-[#0f2e37] hover:bg-[#eef9f9] transition">
-              <div class="flex items-center gap-2">
-                <span class="text-sm">✈️</span>
-                <span>曼谷素萬那普機場 (BKK Airport) 出境與退稅</span>
-                <span class="text-[10px] bg-[#C1EAEA]/50 text-[#0d404b] font-extrabold px-1.5 py-0.5 rounded border border-[#a6dede]">出境返港</span>
-              </div>
-              <div class="flex items-center gap-1 text-slate-400">
-                <span class="text-[10px] text-[#527d86]">詳情</span>
-                <span id="acc-day5-airport-arrow" class="transition-transform duration-200 text-xs">▼</span>
-              </div>
-            </button>
-            <div id="acc-day5-airport" class="hidden px-3.5 pb-3 pt-2 border-t border-[#d8f1f1] text-[11px] sm:text-xs text-slate-700 space-y-2 bg-white/70">
-              <div class="flex items-start gap-2">
-                <span class="font-extrabold text-[#134954] shrink-0">🛂 退稅指引：</span>
-                <span class="text-slate-600">如有 VAT 退稅單，托運行李前需先至出境大堂 4 樓 Gate 10 旁的 <strong>Customs VAT Refund</strong> 海關櫃位蓋章。</span>
-              </div>
-              <div class="flex items-start gap-2">
-                <span class="font-extrabold text-[#134954] shrink-0">🛋️ 登機前休養：</span>
-                <span class="text-slate-600">過關後可前往免稅店漫步或至貴賓室 (Miracle Lounge) 享用熱食與飲品，放鬆等候登機。</span>
-              </div>
-              <div class="flex items-start gap-2">
-                <span class="font-extrabold text-[#134954] shrink-0">💡 慢活提點：</span>
-                <span class="text-slate-600">國泰 CX654 於 15:00 起飛，建議 12:30-13:00 前抵達機場悠閒辦理手續，從容過關免趕急。</span>
-              </div>
-              <div class="pt-2 flex justify-end gap-2 border-t border-slate-100">
-                <button onclick="findNearbyFood('Suvarnabhumi Airport Bangkok')" class="inline-flex items-center gap-1 text-[11px] font-bold bg-[#fef3c7] hover:bg-[#fde68a] text-[#854d0e] px-2.5 py-1 rounded-lg border border-[#fcd34d] shadow-xs transition active:scale-95">
-                  <i data-lucide="utensils" class="w-3 h-3 text-[#b45309]"></i>
-                  <span>搵周邊美食</span>
-                </button>
-                <button onclick="navPlace('Suvarnabhumi Airport Bangkok', 'https://maps.google.com/?cid=12643594950346394595')" class="inline-flex items-center gap-1 text-[11px] font-bold bg-[#C1EAEA] hover:bg-[#aee0e0] text-[#0f343c] px-2.5 py-1 rounded-lg border border-[#9edada] shadow-xs transition active:scale-95">
-                  <i data-lucide="map-pin" class="w-3 h-3 text-[#1b7382]"></i>
-                  <span>導航地圖</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- 🧳 泰國家庭之旅・執行李 Checklist（只在全部總覽顯示） -->
-    <div id="packing-checklist-section" class="bg-white/95 backdrop-blur-md rounded-3xl p-5 sm:p-6 shadow-sm border border-[#cdeced]">
-      <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3 mb-4">
-        <div class="flex items-center gap-2">
-          <span class="text-xl">🧳</span>
-          <div>
-            <h3 class="text-base font-black text-[#0f2e37]">執行李 Check List (點擊打勾確認)</h3>
-            <p class="text-[11px] text-[#527d86]">出發前逐項檢查，確保全家齊全出發無遺漏</p>
-          </div>
-        </div>
-        <span id="pack-progress" class="text-xs bg-[#e4f7f7] text-[#0d4d59] font-black px-2.5 py-1 rounded-xl border border-[#c1eaea]">
-          已準備 0 / 12 項
-        </span>
-      </div>
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs sm:text-sm">
-        
-        <!-- 分類 1：重要證件與財務 -->
-        <div class="bg-[#f7fdfd] border border-[#cdeced] rounded-2xl p-3.5 space-y-2">
-          <div class="font-extrabold text-[#0f3b44] text-xs flex items-center gap-1 border-b border-[#d8f1f1] pb-1.5">
-            <span>🛂 重要證件與財務</span>
-          </div>
-          <label class="flex items-center gap-2.5 cursor-pointer p-1 rounded-lg hover:bg-white/80 transition pack-item">
-            <input type="checkbox" onchange="updatePackProgress()" class="w-4 h-4 rounded text-[#1b7382] focus:ring-[#1b7382] border-slate-300">
-            <span>全家護照 (有效期需達 6 個月以上)</span>
-          </label>
-          <label class="flex items-center gap-2.5 cursor-pointer p-1 rounded-lg hover:bg-white/80 transition pack-item">
-            <input type="checkbox" onchange="updatePackProgress()" class="w-4 h-4 rounded text-[#1b7382] focus:ring-[#1b7382] border-slate-300">
-            <span>機票行程單 (Ref: FT6JYI) 與 酒店確認信</span>
-          </label>
-          <label class="flex items-center gap-2.5 cursor-pointer p-1 rounded-lg hover:bg-white/80 transition pack-item">
-            <input type="checkbox" onchange="updatePackProgress()" class="w-4 h-4 rounded text-[#1b7382] focus:ring-[#1b7382] border-slate-300">
-            <span>泰銖現金、信用卡及海外提款已開通</span>
-          </label>
-        </div>
-
-        <!-- 分類 2：通訊與數碼電器 -->
-        <div class="bg-[#f7fdfd] border border-[#cdeced] rounded-2xl p-3.5 space-y-2">
-          <div class="font-extrabold text-[#0f3b44] text-xs flex items-center gap-1 border-b border-[#d8f1f1] pb-1.5">
-            <span>📱 通訊與數碼電器</span>
-          </div>
-          <label class="flex items-center gap-2.5 cursor-pointer p-1 rounded-lg hover:bg-white/80 transition pack-item">
-            <input type="checkbox" onchange="updatePackProgress()" class="w-4 h-4 rounded text-[#1b7382] focus:ring-[#1b7382] border-slate-300">
-            <span>泰國上網 SIM 卡 / eSIM / 漫遊數據</span>
-          </label>
-          <label class="flex items-center gap-2.5 cursor-pointer p-1 rounded-lg hover:bg-white/80 transition pack-item">
-            <input type="checkbox" onchange="updatePackProgress()" class="w-4 h-4 rounded text-[#1b7382] focus:ring-[#1b7382] border-slate-300">
-            <span>外置充電器 (尿袋，須隨身攜帶不可託運)</span>
-          </label>
-          <label class="flex items-center gap-2.5 cursor-pointer p-1 rounded-lg hover:bg-white/80 transition pack-item">
-            <input type="checkbox" onchange="updatePackProgress()" class="w-4 h-4 rounded text-[#1b7382] focus:ring-[#1b7382] border-slate-300">
-            <span>手機充電線、多口旅行充電插頭</span>
-          </label>
-        </div>
-
-        <!-- 分類 3：衣物與防曬用品 -->
-        <div class="bg-[#f7fdfd] border border-[#cdeced] rounded-2xl p-3.5 space-y-2">
-          <div class="font-extrabold text-[#0f3b44] text-xs flex items-center gap-1 border-b border-[#d8f1f1] pb-1.5">
-            <span>👕 衣物與海島防曬</span>
-          </div>
-          <label class="flex items-center gap-2.5 cursor-pointer p-1 rounded-lg hover:bg-white/80 transition pack-item">
-            <input type="checkbox" onchange="updatePackProgress()" class="w-4 h-4 rounded text-[#1b7382] focus:ring-[#1b7382] border-slate-300">
-            <span>輕便薄外套 (商場與專車冷氣保暖必備)</span>
-          </label>
-          <label class="flex items-center gap-2.5 cursor-pointer p-1 rounded-lg hover:bg-white/80 transition pack-item">
-            <input type="checkbox" onchange="updatePackProgress()" class="w-4 h-4 rounded text-[#1b7382] focus:ring-[#1b7382] border-slate-300">
-            <span>泳裝 / 泳帽 (芭堤雅海灘 & 酒店海景無邊際泳池)</span>
-          </label>
-          <label class="flex items-center gap-2.5 cursor-pointer p-1 rounded-lg hover:bg-white/80 transition pack-item">
-            <input type="checkbox" onchange="updatePackProgress()" class="w-4 h-4 rounded text-[#1b7382] focus:ring-[#1b7382] border-slate-300">
-            <span>防曬乳霜、太陽眼鏡、遮陽帽、便攜摺傘</span>
-          </label>
-        </div>
-
-        <!-- 分類 4：個人常備品與藥品 -->
-        <div class="bg-[#f7fdfd] border border-[#cdeced] rounded-2xl p-3.5 space-y-2">
-          <div class="font-extrabold text-[#0f3b44] text-xs flex items-center gap-1 border-b border-[#d8f1f1] pb-1.5">
-            <span>💊 個人護理與隨身常備藥</span>
-          </div>
-          <label class="flex items-center gap-2.5 cursor-pointer p-1 rounded-lg hover:bg-white/80 transition pack-item">
-            <input type="checkbox" onchange="updatePackProgress()" class="w-4 h-4 rounded text-[#1b7382] focus:ring-[#1b7382] border-slate-300">
-            <span>個人常用藥品 (止痛退燒、腸胃藥、暈浪暈車丸)</span>
-          </label>
-          <label class="flex items-center gap-2.5 cursor-pointer p-1 rounded-lg hover:bg-white/80 transition pack-item">
-            <input type="checkbox" onchange="updatePackProgress()" class="w-4 h-4 rounded text-[#1b7382] focus:ring-[#1b7382] border-slate-300">
-            <span>防蚊水 / 蚊怕貼、消毒濕紙巾</span>
-          </label>
-          <label class="flex items-center gap-2.5 cursor-pointer p-1 rounded-lg hover:bg-white/80 transition pack-item">
-            <input type="checkbox" onchange="updatePackProgress()" class="w-4 h-4 rounded text-[#1b7382] focus:ring-[#1b7382] border-slate-300">
-            <span>舒適輕巧健步鞋 (適合商場平路漫步)</span>
-          </label>
-        </div>
-
-      </div>
-    </div>
+    </section>
 
   </main>
 
-  <!-- 接機指引彈窗 (Pickup Modal) -->
-  <div id="pickup-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-white max-w-md w-full rounded-3xl p-6 shadow-2xl space-y-4 border border-[#cdeced]">
-      <div class="flex justify-between items-center border-b border-slate-100 pb-3">
-        <h3 class="text-base sm:text-lg font-black text-[#0f2e37] flex items-center gap-2">
-          <span>📍 BKK 機場接機指引</span>
-        </h3>
-        <button onclick="closeModal('pickup-modal')" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center font-bold text-sm transition">✕</button>
+  <!-- ==================== 📱 底部固定導航欄 (Bottom Navigation Bar) ==================== -->
+  <nav class="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-lg border-t border-[#ccebeb] shadow-lg pb-[env(safe-area-inset-bottom,8px)]">
+    <div class="max-w-md mx-auto grid grid-cols-4 h-[50px] items-center px-2">
+      <!-- 導航 1: 行程 -->
+      <button onclick="switchView('itinerary')" id="nav-itinerary" class="nav-item flex flex-col items-center justify-center h-full text-[#1b7382] font-black transition-all gap-0.5">
+        <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+        <span class="text-[10px] leading-none">行程表</span>
+      </button>
+
+      <!-- 導航 2: 酒店 -->
+      <button onclick="switchView('hotels')" id="nav-hotels" class="nav-item flex flex-col items-center justify-center h-full text-[#527d86] font-bold transition-all gap-0.5">
+        <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 22v-6.57"/><path d="M12 11h.01"/><path d="M12 7h.01"/><path d="M14 22v-6.57a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2V22"/><path d="M18 22V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v18"/><path d="M8 11h.01"/><path d="M8 7h.01"/></svg>
+        <span class="text-[10px] leading-none">五星住宿</span>
+      </button>
+
+      <!-- 導航 3: 實用工具 -->
+      <button onclick="switchView('tools')" id="nav-tools" class="nav-item flex flex-col items-center justify-center h-full text-[#527d86] font-bold transition-all gap-0.5">
+        <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/></svg>
+        <span class="text-[10px] leading-none">換算工具</span>
+      </button>
+
+      <!-- 導航 4: AI 伴遊 -->
+      <button onclick="switchView('ai')" id="nav-ai" class="nav-item flex flex-col items-center justify-center h-full text-[#527d86] font-bold transition-all gap-0.5">
+        <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"/></svg>
+        <span class="text-[10px] leading-none">AI 伴遊</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ==================== 🚖「給司機看」全螢幕超大字體卡片 (全螢幕跳出) ==================== -->
+  <div id="driver-modal" class="fixed inset-0 z-50 bg-[#091b22]/95 backdrop-blur-md hidden flex flex-col justify-between p-6">
+    <!-- 頂部關閉列 (超大關閉按鈕，不怕按錯) -->
+    <div class="flex items-center justify-between border-b border-white/20 pb-4">
+      <div class="flex items-center gap-2 text-white">
+        <span class="text-2xl">🚕</span>
+        <span class="text-sm font-bold opacity-80">請出示給的士／包車司機查看</span>
       </div>
-      <div class="space-y-3 text-xs sm:text-sm text-slate-600 leading-relaxed">
-        <div class="bg-[#fff9f0] border border-[#fed7aa] rounded-xl p-3 text-xs text-[#9a4f10]">
-          ⚠️ 曼谷機場規定專車不能久停，出示 Voucher 後需等候調車約 <strong>20–30 分鐘</strong>，大家可先在旁座位區悠閒休息。
+      <button onclick="closeDriverModal()" class="w-12 h-12 bg-white/20 active:bg-white/40 text-white rounded-2xl flex items-center justify-center text-xl font-black shadow-md">
+        ✕
+      </button>
+    </div>
+
+    <!-- 中間超大字體展示區 (專門讓司機在街上一目了然) -->
+    <div class="flex-1 flex flex-col justify-center items-center text-center my-6 space-y-4">
+      <div id="driver-modal-title" class="text-base font-bold text-[#C1EAEA]">
+        景點 / 酒店名稱
+      </div>
+      <!-- 超大泰文文字容器 -->
+      <div class="bg-white rounded-3xl p-6 w-full max-w-sm shadow-2xl border-4 border-[#C1EAEA]">
+        <div id="driver-modal-thai" class="font-thai text-2xl sm:text-3xl font-black text-[#0f2e37] leading-relaxed break-words whitespace-pre-wrap">
+          กรุณาไปที่นี่
         </div>
-        <p><strong>1. 集合位置：</strong> 2 樓入境大堂 (Arrival Hall 2nd Fl)，<strong>4 號門 (Gate 4)</strong> 附近。</p>
+      </div>
+      <div class="text-xs text-white/70">
+        💡 提示：若司機看不太清，可將手機橫轉或調亮螢幕亮度
+      </div>
+    </div>
+
+    <!-- 底部操作列 (一鍵複製泰文 + 關閉) -->
+    <div class="space-y-2.5 max-w-sm mx-auto w-full">
+      <button onclick="copyDriverThaiText()" id="copy-driver-btn" class="w-full h-14 bg-[#C1EAEA] text-[#0c2e36] text-base font-black rounded-2xl shadow-lg flex items-center justify-center gap-2">
+        <svg class="w-5 h-5 text-[#0c2e36]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+        <span>複製泰文地址發給司機</span>
+      </button>
+      <button onclick="closeDriverModal()" class="w-full h-12 bg-white/10 text-white text-sm font-bold rounded-2xl">
+        關閉返回
+      </button>
+    </div>
+  </div>
+
+  <!-- 接機指引彈窗 -->
+  <div id="pickup-modal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-xs hidden flex items-center justify-center p-4">
+    <div class="bg-white max-w-sm w-full rounded-3xl p-5 shadow-2xl space-y-3.5 border border-[#cdeced]">
+      <div class="flex justify-between items-center border-b border-slate-100 pb-2">
+        <h3 class="text-sm font-black text-[#0f2e37]">📍 BKK 機場接機指引</h3>
+        <button onclick="closeModal('pickup-modal')" class="w-8 h-8 rounded-full bg-slate-100 text-slate-700 flex items-center justify-center font-bold text-sm">✕</button>
+      </div>
+      <div class="space-y-2 text-xs text-slate-600 leading-relaxed">
+        <div class="bg-[#fff9f0] border border-[#fed7aa] rounded-xl p-2.5 text-[11px] text-[#9a4f10]">
+          ⚠️ 曼谷機場規定專車不能久停，出示 Voucher 後需調車約 <strong>20–30 分鐘</strong>，可先在旁座椅休息。
+        </div>
+        <p><strong>1. 集合位置：</strong> 2 樓入境大堂 (Arrival Hall 2nd Fl) <strong>4 號門 (Gate 4)</strong>。</p>
         <p><strong>2. 認標誌：</strong> 左手邊見到 <strong>Airport Information (AOT)</strong> 櫃位旁，尋找 <strong>Klook / TTD Global</strong> 標示牌。</p>
-        <p><strong>3. 核對上車：</strong> 出示 Klook 憑證，上車前與司機確認姓名及目的地（Hilton Pattaya）。</p>
-        <div class="text-xs text-slate-400 pt-2 border-t border-slate-100">
-          營運商 WhatsApp：<code>+66994838455</code><br>電話：<code>+66-21148844</code>
-        </div>
+        <p><strong>3. 核對上車：</strong> 出示憑證與司機確認目的地（Hilton Pattaya）。</p>
       </div>
-      <button onclick="closeModal('pickup-modal')" class="w-full bg-[#C1EAEA] hover:bg-[#aee0e0] text-[#0f343c] font-black py-2.5 rounded-xl transition shadow-sm border border-[#9edada]">知道了</button>
+      <button onclick="closeModal('pickup-modal')" class="w-full h-11 bg-[#C1EAEA] text-[#0f343c] font-black rounded-xl">知道了</button>
     </div>
   </div>
 
-  <!-- 預訂狀態總覽彈窗 (Booking Modal) -->
-  <div id="booking-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-white max-w-md w-full rounded-3xl p-6 shadow-2xl space-y-4 border border-[#cdeced]">
-      <div class="flex justify-between items-center border-b border-slate-100 pb-3">
-        <h3 class="text-base sm:text-lg font-black text-[#0f2e37] flex items-center gap-2">
-          <span>📋 預約項目總覽</span>
-        </h3>
-        <button onclick="closeModal('booking-modal')" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center font-bold text-sm transition">✕</button>
+  <!-- AI 行程管家彈窗 -->
+  <div id="ai-advisor-modal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-xs hidden flex items-end sm:items-center justify-center p-2 sm:p-4">
+    <div class="bg-white max-w-sm w-full rounded-3xl p-4 shadow-2xl space-y-3 max-h-[85vh] flex flex-col border border-[#cdeced]">
+      <div class="flex justify-between items-center border-b border-slate-100 pb-2">
+        <h3 class="text-sm font-black text-[#0f2e37]">🤖 Gemini 慢活隨身管家</h3>
+        <button onclick="closeModal('ai-advisor-modal')" class="w-8 h-8 rounded-full bg-slate-100 text-slate-700 flex items-center justify-center font-bold text-sm">✕</button>
       </div>
-      <div class="space-y-2 text-xs sm:text-sm max-h-[60vh] overflow-y-auto pr-1">
-        <div class="flex justify-between items-center p-2.5 rounded-xl bg-[#eefaf8] text-[#134d47] border border-[#c2e8e3]">
-          <span>國泰來回機票 (Ref: FT6JYI)</span>
-          <span class="font-extrabold text-xs bg-[#a8e6cf] text-[#0d4036] px-2 py-0.5 rounded-md">✅ 已確認</span>
+      <div class="flex-1 overflow-y-auto space-y-2 text-xs pr-1">
+        <div class="bg-[#f2fafb] p-2.5 rounded-xl text-slate-700 leading-relaxed">
+          👋 您好！您可以隨時詢問我：全家合適的美食推薦、舒適平路動線、雨天室內備案或茶座歇腳點。
         </div>
-        <div class="flex justify-between items-center p-2.5 rounded-xl bg-[#eefaf8] text-[#134d47] border border-[#c2e8e3]">
-          <span>Hilton Pattaya (2晚)</span>
-          <span class="font-extrabold text-xs bg-[#a8e6cf] text-[#0d4036] px-2 py-0.5 rounded-md">✅ 已確認</span>
-        </div>
-        <div class="flex justify-between items-center p-2.5 rounded-xl bg-[#eefaf8] text-[#134d47] border border-[#c2e8e3]">
-          <span>Grande Centre Point Prestige (2晚)</span>
-          <span class="font-extrabold text-xs bg-[#a8e6cf] text-[#0d4036] px-2 py-0.5 rounded-md">✅ 已確認</span>
-        </div>
-        <div class="flex justify-between items-center p-2.5 rounded-xl bg-[#eefaf8] text-[#134d47] border border-[#c2e8e3]">
-          <span>Day 1 接機 (Klook / TTD Global)</span>
-          <span class="font-extrabold text-xs bg-[#a8e6cf] text-[#0d4036] px-2 py-0.5 rounded-md">✅ 已確認</span>
-        </div>
-        <div class="flex justify-between items-center p-2.5 rounded-xl bg-[#eefaf8] text-[#134d47] border border-[#c2e8e3]">
-          <span>The Sky Gallery (18:00 C47枱 5人)</span>
-          <span class="font-extrabold text-xs bg-[#a8e6cf] text-[#0d4036] px-2 py-0.5 rounded-md">✅ 已確認</span>
-        </div>
-        <div class="flex justify-between items-center p-2.5 rounded-xl bg-[#fff7ed] text-[#9a4f10] border border-[#fed7aa]">
-          <span>Day 3 芭堤雅 ➔ 曼谷 跨市包車</span>
-          <span class="font-extrabold text-xs bg-[#ffedd5] text-[#9a3412] px-2 py-0.5 rounded-md border border-[#fed7aa]">待預訂</span>
-        </div>
-        <div class="flex justify-between items-center p-2.5 rounded-xl bg-[#fff7ed] text-[#9a4f10] border border-[#fed7aa]">
-          <span>Day 3 Let's Relax Spa 按摩 (5人)</span>
-          <span class="font-extrabold text-xs bg-[#ffedd5] text-[#9a3412] px-2 py-0.5 rounded-md border border-[#fed7aa]">待預訂</span>
-        </div>
-        <div class="flex justify-between items-center p-2.5 rounded-xl bg-[#fff7ed] text-[#9a4f10] border border-[#fed7aa]">
-          <span>Day 5 曼谷酒店 ➔ BKK 送機包車</span>
-          <span class="font-extrabold text-xs bg-[#ffedd5] text-[#9a3412] px-2 py-0.5 rounded-md border border-[#fed7aa]">待預訂</span>
-        </div>
+        <div id="advisor-chat-output" class="space-y-2"></div>
+        <div id="advisor-loading" class="hidden text-[#1b7382] font-bold text-xs py-1">Gemini 正在規劃建議...</div>
       </div>
-      <button onclick="closeModal('booking-modal')" class="w-full bg-slate-800 hover:bg-slate-900 text-white font-bold py-2.5 rounded-xl transition">關閉</button>
-    </div>
-  </div>
-
-  <!-- 1. AI 行程管家彈窗 (Advisor Modal) -->
-  <div id="ai-advisor-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-white max-w-lg w-full rounded-3xl p-6 shadow-2xl space-y-4 max-h-[90vh] flex flex-col border border-[#cdeced]">
-      <div class="flex justify-between items-center border-b border-slate-100 pb-3">
-        <div class="flex items-center gap-2">
-          <span class="text-2xl">🤖</span>
-          <div>
-            <h3 class="text-base font-black text-[#0f2e37]">Gemini 慢活隨身旅遊管家</h3>
-            <p class="text-[11px] text-[#527d86]">專為芭堤雅/曼谷家庭假期提供休閒靈感與彈性安排</p>
-          </div>
-        </div>
-        <button onclick="closeModal('ai-advisor-modal')" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center font-bold text-sm transition">✕</button>
-      </div>
-
-      <div class="flex-1 overflow-y-auto space-y-3 pr-1 text-sm">
-        <div class="bg-[#f2fafb] border border-[#cdeced] rounded-2xl p-3 text-xs text-slate-700 leading-relaxed">
-          👋 你好！我是您的家庭專屬旅遊管家。您可以隨時詢問我：家庭聚餐美食推薦、舒適寬敞逛街動線、室內消暑或雨天備案，以及彈性放鬆的各類玩樂建議。
-        </div>
-        <div id="advisor-chat-output" class="space-y-2 text-xs sm:text-sm"></div>
-        <div id="advisor-loading" class="hidden flex items-center gap-2 text-[#1b7382] font-medium py-2 text-xs">
-          <svg class="animate-spin h-4 w-4 text-[#1b7382]" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path></svg>
-          Gemini 正在規劃貼心建議...
-        </div>
-      </div>
-
       <div class="pt-2 border-t border-slate-100 space-y-2">
-        <div class="flex flex-wrap gap-1.5 text-[11px]">
-          <button onclick="quickAsk('在曼谷 CentralWorld 逛累了，有哪些寬敞舒適、適合全家人坐下休息的下午茶或咖啡廳？')" class="bg-[#f0fbfb] hover:bg-[#e2f7f7] text-[#134954] border border-[#cdeced] px-2 py-1 rounded-lg transition">🍵 推薦 CentralWorld 茶室</button>
-          <button onclick="quickAsk('如果 Day 2 下雨，芭堤雅老虎園與水上市場有哪些好玩舒適的室內替代備案？')" class="bg-[#f0fbfb] hover:bg-[#e2f7f7] text-[#134954] border border-[#cdeced] px-2 py-1 rounded-lg transition">🌧️ 芭堤雅雨天備案</button>
-          <button onclick="quickAsk('在 The Sky Gallery 聚餐，有哪些全家人都喜歡、不辣且招牌必點的美味菜式？')" class="bg-[#fff9f0] hover:bg-[#faefe3] text-[#9a4f10] border border-[#fed7aa] px-2 py-1 rounded-lg transition">🍽️ The Sky Gallery 招牌菜</button>
+        <div class="flex gap-1.5 overflow-x-auto scrollbar-none pb-1 text-[11px]">
+          <button onclick="quickAsk('在曼谷 CentralWorld 有哪些寬敞舒適、適合全家休息的下午茶？')" class="shrink-0 bg-[#f0fbfb] border border-[#cdeced] px-2.5 py-1.5 rounded-xl font-bold">🍵 CentralWorld 茶室</button>
+          <button onclick="quickAsk('在 The Sky Gallery 聚餐有哪些全家人都喜歡、不辣的招牌菜式？')" class="shrink-0 bg-[#fff9f0] border border-[#fed7aa] text-[#9a4f10] px-2.5 py-1.5 rounded-xl font-bold">🍽️ 懸崖餐廳必點</button>
         </div>
         <div class="flex gap-2">
-          <input type="text" id="advisor-input" placeholder="輸入問題（例如：想買具特色的泰國伴手禮...）" class="flex-1 text-xs border border-slate-200 rounded-xl px-3 py-2.5 focus:outline-[#1b7382] bg-white text-slate-800">
-          <button onclick="askAdvisor()" class="bg-[#C1EAEA] hover:bg-[#aee0e0] text-[#0f343c] text-xs font-black px-4 py-2.5 rounded-xl transition shadow-sm border border-[#9edada]">提問</button>
+          <input type="text" id="advisor-input" placeholder="輸入問題..." class="flex-1 text-xs border border-slate-200 rounded-xl px-3 py-2 bg-white text-slate-800">
+          <button onclick="askAdvisor()" class="h-10 bg-[#C1EAEA] text-[#0f343c] text-xs font-black px-4 rounded-xl">提問</button>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- 2. 泰語發音 TTS 彈窗 -->
-  <div id="ai-tts-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-white max-w-md w-full rounded-3xl p-6 shadow-2xl space-y-4 border border-[#cdeced]">
-      <div class="flex justify-between items-center border-b border-slate-100 pb-3">
-        <div class="flex items-center gap-2">
-          <span class="text-2xl">🔊</span>
-          <div>
-            <h3 class="text-base font-black text-[#0f2e37]">Gemini 泰語即時發音 (TTS)</h3>
-            <p class="text-[11px] text-[#527d86]">點擊播放地道發音，外出點餐、問路輕鬆無阻</p>
-          </div>
-        </div>
-        <button onclick="closeModal('ai-tts-modal')" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center font-bold text-sm transition">✕</button>
+  <!-- AI 菜單拍照解讀彈窗 -->
+  <div id="ai-vision-modal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-xs hidden flex items-end sm:items-center justify-center p-2 sm:p-4">
+    <div class="bg-white max-w-sm w-full rounded-3xl p-4 shadow-2xl space-y-3 max-h-[85vh] flex flex-col border border-[#cdeced]">
+      <div class="flex justify-between items-center border-b border-slate-100 pb-2">
+        <h3 class="text-sm font-black text-[#0f2e37]">📸 菜單與圖片拍照解讀</h3>
+        <button onclick="closeModal('ai-vision-modal')" class="w-8 h-8 rounded-full bg-slate-100 text-slate-700 flex items-center justify-center font-bold text-sm">✕</button>
       </div>
-
-      <div class="space-y-2.5 max-h-[50vh] overflow-y-auto pr-1">
-        <div class="p-3 rounded-2xl bg-[#f2fafb] border border-[#cdeced] flex items-center justify-between">
-          <div>
-            <div class="font-black text-[#0f2e37] text-sm">請不要辣 (微辣/不辣需求)</div>
-            <div class="text-xs text-[#1b7382] font-semibold">Mai Phet (ไม่เผ็ด)</div>
-          </div>
-          <button onclick="playThaiTTS('Mai Phet, mai sai phrik na khrap', this)" class="bg-[#C1EAEA] hover:bg-[#aee0e0] text-[#0f343c] text-xs font-black px-3 py-1.5 rounded-xl flex items-center gap-1 transition shadow-sm border border-[#9edada]">
-            <span>▶ 播音</span>
-          </button>
-        </div>
-
-        <div class="p-3 rounded-2xl bg-[#f2fafb] border border-[#cdeced] flex items-center justify-between">
-          <div>
-            <div class="font-black text-[#0f2e37] text-sm">請問洗手間在哪裡？</div>
-            <div class="text-xs text-[#1b7382] font-semibold">Hong Nam Yoo Thee Nai (ห้องน้ำอยู่ที่ไหน)</div>
-          </div>
-          <button onclick="playThaiTTS('Hong Nam Yoo Thee Nai khrap', this)" class="bg-[#C1EAEA] hover:bg-[#aee0e0] text-[#0f343c] text-xs font-black px-3 py-1.5 rounded-xl flex items-center gap-1 transition shadow-sm border border-[#9edada]">
-            <span>▶ 播音</span>
-          </button>
-        </div>
-
-        <div class="p-3 rounded-2xl bg-[#f2fafb] border border-[#cdeced] flex items-center justify-between">
-          <div>
-            <div class="font-black text-[#0f2e37] text-sm">請小力一點 (按摩)</div>
-            <div class="text-xs text-[#1b7382] font-semibold">Bao Bao Noi (เบาๆ หน่อย)</div>
-          </div>
-          <button onclick="playThaiTTS('Chuay bao bao noi na khrap', this)" class="bg-[#C1EAEA] hover:bg-[#aee0e0] text-[#0f343c] text-xs font-black px-3 py-1.5 rounded-xl flex items-center gap-1 transition shadow-sm border border-[#9edada]">
-            <span>▶ 播音</span>
-          </button>
-        </div>
-
-        <div class="p-3 rounded-2xl bg-[#f2fafb] border border-[#cdeced] flex items-center justify-between">
-          <div>
-            <div class="font-black text-[#0f2e37] text-sm">請問可以埋單嗎？</div>
-            <div class="text-xs text-[#1b7382] font-semibold">Check Bin (เช็คบิลด้วยครับ)</div>
-          </div>
-          <button onclick="playThaiTTS('Check bin duay khrap', this)" class="bg-[#C1EAEA] hover:bg-[#aee0e0] text-[#0f343c] text-xs font-black px-3 py-1.5 rounded-xl flex items-center gap-1 transition shadow-sm border border-[#9edada]">
-            <span>▶ 播音</span>
-          </button>
-        </div>
-      </div>
-
-      <!-- 自訂即時轉發音 -->
-      <div class="pt-2 border-t border-slate-100">
-        <label class="block text-xs font-bold text-[#527d86] mb-1">自訂句子直接說泰語：</label>
-        <div class="flex gap-2">
-          <input type="text" id="custom-tts-input" placeholder="例如：Sawasdee khrap / 你好謝謝" class="flex-1 text-xs border border-slate-200 rounded-xl px-3 py-2 focus:outline-[#1b7382] bg-white text-slate-800">
-          <button onclick="playCustomTTS()" id="custom-tts-btn" class="bg-[#C1EAEA] hover:bg-[#aee0e0] text-[#0f343c] text-xs font-black px-3 py-2 rounded-xl transition border border-[#9edada]">發音</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 3. 菜單視覺翻譯 (Multimodal Modal) -->
-  <div id="ai-vision-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-white max-w-md w-full rounded-3xl p-6 shadow-2xl space-y-4 max-h-[90vh] flex flex-col border border-[#cdeced]">
-      <div class="flex justify-between items-center border-b border-slate-100 pb-3">
-        <div class="flex items-center gap-2">
-          <span class="text-2xl">📸</span>
-          <div>
-            <h3 class="text-base font-black text-[#0f2e37]">Gemini 菜單與圖片解讀</h3>
-            <p class="text-[11px] text-[#527d86]">拍照或上傳泰文菜單，分析食材風味與人氣推薦</p>
-          </div>
-        </div>
-        <button onclick="closeModal('ai-vision-modal')" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center font-bold text-sm transition">✕</button>
-      </div>
-
-      <div class="flex-1 overflow-y-auto space-y-3 pr-1 text-xs text-slate-700">
-        <div class="border-2 border-dashed border-[#aee2e2] hover:border-[#1b7382] rounded-2xl p-4 text-center cursor-pointer transition bg-[#f7fdfd]" onclick="document.getElementById('vision-file-input').click()">
+      <div class="flex-1 overflow-y-auto space-y-2 text-xs">
+        <div class="border-2 border-dashed border-[#aee2e2] rounded-2xl p-4 text-center cursor-pointer bg-[#f7fdfd]" onclick="document.getElementById('vision-file-input').click()">
           <input type="file" id="vision-file-input" accept="image/*" class="hidden" onchange="handleVisionImage(event)">
-          <div id="vision-preview-box" class="flex flex-col items-center justify-center gap-1.5 text-[#527d86]">
-            <span class="text-3xl">📷</span>
-            <span class="font-black text-xs text-[#0f2e37]">點擊上傳或拍攝菜單 / 路牌</span>
-            <span class="text-[10px] text-[#69919a]">支援 JPG、PNG 格式</span>
+          <div id="vision-preview-box" class="flex flex-col items-center gap-1 text-[#527d86]">
+            <span class="text-2xl">📷</span>
+            <span class="font-bold text-xs text-[#0f2e37]">點擊拍攝或上傳菜單照片</span>
           </div>
-          <img id="vision-preview-img" class="hidden w-full max-h-48 object-cover rounded-xl mt-2 border border-[#cdeced]" alt="Preview">
+          <img id="vision-preview-img" class="hidden w-full max-h-40 object-cover rounded-xl mt-2" alt="Preview">
         </div>
-
-        <div id="vision-output" class="hidden bg-[#f2fafb] border border-[#cdeced] rounded-2xl p-3 space-y-1.5 leading-relaxed"></div>
-
-        <div id="vision-loading" class="hidden flex items-center gap-2 text-[#1b7382] font-medium py-2">
-          <svg class="animate-spin h-4 w-4 text-[#1b7382]" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path></svg>
-          Gemini 正在分析圖片內容與菜色...
-        </div>
+        <div id="vision-output" class="hidden bg-[#f2fafb] p-3 rounded-2xl space-y-1 leading-relaxed"></div>
+        <div id="vision-loading" class="hidden text-[#1b7382] font-bold py-1">Gemini 正在分析菜單...</div>
       </div>
+      <button onclick="analyzeVisionImage()" class="w-full h-12 bg-[#C1EAEA] text-[#0f343c] font-black rounded-xl">開始解讀菜單</button>
+    </div>
+  </div>
 
-      <div class="pt-2 border-t border-slate-100">
-        <button onclick="analyzeVisionImage()" id="vision-analyze-btn" class="w-full bg-[#C1EAEA] hover:bg-[#aee0e0] text-[#0f343c] font-black py-2.5 rounded-xl transition shadow-sm border border-[#9edada]">
-          開始解讀菜單
-        </button>
+  <!-- AI B計劃雷達彈窗 -->
+  <div id="ai-planb-modal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-xs hidden flex items-end sm:items-center justify-center p-2 sm:p-4">
+    <div class="bg-white max-w-sm w-full rounded-3xl p-4 shadow-2xl space-y-3 max-h-[85vh] flex flex-col border border-[#cdeced]">
+      <div class="flex justify-between items-center border-b border-slate-100 pb-2">
+        <h3 class="text-sm font-black text-[#0f2e37]">🚕 「B計劃」塞車應變雷達</h3>
+        <button onclick="closeModal('ai-planb-modal')" class="w-8 h-8 rounded-full bg-slate-100 text-slate-700 flex items-center justify-center font-bold text-sm">✕</button>
+      </div>
+      <div class="flex-1 overflow-y-auto space-y-2 text-xs">
+        <div class="bg-[#f2fafb] p-2.5 rounded-xl text-slate-700 leading-relaxed">
+          🚦 曼谷/芭堤雅遇上塞車或下雨？告訴 Gemini 你現在的位置，立即推薦就近舒適的歇腳落腳點！
+        </div>
+        <div id="planb-output" class="hidden bg-[#f7fdfd] border border-[#bfe4e4] rounded-2xl p-3 space-y-1.5 leading-relaxed text-slate-700"></div>
+        <div id="planb-loading" class="hidden text-[#1b7382] font-bold py-1">Gemini 正在搜尋就近舒適落腳點...</div>
+      </div>
+      <div class="pt-2 border-t border-slate-100 space-y-2">
+        <div class="flex gap-1.5 overflow-x-auto scrollbar-none pb-1 text-[11px]">
+          <button onclick="quickPlanB('去 ICONSIAM 路上嚴重塞車，全家在車上疲倦，請推薦就近寬敞商場或河畔茶座落腳避開塞車')" class="shrink-0 bg-[#f0fbfb] border border-[#cdeced] text-[#134954] px-2.5 py-1.5 rounded-xl font-bold">🚗 往 ICONSIAM 塞車</button>
+          <button onclick="quickPlanB('在芭堤雅突發暴雨，去唔到戶外老虎園，有冇舒適室內冷氣備案？')" class="shrink-0 bg-[#fff9f0] border border-[#fed7aa] text-[#9a4f10] px-2.5 py-1.5 rounded-xl font-bold">🌧️ 芭堤雅突然落雨</button>
+        </div>
+        <div class="flex gap-2">
+          <input type="text" id="planb-input" placeholder="輸入目前位置與狀況..." class="flex-1 text-xs border border-slate-200 rounded-xl px-3 py-2 bg-white text-slate-800">
+          <button onclick="askPlanB()" class="h-10 bg-[#C1EAEA] text-[#0f343c] text-xs font-black px-4 rounded-xl">尋找</button>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- 4. 塞車／突發「B計劃」應變雷達彈窗 (Plan B Modal) -->
-  <div id="ai-planb-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-white max-w-lg w-full rounded-3xl p-6 shadow-2xl space-y-4 max-h-[90vh] flex flex-col border border-[#cdeced]">
-      <div class="flex justify-between items-center border-b border-slate-100 pb-3">
-        <div class="flex items-center gap-2">
-          <span class="text-2xl">🚕</span>
-          <div>
-            <h3 class="text-base font-black text-[#0f2e37]">塞車／突發「B計劃」應變雷達</h3>
-            <p class="text-[11px] text-[#527d86]">曼谷與芭堤雅即時避開塞車、雨天室內轉場與就近歇腳提案</p>
-          </div>
-        </div>
-        <button onclick="closeModal('ai-planb-modal')" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center font-bold text-sm transition">✕</button>
+  <!-- AI TTS 發音彈窗 -->
+  <div id="ai-tts-modal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-xs hidden flex items-center justify-center p-4">
+    <div class="bg-white max-w-sm w-full rounded-3xl p-4 shadow-2xl space-y-3 border border-[#cdeced]">
+      <div class="flex justify-between items-center border-b border-slate-100 pb-2">
+        <h3 class="text-sm font-black text-[#0f2e37]">🔊 自訂泰語發音</h3>
+        <button onclick="closeModal('ai-tts-modal')" class="w-8 h-8 rounded-full bg-slate-100 text-slate-700 flex items-center justify-center font-bold text-sm">✕</button>
       </div>
-
-      <div class="flex-1 overflow-y-auto space-y-3 pr-1 text-xs">
-        <div class="bg-[#f2fafb] border border-[#cdeced] rounded-2xl p-3 text-xs text-slate-700 leading-relaxed">
-          🚦 <strong>泰國慢活不趕急心法</strong>：遇到曼谷或芭堤雅傍晚大塞車、突發暴雨，或者全家玩累想改行程？一鍵告訴 Gemini 你現在的位置，立即為你規劃最舒適的「Plan B」歇腳落腳處或室內替代路線！
-        </div>
-
-        <div id="planb-output" class="hidden bg-[#f7fdfd] border border-[#bfe4e4] rounded-2xl p-3.5 space-y-2 leading-relaxed text-slate-700"></div>
-
-        <div id="planb-loading" class="hidden flex items-center gap-2 text-[#1b7382] font-medium py-2">
-          <svg class="animate-spin h-4 w-4 text-[#1b7382]" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path></svg>
-          Gemini 正在搜尋就近舒適落腳點與 Plan B 備案...
-        </div>
-      </div>
-
-      <div class="pt-2 border-t border-slate-100 space-y-2">
-        <div class="text-[11px] font-bold text-[#527d86]">常見突發情境（點擊即時分析）：</div>
-        <div class="flex flex-wrap gap-1.5 text-[11px]">
-          <button onclick="quickPlanB('去 ICONSIAM 路上車龍好長嚴重塞車，全家在包車上開始疲倦，想就近在附近找寬敞好逛的商場或河畔餐廳落腳休息避開塞車')" class="bg-[#f0fbfb] hover:bg-[#e2f7f7] text-[#134954] border border-[#cdeced] px-2.5 py-1 rounded-xl transition">🚗 往 ICONSIAM 塞車轉場</button>
-          <button onclick="quickPlanB('在芭堤雅遇到突發下雨，去唔到老虎園或者水上市場，有冇距離近、環境好、全家適合的室內吹冷氣備案？')" class="bg-[#f0fbfb] hover:bg-[#e2f7f7] text-[#134954] border border-[#cdeced] px-2.5 py-1 rounded-xl transition">🌧️ 芭堤雅突然落雨</button>
-          <button onclick="quickPlanB('在曼谷 Siam / CentralWorld 逛到下午太累，全家想找個安靜、座位寬敞、有冷氣且容易叫包車/步行的休息點')" class="bg-[#fff9f0] hover:bg-[#faefe3] text-[#9a4f10] border border-[#fed7aa] px-2.5 py-1 rounded-xl transition">☕ 市中心逛攰歇腳處</button>
-        </div>
+      <div class="space-y-2 text-xs">
+        <label class="block text-slate-600 font-bold">輸入想說的泰語或英文句子：</label>
         <div class="flex gap-2">
-          <input type="text" id="planb-input" placeholder="輸入目前位置與突發狀況（例如：依家喺素坤逸路好塞車...）" class="flex-1 text-xs border border-slate-200 rounded-xl px-3 py-2.5 focus:outline-[#1b7382] bg-white text-slate-800">
-          <button onclick="askPlanB()" class="bg-[#C1EAEA] hover:bg-[#aee0e0] text-[#0f343c] text-xs font-black px-3.5 py-2.5 rounded-xl transition shadow-sm border border-[#9edada] whitespace-nowrap">雷達尋找</button>
+          <input type="text" id="custom-tts-input" placeholder="例如：Sawasdee khrap" class="flex-1 text-xs border border-slate-200 rounded-xl px-3 py-2.5 bg-white text-slate-800">
+          <button onclick="playCustomTTS()" id="custom-tts-btn" class="h-11 bg-[#C1EAEA] text-[#0f343c] font-black px-4 rounded-xl">發音</button>
         </div>
       </div>
+      <button onclick="closeModal('ai-tts-modal')" class="w-full h-10 bg-slate-100 text-slate-600 font-bold rounded-xl text-xs">關閉</button>
     </div>
   </div>
 
   <script>
-    const apiKey = ""; // Canvas runtime provides the key automatically
+    // 💡 提示：放上 GitHub 獨立託管時，請在引號內填入免費 Gemini API Key
+    const apiKey = "";
     let selectedVisionBase64 = null;
+    let currentDriverThaiText = "";
 
-    // 通用 Fetch 請求包裝
-    async function fetchWithRetry(url, options, retries = 2) {
-      for (let i = 0; i <= retries; i++) {
-        try {
-          const res = await fetch(url, options);
-          if (res.ok) return res;
-        } catch (err) {
-          if (i === retries) throw err;
-        }
-      }
-      return fetch(url, options);
-    }
+    // ==================== 底部導航欄視圖切換 ====================
+    function switchView(viewName) {
+      document.querySelectorAll('.app-view').forEach(v => v.classList.add('hidden'));
+      const targetView = document.getElementById('view-' + viewName);
+      if (targetView) targetView.classList.remove('hidden');
 
-    // 打開特定的 AI 功能彈窗
-    function openAiFeature(feature) {
-      if (feature === 'advisor') openModal('ai-advisor-modal');
-      if (feature === 'tts') openModal('ai-tts-modal');
-      if (feature === 'vision') openModal('ai-vision-modal');
-      if (feature === 'planb') openModal('ai-planb-modal');
-    }
-
-    // 1. AI 行程管家 (Advisor)
-    function quickAsk(text) {
-      document.getElementById('advisor-input').value = text;
-      askAdvisor();
-    }
-
-    async function askAdvisor() {
-      const input = document.getElementById('advisor-input');
-      const text = input.value.trim();
-      if (!text) return;
-      input.value = '';
-
-      const output = document.getElementById('advisor-chat-output');
-      const loader = document.getElementById('advisor-loading');
-
-      output.innerHTML += `
-        <div class="flex justify-end">
-          <div class="bg-[#C1EAEA] text-[#0f3b44] font-bold rounded-2xl px-3 py-2 max-w-[85%] text-xs shadow-sm">${text}</div>
-        </div>
-      `;
-      loader.classList.remove('hidden');
-
-      const systemPrompt = `你是一位泰國慢活家庭假期的貼心隨身管家。
-本次家庭出遊特色：5天4夜、全程包車點對點、節奏從容、不趕時間。
-請以溫暖從容、繁體中文回答用戶的問題，聚焦於全家適合的美食、平路動線、寬敞放鬆的茶座，切勿使用「長輩」字眼。`;
-
-      try {
-        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
-        const payload = {
-          contents: [{ parts: [{ text }] }],
-          systemInstruction: { parts: [{ text: systemPrompt }] }
-        };
-
-        const res = await fetchWithRetry(apiUrl, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-
-        const data = await res.json();
-        const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || "暫時未能取得建議，請稍後重試。";
-
-        output.innerHTML += `
-          <div class="flex justify-start">
-            <div class="bg-[#f2fafb] border border-[#cdeced] text-slate-800 rounded-2xl p-3 max-w-[90%] text-xs leading-relaxed whitespace-pre-wrap">${reply}</div>
-          </div>
-        `;
-      } catch (err) {
-        output.innerHTML += `
-          <div class="flex justify-start">
-            <div class="bg-rose-50 border border-rose-200 text-rose-700 rounded-2xl p-2.5 text-xs">連線繁忙，請稍後再試。</div>
-          </div>
-        `;
-      } finally {
-        loader.classList.add('hidden');
-      }
-    }
-
-    // 2. 泰語發音 TTS (Web Speech API 優先)
-    function playThaiTTS(thaiPhrase, btnElement) {
-      if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
-        const utterance = new SpeechSynthesisUtterance(thaiPhrase);
-        utterance.lang = 'th-TH';
-        utterance.rate = 0.85;
-
-        if (btnElement) {
-          const originalText = btnElement.innerHTML;
-          btnElement.innerHTML = '<span>🔊 播放中</span>';
-          utterance.onend = () => { btnElement.innerHTML = originalText; };
-          utterance.onerror = () => { btnElement.innerHTML = originalText; };
-        }
-
-        window.speechSynthesis.speak(utterance);
-      }
-    }
-
-    function playCustomTTS() {
-      const input = document.getElementById('custom-tts-input');
-      const text = input.value.trim();
-      if (!text) return;
-      const btn = document.getElementById('custom-tts-btn');
-      playThaiTTS(text, btn);
-    }
-
-    // 3. 菜單/路標視覺解讀 (Vision)
-    function handleVisionImage(event) {
-      const file = event.target.files[0];
-      if (!file) return;
-
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        selectedVisionBase64 = e.target.result.split(',')[1];
-        const preview = document.getElementById('vision-preview-img');
-        preview.src = e.target.result;
-        preview.classList.remove('hidden');
-        document.getElementById('vision-preview-box').classList.add('hidden');
-      };
-      reader.readAsDataURL(file);
-    }
-
-    async function analyzeVisionImage() {
-      if (!selectedVisionBase64) {
-        const out = document.getElementById('vision-output');
-        out.innerHTML = '<span class="text-[#8c581c] font-bold">請先點擊上方拍攝或上傳菜單圖片！</span>';
-        out.classList.remove('hidden');
-        return;
-      }
-
-      const loader = document.getElementById('vision-loading');
-      const output = document.getElementById('vision-output');
-      loader.classList.remove('hidden');
-      output.classList.add('hidden');
-
-      const systemPrompt = `你是一位泰國菜色專家與家庭旅遊美食顧問。
-請辨識圖片中的泰國菜單或料理名稱，以繁體中文清楚列出：
-1. 菜色中文翻譯
-2. 風味口感（酸辣、清淡、香脆、椰香等）
-3. 適合度提醒（辣度是否可調、是否適合全家人享用）
-4. 招牌推薦度。`;
-
-      try {
-        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
-        const payload = {
-          contents: [{
-            parts: [
-              { text: "請分析這張菜單或圖片，繁體中文列出菜名與家庭點餐建議。" },
-              { inlineData: { mimeType: "image/jpeg", data: selectedVisionBase64 } }
-            ]
-          }],
-          systemInstruction: { parts: [{ text: systemPrompt }] }
-        };
-
-        const res = await fetchWithRetry(apiUrl, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-
-        const data = await res.json();
-        const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || "未能辨識菜單，請換一張更清晰的照片試試。";
-
-        output.innerHTML = `
-          <div class="font-bold text-[#0d4d59] text-xs border-b border-[#cdeced] pb-1 mb-1 flex items-center gap-1">
-            <span>🍽️ 菜單解析與家庭推薦：</span>
-          </div>
-          <div class="whitespace-pre-wrap text-xs text-slate-700 leading-relaxed">${reply}</div>
-        `;
-        output.classList.remove('hidden');
-      } catch (err) {
-        output.innerHTML = '<span class="text-rose-500 font-bold">辨識失敗，請檢查網絡後重試。</span>';
-        output.classList.remove('hidden');
-      } finally {
-        loader.classList.add('hidden');
-      }
-    }
-
-    // 4. 塞車與突發「B計劃」應變雷達
-    function quickPlanB(text) {
-      document.getElementById('planb-input').value = text;
-      askPlanB();
-    }
-
-    async function askPlanB() {
-      const input = document.getElementById('planb-input');
-      const text = input.value.trim();
-      if (!text) return;
-
-      const loader = document.getElementById('planb-loading');
-      const output = document.getElementById('planb-output');
-      loader.classList.remove('hidden');
-      output.classList.add('hidden');
-
-      const systemPrompt = `你是一位熟悉曼谷和芭堤雅地理交通的家庭旅遊即時應變顧問。
-行程重點是「5天4夜全家慢活度假、包車接送、不趕急、放鬆舒適」。
-請針對用戶遇到的塞車、下雨或疲倦等突發狀況，提供 1-2 個極佳的「Plan B 替代落腳方案」：
-1. 具體建議：推薦具體的商場、特色咖啡店、室內景點或河畔茶室。
-2. 舒適理由：說明為什麼這個地方適合全家人歇腳（例如：平路冷氣充足、座位寬敞舒服、洗手間乾淨、容易上落車）。
-3. 節奏建議：安撫情緒，建議在該處停留多長時間等車潮消退再出發。
-口吻需貼心從容，請勿使用「長輩」字眼，以全家同行、舒適休閒的視角回答。`;
-
-      try {
-        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
-        const payload = {
-          contents: [{ parts: [{ text }] }],
-          systemInstruction: { parts: [{ text: systemPrompt }] }
-        };
-
-        const res = await fetchWithRetry(apiUrl, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-
-        const data = await res.json();
-        const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || "暫時未能取得應變方案，建議先於就近大型商場休息。";
-
-        output.innerHTML = `
-          <div class="font-bold text-[#0d4d59] text-xs border-b border-[#cdeced] pb-1 mb-1.5 flex items-center gap-1.5">
-            <span>🛡️ Plan B 即時應變方案：</span>
-          </div>
-          <div class="whitespace-pre-wrap text-xs text-slate-700 leading-relaxed">${reply}</div>
-        `;
-        output.classList.remove('hidden');
-      } catch (err) {
-        output.innerHTML = '<span class="text-rose-500 font-bold">連線失敗，請檢查網絡後重試。</span>';
-        output.classList.remove('hidden');
-      } finally {
-        loader.classList.add('hidden');
-      }
-    }
-
-    // 匯率換算 (THB 1 = HK$0.2369，顯示保留兩位小數)
-    function calcExchange() {
-      const val = parseFloat(document.getElementById('thb-input').value);
-      if (isNaN(val) || val <= 0) {
-        document.getElementById('hkd-result').innerText = 'HK$0.00';
-        return;
-      }
-      const hkd = val * 0.2369;
-      document.getElementById('hkd-result').innerText = 'HK$' + hkd.toFixed(2);
-    }
-
-    // 複製 Booking Ref（兼容 iframe 剪貼簿）
-    function copyRef(text) {
-      const btn = document.getElementById('copy-btn-text');
-      const fallbackCopy = (str) => {
-        const el = document.createElement('textarea');
-        el.value = str;
-        el.setAttribute('readonly', '');
-        el.style.position = 'absolute';
-        el.style.left = '-9999px';
-        document.body.appendChild(el);
-        el.select();
-        document.execCommand('copy');
-        document.body.removeChild(el);
-      };
-
-      try {
-        if (navigator.clipboard && window.isSecureContext) {
-          navigator.clipboard.writeText(text).catch(() => fallbackCopy(text));
-        } else {
-          fallbackCopy(text);
-        }
-      } catch (err) {
-        fallbackCopy(text);
-      }
-
-      btn.innerText = '已複製 FT6JYI!';
-      setTimeout(() => {
-        btn.innerText = 'Ref: FT6JYI';
-      }, 2000);
-    }
-
-    // 複製泰文酒店地址（給司機）
-    function copyAddress(elementId, btnElement) {
-      const addrText = document.getElementById(elementId).innerText;
-      const fallbackCopy = (str) => {
-        const el = document.createElement('textarea');
-        el.value = str;
-        el.setAttribute('readonly', '');
-        el.style.position = 'absolute';
-        el.style.left = '-9999px';
-        document.body.appendChild(el);
-        el.select();
-        document.execCommand('copy');
-        document.body.removeChild(el);
-      };
-
-      try {
-        if (navigator.clipboard && window.isSecureContext) {
-          navigator.clipboard.writeText(addrText).catch(() => fallbackCopy(addrText));
-        } else {
-          fallbackCopy(addrText);
-        }
-      } catch (err) {
-        fallbackCopy(addrText);
-      }
-
-      const origText = btnElement.innerText;
-      btnElement.innerText = '✅ 已複製';
-      setTimeout(() => {
-        btnElement.innerText = origText;
-      }, 2000);
-    }
-
-    // Modal 開關
-    function openModal(id) {
-      const modal = document.getElementById(id);
-      if (modal) modal.classList.remove('hidden');
-    }
-
-    function closeModal(id) {
-      const modal = document.getElementById(id);
-      if (modal) modal.classList.add('hidden');
-    }
-
-    // 點擊 Modal 背景自動關閉
-    window.addEventListener('click', (e) => {
-      if (e.target.id === 'pickup-modal') closeModal('pickup-modal');
-      if (e.target.id === 'booking-modal') closeModal('booking-modal');
-      if (e.target.id === 'ai-advisor-modal') closeModal('ai-advisor-modal');
-      if (e.target.id === 'ai-tts-modal') closeModal('ai-tts-modal');
-      if (e.target.id === 'ai-vision-modal') closeModal('ai-vision-modal');
-      if (e.target.id === 'ai-planb-modal') closeModal('ai-planb-modal');
-    });
-
-    // 日程篩選
-    function filterDay(day) {
-      const inactiveClasses = 'day-tab flex items-center gap-1.5 px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl sm:rounded-2xl text-xs sm:text-sm font-bold text-[#456d75] hover:text-[#0b3842] hover:bg-white/90 border border-transparent hover:border-[#cdeced] transition-all duration-200 whitespace-nowrap active:scale-95';
-      const activeClasses = 'day-tab flex items-center gap-1.5 px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl sm:rounded-2xl text-xs sm:text-sm font-black bg-gradient-to-r from-[#b6e7e7] to-[#ccf2f2] text-[#0a353e] shadow-sm border border-[#8fd7d7] ring-2 ring-[#c1eaea]/50 transition-all duration-200 whitespace-nowrap active:scale-95';
-
-      document.querySelectorAll('.day-tab').forEach(tab => {
-        tab.className = inactiveClasses;
+      // 更新導航欄顏色高亮
+      document.querySelectorAll('.nav-item').forEach(btn => {
+        btn.classList.remove('text-[#1b7382]', 'font-black');
+        btn.classList.add('text-[#527d86]', 'font-bold');
       });
-      const activeTab = document.getElementById('tab-' + day);
-      if (activeTab) {
-        activeTab.className = activeClasses;
+      const activeNav = document.getElementById('nav-' + viewName);
+      if (activeNav) {
+        activeNav.classList.remove('text-[#527d86]', 'font-bold');
+        activeNav.classList.add('text-[#1b7382]', 'font-black');
       }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ==================== 「給司機看」全螢幕大字體功能 ====================
+    function showDriverModal(title, thaiText) {
+      currentDriverThaiText = thaiText;
+      document.getElementById('driver-modal-title').innerText = title;
+      document.getElementById('driver-modal-thai').innerText = thaiText;
+      const modal = document.getElementById('driver-modal');
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden'; // 鎖定背景滾動
+    }
+
+    function closeDriverModal() {
+      const modal = document.getElementById('driver-modal');
+      modal.classList.add('hidden');
+      document.body.style.overflow = '';
+      const copyBtn = document.getElementById('copy-driver-btn');
+      if (copyBtn) copyBtn.innerHTML = `
+        <svg class="w-5 h-5 text-[#0c2e36]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+        <span>複製泰文地址發給司機</span>
+      `;
+    }
+
+    function copyDriverThaiText() {
+      if (!currentDriverThaiText) return;
+      fallbackCopy(currentDriverThaiText);
+      const copyBtn = document.getElementById('copy-driver-btn');
+      copyBtn.innerHTML = '<span>✅ 已複製！可直接粘貼至 WhatsApp / Grab</span>';
+      setTimeout(() => {
+        if (copyBtn) {
+          copyBtn.innerHTML = `
+            <svg class="w-5 h-5 text-[#0c2e36]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+            <span>複製泰文地址發給司機</span>
+          `;
+        }
+      }, 2500);
+    }
+
+    // ==================== 日程過濾 ====================
+    function filterDay(day) {
+      const activeStyle = 'day-tab flex-1 min-w-[76px] py-2.5 px-3 rounded-2xl text-xs font-black text-center bg-[#13353e] text-white shadow-xs border border-[#13353e]';
+      const inactiveStyle = 'day-tab flex-1 min-w-[76px] py-2.5 px-3 rounded-2xl text-xs font-black text-center bg-white/90 text-[#255b66] border border-[#cbebeb] shadow-xs';
+
+      document.querySelectorAll('.day-tab').forEach(t => t.className = inactiveStyle);
+      const targetTab = document.getElementById('tab-' + day);
+      if (targetTab) targetTab.className = activeStyle;
 
       document.querySelectorAll('.day-card').forEach(card => {
         if (day === 'all' || card.getAttribute('data-day') == day) {
@@ -1804,261 +996,305 @@
         }
       });
 
-      // 執行李清單只在「全部總覽 (all)」顯示，在每日內頁 (Day 1 - 5) 自動隱藏
+      // 執行李清單只在「全部總覽」顯示
       const packSection = document.getElementById('packing-checklist-section');
       if (packSection) {
-        if (day === 'all') {
-          packSection.classList.remove('hidden');
-        } else {
-          packSection.classList.add('hidden');
-        }
+        if (day === 'all') packSection.classList.remove('hidden');
+        else packSection.classList.add('hidden');
       }
 
-      // 更新天氣與穿搭建議 Widget
-      updateWeatherAndOutfitForDay(day);
+      updateWeatherForDay(day);
     }
 
-    // 依選擇的日程切換天氣城市與專屬穿搭提示
-    let currentSelectedDay = 'all';
+    // ==================== 當地天氣與時差 ====================
     const dayOutfitTips = {
-      '1': {
-        city: 'pattaya',
-        title: 'Day 1 行李與穿搭建議 (抵達芭堤雅)',
-        tag: '抵達海島',
-        icon: '🌊',
-        desc: '機艙與冷氣專車冷氣較足，必備隨身薄外套保暖；芭堤雅日間氣候宜人晴暖（約 29°C），入住 Hilton 後可換上輕便棉麻休閒服或涼鞋，出門直落商場與海灘。'
-      },
-      '2': {
-        city: 'pattaya',
-        title: 'Day 2 行李與穿搭建議 (老虎園・水上市場・夕陽晚餐)',
-        tag: '海陸探訪',
-        icon: '🐅',
-        desc: '日間多戶外活動，建議著透氣防曬吸汗衣服、戴遮陽帽或墨鏡；水上市場走木棧道宜著防滑平底健步鞋；傍晚前往 The Sky Gallery 懸崖海風較大，可多備一件薄披肩。'
-      },
-      '3': {
-        city: 'bangkok',
-        title: 'Day 3 行李與穿搭建議 (奔曼谷・四面佛・Spa舒壓)',
-        tag: '文化祈福',
-        icon: '🛕',
-        desc: '參拜四面佛請注意穿著得體端莊（建議過膝長褲或長裙，避免無袖背心）；前往 Let\'s Relax 做按摩建議著寬鬆舒適便服，方便放鬆換裝。'
-      },
-      '4': {
-        city: 'bangkok',
-        title: 'Day 4 行李與穿搭建議 (Siam商圈・ICONSIAM河畔)',
-        tag: '冷氣商場',
-        icon: '🛍️',
-        desc: '整日以豪華商場與室內平路為主，建議著最舒適的慢跑步鞋；商場冷氣充足宜隨身備薄外套；傍晚至 ICONSIAM 河畔花園吹晚風看水舞秀拍照非常出片！'
-      },
-      '5': {
-        city: 'bangkok',
-        title: 'Day 5 行李與穿搭建議 (出境返港・免稅店)',
-        tag: '甜蜜回程',
-        icon: '✈️',
-        desc: '返港搭機建議著彈性保暖的長褲與外套；隨身隨行行李預留空間放置伴手禮，注意超過 100ml 的液體護膚品或醬料必須放入大行李箱託運。'
-      },
-      'all': {
-        city: 'pattaya',
-        title: '5天4夜 慢活度假總覽穿搭指南',
-        tag: '全家度假',
-        icon: '🌴',
-        desc: '10月泰國氣候溫暖（平均 26°C - 32°C），室內及包車冷氣強勁，請備齊薄外套。穿著以寬鬆透氣棉麻休閒服為主，配備一雙好行平底鞋即可輕鬆暢遊！'
-      }
+      '1': { city: 'pattaya', title: 'Day 1 穿搭：', desc: '機艙與專車冷氣充足備薄外套；芭堤雅日間晴暖宜棉麻休閒服。' },
+      '2': { city: 'pattaya', title: 'Day 2 穿搭：', desc: '戶外老虎園防曬吸汗服、水上市場平底健步鞋、懸崖海風薄披肩。' },
+      '3': { city: 'bangkok', title: 'Day 3 穿搭：', desc: '拜四面佛請穿著端莊過膝長褲/長裙；按摩宜寬鬆舒適衣物。' },
+      '4': { city: 'bangkok', title: 'Day 4 穿搭：', desc: '商場全平路漫步好走鞋；冷氣充足備薄外套，河畔水舞拍照亮色。' },
+      '5': { city: 'bangkok', title: 'Day 5 穿搭：', desc: '返港著保暖彈性長褲；液體超過 100ml 記得預先放行李箱託運。' },
+      'all': { city: 'pattaya', title: '慢活穿搭：', desc: '泰國10月平均 29°C，室內及專車冷氣強勁，請備齊薄外套與平底鞋。' }
     };
 
-    function updateWeatherAndOutfitForDay(day) {
-      currentSelectedDay = day;
+    function updateWeatherForDay(day) {
       const info = dayOutfitTips[day] || dayOutfitTips['all'];
-      const cityName = (info.city === 'pattaya') ? '芭堤雅 (Pattaya)' : '曼谷 (Bangkok)';
-      
-      const cityTitleEl = document.getElementById('weather-city-title');
-      const tagEl = document.getElementById('weather-tag');
-      const outfitTitleEl = document.getElementById('outfit-title');
-      const outfitDetailEl = document.getElementById('outfit-detail');
-
-      if (cityTitleEl) cityTitleEl.innerText = `${cityName} 即時天氣`;
-      if (tagEl) tagEl.innerText = info.tag;
-      if (outfitTitleEl) outfitTitleEl.innerText = info.title;
-      if (outfitDetailEl) outfitDetailEl.innerText = info.desc;
-
+      const cityName = (info.city === 'pattaya') ? '芭堤雅' : '曼谷';
+      document.getElementById('weather-city-title').innerText = `${cityName} 即時天氣`;
+      document.getElementById('outfit-title').innerText = info.title;
+      document.getElementById('outfit-detail').innerText = info.desc;
       fetchCityWeather(info.city);
     }
 
-    // 調用 Open-Meteo 免費天氣 API 獲取芭堤雅或曼谷即時天氣
     async function fetchCityWeather(city) {
       const coords = {
-        pattaya: { lat: 12.9276, lng: 100.8771, label: '芭堤雅' },
-        bangkok: { lat: 13.7563, lng: 100.5018, label: '曼谷' }
+        pattaya: { lat: 12.9276, lng: 100.8771 },
+        bangkok: { lat: 13.7563, lng: 100.5018 }
       };
       const c = coords[city] || coords.pattaya;
-
-      const tempEl = document.getElementById('weather-temp-display');
-      const condEl = document.getElementById('weather-condition-text');
-      const iconEl = document.getElementById('weather-icon');
-
       try {
-        const url = `https://api.open-meteo.com/v1/forecast?latitude=${c.lat}&longitude=${c.lng}&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m&timezone=Asia%2FBangkok`;
+        const url = `https://api.open-meteo.com/v1/forecast?latitude=${c.lat}&longitude=${c.lng}&current=temperature_2m,relative_humidity_2m,weather_code&timezone=Asia%2FBangkok`;
         const res = await fetch(url);
-        if (!res.ok) throw new Error('Weather API error');
+        if (!res.ok) throw new Error();
         const data = await res.json();
-        const current = data.current;
-        const temp = Math.round(current.temperature_2m);
-        const code = current.weather_code;
-        const humidity = current.relative_humidity_2m;
-
-        // WMO Code 簡易天氣狀態對應
-        let conditionText = '晴時多雲';
-        let weatherEmoji = '🌤️';
-        if (code === 0) { conditionText = '晴天放晴'; weatherEmoji = '☀️'; }
-        else if (code <= 3) { conditionText = '多雲微風'; weatherEmoji = '⛅'; }
-        else if (code <= 48) { conditionText = '有霧薄陰'; weatherEmoji = '🌫️'; }
-        else if (code <= 67) { conditionText = '局部小雨'; weatherEmoji = '🌦️'; }
-        else if (code <= 82) { conditionText = '有驟雨'; weatherEmoji = '🌧️'; }
-        else { conditionText = '雷雨偶至'; weatherEmoji = '⛈️'; }
-
-        if (tempEl) tempEl.innerText = `${temp}°C`;
-        if (condEl) condEl.innerText = `${conditionText} • 濕度 ${humidity}%`;
-        if (iconEl) iconEl.innerText = weatherEmoji;
-      } catch (err) {
-        // 備用靜態數據 (泰國 10 月均溫)
-        if (tempEl) tempEl.innerText = (city === 'pattaya') ? '29°C' : '30°C';
-        if (condEl) condEl.innerText = '晴時微風 • 體感溫潤';
-        if (iconEl) iconEl.innerText = '🌤️';
+        const temp = Math.round(data.current.temperature_2m);
+        document.getElementById('weather-temp-display').innerText = `${temp}°C`;
+        document.getElementById('weather-condition-text').innerText = `濕度 ${data.current.relative_humidity_2m}%`;
+      } catch (e) {
+        document.getElementById('weather-temp-display').innerText = '29°C';
+        document.getElementById('weather-condition-text').innerText = '晴時微風';
       }
     }
 
-    function refreshCurrentWeather() {
-      const info = dayOutfitTips[currentSelectedDay] || dayOutfitTips['all'];
-      fetchCityWeather(info.city);
-      updateThaiTime();
-    }
-
-    // 即時計算泰國時間 (曼谷/芭堤雅 GMT+7，比香港快/慢轉換：泰國比香港慢 1 小時)
     function updateThaiTime() {
       const now = new Date();
-      // 取得 UTC 毫秒數，泰國為 UTC+7
-      const utcTime = now.getTime() + (now.getTimezoneOffset() * 60000);
-      const thaiTime = new Date(utcTime + (3600000 * 7));
-      const hours = String(thaiTime.getHours()).padStart(2, '0');
-      const minutes = String(thaiTime.getMinutes()).padStart(2, '0');
-      const thaiClockEl = document.getElementById('thai-local-time');
-      if (thaiClockEl) {
-        thaiClockEl.innerText = `${hours}:${minutes}`;
+      const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+      const thai = new Date(utc + (3600000 * 7));
+      const h = String(thai.getHours()).padStart(2, '0');
+      const m = String(thai.getMinutes()).padStart(2, '0');
+      const el = document.getElementById('thai-local-time');
+      if (el) el.innerText = `${h}:${m}`;
+    }
+
+    // ==================== 換算與通用複製 ====================
+    function calcExchangeTool() {
+      const val = parseFloat(document.getElementById('thb-input-tool').value);
+      if (isNaN(val) || val <= 0) {
+        document.getElementById('hkd-result-tool').innerText = 'HK$0.00';
+        return;
       }
+      const hkd = val * 0.2369;
+      document.getElementById('hkd-result-tool').innerText = 'HK$' + hkd.toFixed(2);
     }
 
-    // 依地點名稱自動開啟或生成 Google Maps 導航
-    function navPlace(placeName, directUrl) {
-      if (directUrl) {
-        window.open(directUrl, '_blank', 'noopener,noreferrer');
-      } else {
-        const queryUrl = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(placeName);
-        window.open(queryUrl, '_blank', 'noopener,noreferrer');
-      }
+    function copyRef(text) {
+      fallbackCopy(text);
+      const el = document.getElementById('header-ref-text');
+      el.innerText = '已複製!';
+      setTimeout(() => { el.innerText = 'FT6JYI'; }, 2000);
     }
 
-    // 一鍵尋找特定景點周邊美食
-    function findNearbyFood(placeName) {
-      const query = encodeURIComponent(placeName + ' restaurants food');
-      window.open(`https://www.google.com/maps/search/?api=1&query=${query}`, '_blank', 'noopener,noreferrer');
-    }
-
-    // 一鍵尋找手機當前 GPS 所在地附近美食
-    function findMyNearbyFood() {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          (pos) => {
-            const lat = pos.coords.latitude;
-            const lng = pos.coords.longitude;
-            window.open(`https://www.google.com/maps/search/restaurants/@${lat},${lng},16z`, '_blank', 'noopener,noreferrer');
-          },
-          () => {
-            // 如用戶未允許 GPS 或在桌機，直接打開 Google Maps 周邊推薦
-            window.open('https://www.google.com/maps/search/restaurants+near+me', '_blank', 'noopener,noreferrer');
-          },
-          { timeout: 5000 }
-        );
-      } else {
-        window.open('https://www.google.com/maps/search/restaurants+near+me', '_blank', 'noopener,noreferrer');
-      }
-    }
-
-    // 景點摺疊卡片 (Accordion) 切換邏輯
-    function toggleAccordion(id) {
-      const content = document.getElementById(id);
-      const arrow = document.getElementById(id + '-arrow');
-      if (!content) return;
-      
-      const isHidden = content.classList.contains('hidden');
-      if (isHidden) {
-        content.classList.remove('hidden');
-        if (arrow) arrow.style.transform = 'rotate(180deg)';
-      } else {
-        content.classList.add('hidden');
-        if (arrow) arrow.style.transform = 'rotate(0deg)';
-      }
-    }
-
-    // 一鍵喚醒並開啟 LINE App (專為 iOS 優化：直開 iOS App 或導向 Apple App Store)
-    function openLineApp() {
-      // 呼叫 iOS LINE 深度喚起協定
-      window.location.href = 'line://';
-
-      // 若在 iPhone/iPad 上未成功拉起，1.2 秒後無縫導向 iOS App Store LINE 官方頁
-      setTimeout(() => {
-        if (!document.hidden) {
-          window.open('https://apps.apple.com/app/line/id443904275', '_blank');
+    function fallbackCopy(str) {
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          navigator.clipboard.writeText(str);
+        } else {
+          const el = document.createElement('textarea');
+          el.value = str;
+          el.setAttribute('readonly', '');
+          el.style.position = 'absolute';
+          el.style.left = '-9999px';
+          document.body.appendChild(el);
+          el.select();
+          document.execCommand('copy');
+          document.body.removeChild(el);
         }
-      }, 1200);
+      } catch (e) {}
     }
 
-    // 一鍵喚醒並開啟 Klook App (專為 iOS 優化：調用 klook:// 協定或導向 App Store)
-    function openKlookApp() {
-      // 嘗試透過 iOS URL Scheme 呼叫 Klook 應用程式
-      window.location.href = 'klook://';
-
-      // 若在 iPhone/iPad 上未安裝或未成功拉起，1.2 秒後自動導向 iOS App Store Klook 官方下載頁
-      setTimeout(() => {
-        if (!document.hidden) {
-          window.open('https://apps.apple.com/app/klook-travel-hotel-leisure/id961850126', '_blank');
-        }
-      }, 1200);
-    }
-
-    // 一鍵喚醒並開啟 Grab App (iOS URL Scheme 優先，附帶備用 App Store 連結)
-    function openGrabApp() {
-      // 嘗試呼叫 iOS Grab 深度連結協定
-      window.location.href = 'grab://';
-      
-      // 若手機未安裝或未成功拉起，1.2 秒後無縫提示前往 App Store
-      setTimeout(() => {
-        if (!document.hidden) {
-          window.open('https://apps.apple.com/th/app/grab-taxi-ride-food-delivery/id647268330', '_blank');
-        }
-      }, 1200);
-    }
-
-    // 執行李清單進度計算
     function updatePackProgress() {
       const items = document.querySelectorAll('.pack-item input[type="checkbox"]');
       const checked = document.querySelectorAll('.pack-item input[type="checkbox"]:checked').length;
-      const progressBadge = document.getElementById('pack-progress');
-      if (progressBadge) {
-        progressBadge.innerText = `已準備 ${checked} / ${items.length} 項`;
+      const el = document.getElementById('pack-progress');
+      if (el) {
+        el.innerText = `已準備 ${checked} / ${items.length} 項`;
         if (checked === items.length) {
-          progressBadge.className = 'text-xs bg-[#a8e6cf] text-[#0d4036] font-black px-2.5 py-1 rounded-xl border border-[#7ed6b8]';
-          progressBadge.innerText = `🎉 已全部收拾妥當！(${checked}/${items.length})`;
+          el.innerText = `🎉 全部妥當 (${checked}/${items.length})`;
+          el.className = 'text-[11px] bg-[#a8e6cf] text-[#0d4036] font-black px-2.5 py-1 rounded-xl border border-[#7ed6b8]';
         } else {
-          progressBadge.className = 'text-xs bg-[#e4f7f7] text-[#0d4d59] font-black px-2.5 py-1 rounded-xl border border-[#c1eaea]';
+          el.className = 'text-[11px] bg-[#e4f7f7] text-[#0d4d59] font-black px-2.5 py-1 rounded-xl border border-[#c1eaea]';
         }
       }
     }
 
-    // 初始化 Lucide 圖標
-    document.addEventListener("DOMContentLoaded", () => {
-      if (window.lucide) {
-        lucide.createIcons();
+    // ==================== iOS App 深度呼叫 ====================
+    function openLineApp() {
+      window.location.href = 'line://';
+      setTimeout(() => {
+        if (!document.hidden) window.open('https://apps.apple.com/app/line/id443904275', '_blank');
+      }, 1200);
+    }
+
+    function openKlookApp() {
+      window.location.href = 'klook://';
+      setTimeout(() => {
+        if (!document.hidden) window.open('https://apps.apple.com/app/klook-travel-hotel-leisure/id961850126', '_blank');
+      }, 1200);
+    }
+
+    function openGrabApp() {
+      window.location.href = 'grab://';
+      setTimeout(() => {
+        if (!document.hidden) window.open('https://apps.apple.com/th/app/grab-taxi-ride-food-delivery/id647268330', '_blank');
+      }, 1200);
+    }
+
+    function navPlace(name, directUrl) {
+      if (directUrl) window.open(directUrl, '_blank', 'noopener,noreferrer');
+      else window.open('https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(name), '_blank', 'noopener,noreferrer');
+    }
+
+    // ==================== 彈窗控制 ====================
+    function openModal(id) {
+      const m = document.getElementById(id);
+      if (m) m.classList.remove('hidden');
+    }
+
+    function closeModal(id) {
+      const m = document.getElementById(id);
+      if (m) m.classList.add('hidden');
+    }
+
+    function openAiFeature(feat) {
+      if (feat === 'advisor') openModal('ai-advisor-modal');
+      if (feat === 'vision') openModal('ai-vision-modal');
+      if (feat === 'planb') openModal('ai-planb-modal');
+      if (feat === 'tts') openModal('ai-tts-modal');
+    }
+
+    // ==================== 離線 Web Speech API 發音 ====================
+    function playThaiTTS(phrase, btn) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const u = new SpeechSynthesisUtterance(phrase);
+        u.lang = 'th-TH';
+        u.rate = 0.85;
+        if (btn) {
+          const orig = btn.innerText;
+          btn.innerText = '🔊 播放中';
+          u.onend = () => { btn.innerText = orig; };
+          u.onerror = () => { btn.innerText = orig; };
+        }
+        window.speechSynthesis.speak(u);
       }
-      // 初始化天氣與時間
+    }
+
+    function playCustomTTS() {
+      const text = document.getElementById('custom-tts-input').value.trim();
+      if (text) playThaiTTS(text, document.getElementById('custom-tts-btn'));
+    }
+
+    // ==================== Gemini AI 呼叫封裝 ====================
+    async function askAdvisor() {
+      const input = document.getElementById('advisor-input');
+      const text = input.value.trim();
+      if (!text) return;
+      input.value = '';
+      const output = document.getElementById('advisor-chat-output');
+      const loader = document.getElementById('advisor-loading');
+
+      output.innerHTML += `<div class="bg-[#C1EAEA] text-[#0f343c] font-black p-2.5 rounded-2xl text-xs ml-auto max-w-[85%]">${text}</div>`;
+      loader.classList.remove('hidden');
+
+      try {
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+        const res = await fetch(url, {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({
+            contents: [{ parts: [{ text }] }],
+            systemInstruction: { parts: [{ text: "你是泰國曼谷與芭堤雅家庭慢活假期的管家。以繁體中文回答，著重全家舒適、平路、不趕急，不使用長輩字眼。" }] }
+          })
+        });
+        const data = await res.json();
+        const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || "暫時未能取得建議。";
+        output.innerHTML += `<div class="bg-[#f0fbfb] border border-[#cdeced] text-slate-800 p-2.5 rounded-2xl text-xs leading-relaxed whitespace-pre-wrap">${reply}</div>`;
+      } catch (e) {
+        output.innerHTML += `<div class="bg-rose-50 text-rose-700 p-2.5 rounded-xl text-xs">連線未成功。若在 GitHub 自行託管，請確認代碼中的 apiKey 已填入有效的 Gemini API Key。</div>`;
+      } finally {
+        loader.classList.add('hidden');
+      }
+    }
+
+    function quickAsk(q) {
+      document.getElementById('advisor-input').value = q;
+      askAdvisor();
+    }
+
+    function quickPlanB(q) {
+      document.getElementById('planb-input').value = q;
+      askPlanB();
+    }
+
+    async function askPlanB() {
+      const input = document.getElementById('planb-input');
+      const text = input.value.trim();
+      if (!text) return;
+      const output = document.getElementById('planb-output');
+      const loader = document.getElementById('planb-loading');
+      loader.classList.remove('hidden');
+      output.classList.add('hidden');
+
+      try {
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+        const res = await fetch(url, {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({
+            contents: [{ parts: [{ text }] }],
+            systemInstruction: { parts: [{ text: "你是曼谷和芭堤雅塞車與突發應變專家。推薦 1-2 個就近寬敞、平路好休息的落腳點商場或茶座。口吻貼心，不使用長輩字眼。" }] }
+          })
+        });
+        const data = await res.json();
+        const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || "建議先於就近大型商場休息。";
+        output.innerHTML = `<div class="whitespace-pre-wrap">${reply}</div>`;
+        output.classList.remove('hidden');
+      } catch (e) {
+        output.innerHTML = '連線未成功。若在 GitHub 獨立託管，請確認已在代碼中填入 Gemini API Key。';
+        output.classList.remove('hidden');
+      } finally {
+        loader.classList.add('hidden');
+      }
+    }
+
+    function handleVisionImage(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        selectedVisionBase64 = evt.target.result.split(',')[1];
+        const preview = document.getElementById('vision-preview-img');
+        preview.src = evt.target.result;
+        preview.classList.remove('hidden');
+        document.getElementById('vision-preview-box').classList.add('hidden');
+      };
+      reader.readAsDataURL(file);
+    }
+
+    async function analyzeVisionImage() {
+      if (!selectedVisionBase64) return;
+      const loader = document.getElementById('vision-loading');
+      const output = document.getElementById('vision-output');
+      loader.classList.remove('hidden');
+      output.classList.add('hidden');
+
+      try {
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+        const res = await fetch(url, {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({
+            contents: [{
+              parts: [
+                { text: "請分析這張泰國菜單，繁體中文列出菜名翻譯、口感、不辣提醒與家庭推薦。" },
+                { inlineData: { mimeType: "image/jpeg", data: selectedVisionBase64 } }
+              ]
+            }]
+          })
+        });
+        const data = await res.json();
+        const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || "未能辨識菜單。";
+        output.innerHTML = `<div class="whitespace-pre-wrap text-slate-700">${reply}</div>`;
+        output.classList.remove('hidden');
+      } catch (e) {
+        output.innerHTML = '辨識失敗。請確認代碼中已配置有效的 Gemini API Key。';
+        output.classList.remove('hidden');
+      } finally {
+        loader.classList.add('hidden');
+      }
+    }
+
+    // 初始化
+    document.addEventListener("DOMContentLoaded", () => {
       updateThaiTime();
       setInterval(updateThaiTime, 30000);
       fetchCityWeather('pattaya');
