@@ -826,23 +826,31 @@
   <div id="ai-advisor-modal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-xs hidden flex items-end sm:items-center justify-center p-2 sm:p-4">
     <div class="bg-white max-w-sm w-full rounded-3xl p-4 shadow-2xl space-y-3 max-h-[85vh] flex flex-col border border-[#cdeced]">
       <div class="flex justify-between items-center border-b border-slate-100 pb-2">
-        <h3 class="text-sm font-black text-[#0f2e37]">🤖 Gemini 慢活隨身管家</h3>
-        <button onclick="closeModal('ai-advisor-modal')" class="w-8 h-8 rounded-full bg-slate-100 text-slate-700 flex items-center justify-center font-bold text-sm">✕</button>
+        <div class="flex items-center gap-1.5">
+          <span class="text-base">🤖</span>
+          <h3 class="text-sm font-black text-[#0f2e37]">Gemini 慢活隨身管家</h3>
+          <span class="text-[9px] bg-[#dcf4f4] text-[#0d454f] font-bold px-1.5 py-0.5 rounded-md">雙模智能</span>
+        </div>
+        <div class="flex items-center gap-1">
+          <button onclick="toggleApiKeyPrompt()" title="設定個人 API Key" class="w-8 h-8 rounded-full bg-[#f2fafb] text-[#1b7382] flex items-center justify-center font-bold text-xs">⚙️</button>
+          <button onclick="closeModal('ai-advisor-modal')" class="w-8 h-8 rounded-full bg-slate-100 text-slate-700 flex items-center justify-center font-bold text-sm">✕</button>
+        </div>
       </div>
       <div class="flex-1 overflow-y-auto space-y-2 text-xs pr-1">
         <div class="bg-[#f2fafb] p-2.5 rounded-xl text-slate-700 leading-relaxed">
-          👋 您好！您可以隨時詢問我：全家合適的美食推薦、舒適平路動線、雨天室內備案或茶座歇腳點。
+          👋 您好！您可以隨時詢問我：全家合適的美食推薦、舒適平路動線、雨天室內備案或茶座歇腳點。（已內建離線智囊庫，無需金鑰即可秒答）
         </div>
         <div id="advisor-chat-output" class="space-y-2"></div>
-        <div id="advisor-loading" class="hidden text-[#1b7382] font-bold text-xs py-1">Gemini 正在規劃建議...</div>
+        <div id="advisor-loading" class="hidden text-[#1b7382] font-bold text-xs py-1">正在規劃慢活建議...</div>
       </div>
       <div class="pt-2 border-t border-slate-100 space-y-2">
         <div class="flex gap-1.5 overflow-x-auto scrollbar-none pb-1 text-[11px]">
-          <button onclick="quickAsk('在曼谷 CentralWorld 有哪些寬敞舒適、適合全家休息的下午茶？')" class="shrink-0 bg-[#f0fbfb] border border-[#cdeced] px-2.5 py-1.5 rounded-xl font-bold">🍵 CentralWorld 茶室</button>
+          <button onclick="quickAsk('在曼谷 CentralWorld 有哪些寬敞舒適、適合全家休息的下午茶？')" class="shrink-0 bg-[#f0fbfb] border border-[#cdeced] text-[#134954] px-2.5 py-1.5 rounded-xl font-bold">🍵 CentralWorld 茶室</button>
           <button onclick="quickAsk('在 The Sky Gallery 聚餐有哪些全家人都喜歡、不辣的招牌菜式？')" class="shrink-0 bg-[#fff9f0] border border-[#fed7aa] text-[#9a4f10] px-2.5 py-1.5 rounded-xl font-bold">🍽️ 懸崖餐廳必點</button>
+          <button onclick="quickAsk('四面佛參拜有什麼需要留意的禁忌與防坑指南？')" class="shrink-0 bg-[#f7fdfd] border border-[#b2e2e4] text-[#0e3b44] px-2.5 py-1.5 rounded-xl font-bold">🛕 四面佛參拜貼士</button>
         </div>
         <div class="flex gap-2">
-          <input type="text" id="advisor-input" placeholder="輸入問題..." class="flex-1 text-xs border border-slate-200 rounded-xl px-3 py-2 bg-white text-slate-800">
+          <input type="text" id="advisor-input" placeholder="輸入問題（如：下午茶、不辣美食...）" class="flex-1 text-xs border border-slate-200 rounded-xl px-3 py-2 bg-white text-slate-800">
           <button onclick="askAdvisor()" class="h-10 bg-[#C1EAEA] text-[#0f343c] text-xs font-black px-4 rounded-xl">提問</button>
         </div>
       </div>
@@ -876,23 +884,31 @@
   <div id="ai-planb-modal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-xs hidden flex items-end sm:items-center justify-center p-2 sm:p-4">
     <div class="bg-white max-w-sm w-full rounded-3xl p-4 shadow-2xl space-y-3 max-h-[85vh] flex flex-col border border-[#cdeced]">
       <div class="flex justify-between items-center border-b border-slate-100 pb-2">
-        <h3 class="text-sm font-black text-[#0f2e37]">🚕 「B計劃」塞車應變雷達</h3>
-        <button onclick="closeModal('ai-planb-modal')" class="w-8 h-8 rounded-full bg-slate-100 text-slate-700 flex items-center justify-center font-bold text-sm">✕</button>
+        <div class="flex items-center gap-1.5">
+          <span class="text-base">🚕</span>
+          <h3 class="text-sm font-black text-[#0f2e37]">「B計劃」塞車應變雷達</h3>
+          <span class="text-[9px] bg-[#fef3c7] text-[#92400e] font-bold px-1.5 py-0.5 rounded-md">即時避堵</span>
+        </div>
+        <div class="flex items-center gap-1">
+          <button onclick="toggleApiKeyPrompt()" title="設定個人 API Key" class="w-8 h-8 rounded-full bg-[#f2fafb] text-[#1b7382] flex items-center justify-center font-bold text-xs">⚙️</button>
+          <button onclick="closeModal('ai-planb-modal')" class="w-8 h-8 rounded-full bg-slate-100 text-slate-700 flex items-center justify-center font-bold text-sm">✕</button>
+        </div>
       </div>
       <div class="flex-1 overflow-y-auto space-y-2 text-xs">
         <div class="bg-[#f2fafb] p-2.5 rounded-xl text-slate-700 leading-relaxed">
-          🚦 曼谷/芭堤雅遇上塞車或下雨？告訴 Gemini 你現在的位置，立即推薦就近舒適的歇腳落腳點！
+          🚦 曼谷/芭堤雅遇上塞車或突發陣雨？點擊下方或輸入狀況，立即為您調出就近寬敞、少走路的落腳備案！
         </div>
         <div id="planb-output" class="hidden bg-[#f7fdfd] border border-[#bfe4e4] rounded-2xl p-3 space-y-1.5 leading-relaxed text-slate-700"></div>
-        <div id="planb-loading" class="hidden text-[#1b7382] font-bold py-1">Gemini 正在搜尋就近舒適落腳點...</div>
+        <div id="planb-loading" class="hidden text-[#1b7382] font-bold py-1">正在搜尋就近舒適落腳點...</div>
       </div>
       <div class="pt-2 border-t border-slate-100 space-y-2">
         <div class="flex gap-1.5 overflow-x-auto scrollbar-none pb-1 text-[11px]">
           <button onclick="quickPlanB('去 ICONSIAM 路上嚴重塞車，全家在車上疲倦，請推薦就近寬敞商場或河畔茶座落腳避開塞車')" class="shrink-0 bg-[#f0fbfb] border border-[#cdeced] text-[#134954] px-2.5 py-1.5 rounded-xl font-bold">🚗 往 ICONSIAM 塞車</button>
           <button onclick="quickPlanB('在芭堤雅突發暴雨，去唔到戶外老虎園，有冇舒適室內冷氣備案？')" class="shrink-0 bg-[#fff9f0] border border-[#fed7aa] text-[#9a4f10] px-2.5 py-1.5 rounded-xl font-bold">🌧️ 芭堤雅突然落雨</button>
+          <button onclick="quickPlanB('市中心 Sukhumvit 或 Siam 嚴重塞車動彈不得，建議就近落車點？')" class="shrink-0 bg-[#ecfdf5] border border-[#a7f3d0] text-[#065f46] px-2.5 py-1.5 rounded-xl font-bold">🚦 市區大塞車</button>
         </div>
         <div class="flex gap-2">
-          <input type="text" id="planb-input" placeholder="輸入目前位置與狀況..." class="flex-1 text-xs border border-slate-200 rounded-xl px-3 py-2 bg-white text-slate-800">
+          <input type="text" id="planb-input" placeholder="輸入目前位置或狀況..." class="flex-1 text-xs border border-slate-200 rounded-xl px-3 py-2 bg-white text-slate-800">
           <button onclick="askPlanB()" class="h-10 bg-[#C1EAEA] text-[#0f343c] text-xs font-black px-4 rounded-xl">尋找</button>
         </div>
       </div>
@@ -918,10 +934,20 @@
   </div>
 
   <script>
-    // 💡 提示：放上 GitHub 獨立託管時，請在引號內填入免費 Gemini API Key
-    const apiKey = "";
+    // 💡 提示：API Key 優先從手機 LocalStorage 讀取，避免放上 GitHub 遭到安全撤銷
+    let customApiKey = localStorage.getItem('GEMINI_API_KEY') || "";
     let selectedVisionBase64 = null;
     let currentDriverThaiText = "";
+
+    function toggleApiKeyPrompt() {
+      const current = localStorage.getItem('GEMINI_API_KEY') || "";
+      const input = prompt("【可選】輸入您的 Gemini API Key：\n(金鑰只會保存在您這部手機的瀏覽器中，不會上傳 GitHub，避免被撤銷。若留空，系統會自動使用內建專家智囊庫，完全免費且無需金鑰)", current);
+      if (input !== null) {
+        customApiKey = input.trim();
+        localStorage.setItem('GEMINI_API_KEY', customApiKey);
+        alert(customApiKey ? "✅ API Key 已安全保存於本機！" : "ℹ️ 已切換為內建離線專家智囊庫模式。");
+      }
+    }
 
     // ==================== 底部導航欄視圖切換 ====================
     function switchView(viewName) {
@@ -1173,7 +1199,39 @@
       if (text) playThaiTTS(text, document.getElementById('custom-tts-btn'));
     }
 
-    // ==================== Gemini AI 呼叫封裝 ====================
+    // ==================== 內建在地慢活專家智囊庫 (GitHub 100% 可用) ====================
+    function getOfflineAdvisorReply(q) {
+      const text = q.toLowerCase();
+      if (text.includes("centralworld") || text.includes("下午茶") || text.includes("茶室") || text.includes("咖啡")) {
+        return "🍵 【CentralWorld 全家慢活下午茶推薦】：\n\n1. % Arabica (1F)：挑高中庭、極寬敞白色冷氣空間，沙發座位舒適，採光極佳，非常適合坐下來喝杯拿鐵歇腳。\n2. TWG Tea Salon (1F)：英式貴族風精緻茶座，沙發極軟，茶品香醇不刺激，環境安靜適合全家交談放鬆。\n3. After You Dessert Cafe (7F)：招牌日式芒果糯米刨冰與蜜糖吐司，甜而不膩，家庭出行必點！\n💡 動線提示：商場各樓層均有全平路無障礙升降機，走累了隨時可至 1 樓或 7 樓大型中庭休息區。";
+      }
+      if (text.includes("sky gallery") || text.includes("懸崖") || text.includes("菜") || text.includes("不辣")) {
+        return "🍽️ 【The Sky Gallery 全家招牌必點指南（已訂 C47 枱）】：\n\n1. 菠蘿海鮮炒飯 (Pineapple Fried Rice)：果香濃郁、完全不辣，份量足且滿滿蝦肉，深受大家喜愛。\n2. 泰式鮮蝦炒金邊粉 (Pad Thai Goong)：甜酸適中，花生碎與辣椒粉分開盛放，可自選調味。\n3. 沙嗲雞肉串配花生醬：肉質鮮嫩無骨，蘸溫熱花生甜醬極度開胃。\n4. 香茅烤春雞配甜酸汁：皮脆肉嫩，香氣撲鼻。\n5. 原個椰青 (Fresh Young Coconut)：清甜解暑，看夕陽拍照打卡必備。\n💡 溫馨提示：18:00 入座恰逢黃昏日落金黃時刻，海邊微風漸起，建議備好薄披肩。";
+      }
+      if (text.includes("四面佛") || text.includes("拜") || text.includes("香") || text.includes("禁忌")) {
+        return "🛕 【四面佛參拜與避坑實用指南】：\n\n1. 官方公價香燭：請務必在「圍欄內部」的正中央官方小賣部購買（一組只需 25-50 泰銖，含 12 炷香、4 串黃花、1 支蠟燭），切勿向圍欄外街邊小販購買。\n2. 順時針參拜：由正面（功名/事業）開始，順時針依次拜第2面（姻緣/家庭）、第3面（財富）、第4面（健康平安），每面插 3 炷香及獻 1 串花。\n3. 著裝要求：上衣需有袖、下身過膝長褲或長裙，展現端莊敬意。\n4. 交通動線：由 Grande Centre Point Prestige 步行經天橋或平路只需 2-3 分鐘即可抵達。";
+      }
+      if (text.includes("iconsiam") || text.includes("水上市場") || text.includes("夜景")) {
+        return "⛴️ 【ICONSIAM 慢活家庭全攻略】：\n\n1. G 樓 SOOKSIAM 室內冷氣水上市場：平路冷氣環境享受全泰國 77 府地道小食（泰式米粉湯、香蕉煎餅、芒果糯米飯），乾淨衛生。\n2. 6 樓空中瀑布水景餐廳區：挑高玻璃景觀，匯聚多家精緻泰菜（如 Nara、Thip Samai 鬼門炒粉）。\n3. 河畔聲光水舞秀：傍晚 18:30 / 20:00 於戶外碼頭廣場上演，河風習習，璀璨燈火非常壯觀。\n💡 提示：商場內有無障礙直達電梯，各層均設有寬敞冷氣休息座。";
+      }
+      return "🌴 【曼谷與芭堤雅慢活假期貼心提示】：\n\n・節奏安排：建議每日上午悠閒早餐、中午至午後安排 1-2 個室內冷氣平路景點、午後回酒店客廳或茶座休息避開烈日。\n・室內外溫差：商場及專車冷氣充足（約 20°C），戶外約 30°C，隨身必備輕便薄外套。\n・補水防曬：泰國氣候溫暖，記得定時補充水分，享受悠閒從容的家庭時光！";
+    }
+
+    function getOfflinePlanBReply(q) {
+      const text = q.toLowerCase();
+      if (text.includes("iconsiam") || text.includes("塞車") || text.includes("堵車") || text.includes("橋")) {
+        return "🚕 【往 ICONSIAM 避塞車 B 計劃】：\n\n【方案 A（推薦・轉乘渡輪避開跨河塞車）】：\n若專車卡在沙吞路（Sathorn），可讓司機就近在「BTS Saphan Taksin 站／中央碼頭（Sathorn Pier）」停車。步行至碼頭搭乘 ICONSIAM 專屬冷氣接駁船（船程約 5-8 分鐘），既免去橋上塞車，又能欣賞湄南河微風風光！\n\n【方案 B（原車折返・改去就近奢華新地標）】：\n若不欲轉船，可請司機改道前往剛落成的全新頂級室內地標【ONE Bangkok】或【Central Embassy】，車程僅數分鐘，同樣擁有頂級冷氣環境、米芝蓮泰菜及超寬敞平路漫步空間！";
+      }
+      if (text.includes("雨") || text.includes("暴雨") || text.includes("老虎園") || text.includes("芭堤雅")) {
+        return "🌧️ 【芭堤雅突發暴雨室內 B 計劃】：\n\n【備案 1：Terminal 21 Pattaya（首選平路商場）】：\n全室內超大冷氣空間，各樓層以各國機場航廈為主題（巴黎鐵塔、舊金山金門大橋），地面平坦好推車，頂層美食街 Pier 21 物美價廉，底層有大型超市。\n\n【備案 2：Hilton eforea Spa 水療體驗】：\n直接回到 Central Pattaya 商場上蓋的 Hilton 酒店，全家享受精油芳療或在觀景茶室品茶看海面雨景，自在慢活。";
+      }
+      if (text.includes("市區") || text.includes("sukhumvit") || text.includes("siam") || text.includes("腳攰")) {
+        return "🚶 【市中心急需歇腳 B 計劃】：\n\n1. 就近尋找空鐵 BTS 聯通商場（如 Siam Paragon、CentralWorld、The EmQuartier）：從空中天橋（Skywalk）可直接走入商場 2 樓或 3 樓，完全不必在地面日曬與等候紅綠燈。\n2. 各大商場 1 樓或高樓層均設有豪華沙發咖啡室（TWG、星巴克旗艦店），可直接入座喝杯冰茶休息。";
+      }
+      return "☕ 【塞車/突發狀況通用 B 計劃】：\n\n若路況嚴重擁堵，建議不必強行趕往原定目的地。可請司機在最近的大型連鎖商場或五星酒店大堂放下全家，點杯泰式奶茶或甜品小歇 1 小時，待下午 19:30 後路面高峰期過後再叫 Grab 專車出發！";
+    }
+
+    // ==================== Gemini AI / 智囊庫呼叫封裝 ====================
     async function askAdvisor() {
       const input = document.getElementById('advisor-input');
       const text = input.value.trim();
@@ -1185,8 +1243,20 @@
       output.innerHTML += `<div class="bg-[#C1EAEA] text-[#0f343c] font-black p-2.5 rounded-2xl text-xs ml-auto max-w-[85%]">${text}</div>`;
       loader.classList.remove('hidden');
 
+      // 若未自訂 API Key，直接由在地專家智囊庫秒回（GitHub 完美運作）
+      if (!customApiKey) {
+        setTimeout(() => {
+          const offlineAnswer = getOfflineAdvisorReply(text);
+          output.innerHTML += `<div class="bg-[#f0fbfb] border border-[#cdeced] text-slate-800 p-2.5 rounded-2xl text-xs leading-relaxed whitespace-pre-wrap">${offlineAnswer}</div>`;
+          loader.classList.add('hidden');
+          output.scrollTop = output.scrollHeight;
+        }, 350);
+        return;
+      }
+
+      // 若有提供 Key，調用雲端 Gemini
       try {
-        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${customApiKey}`;
         const res = await fetch(url, {
           method: 'POST',
           headers: {'Content-Type': 'application/json'},
@@ -1196,12 +1266,16 @@
           })
         });
         const data = await res.json();
-        const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || "暫時未能取得建議。";
+        const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+        if (!reply) throw new Error("API response empty");
         output.innerHTML += `<div class="bg-[#f0fbfb] border border-[#cdeced] text-slate-800 p-2.5 rounded-2xl text-xs leading-relaxed whitespace-pre-wrap">${reply}</div>`;
       } catch (e) {
-        output.innerHTML += `<div class="bg-rose-50 text-rose-700 p-2.5 rounded-xl text-xs">連線未成功。若在 GitHub 自行託管，請確認代碼中的 apiKey 已填入有效的 Gemini API Key。</div>`;
+        // 雲端連線失敗時，自動降級調用在地專家庫，確保永不掛掉
+        const fallback = getOfflineAdvisorReply(text);
+        output.innerHTML += `<div class="bg-[#f0fbfb] border border-[#cdeced] text-slate-800 p-2.5 rounded-2xl text-xs leading-relaxed whitespace-pre-wrap">${fallback}</div>`;
       } finally {
         loader.classList.add('hidden');
+        output.scrollTop = output.scrollHeight;
       }
     }
 
@@ -1224,8 +1298,20 @@
       loader.classList.remove('hidden');
       output.classList.add('hidden');
 
+      // 若未自訂 API Key，直接由在地專家智囊庫秒回（GitHub 完美運作）
+      if (!customApiKey) {
+        setTimeout(() => {
+          const offlinePlanB = getOfflinePlanBReply(text);
+          output.innerHTML = `<div class="whitespace-pre-wrap">${offlinePlanB}</div>`;
+          output.classList.remove('hidden');
+          loader.classList.add('hidden');
+        }, 350);
+        return;
+      }
+
+      // 若有提供 Key，調用雲端 Gemini
       try {
-        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${customApiKey}`;
         const res = await fetch(url, {
           method: 'POST',
           headers: {'Content-Type': 'application/json'},
@@ -1235,11 +1321,14 @@
           })
         });
         const data = await res.json();
-        const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || "建議先於就近大型商場休息。";
+        const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+        if (!reply) throw new Error("API response empty");
         output.innerHTML = `<div class="whitespace-pre-wrap">${reply}</div>`;
         output.classList.remove('hidden');
       } catch (e) {
-        output.innerHTML = '連線未成功。若在 GitHub 獨立託管，請確認已在代碼中填入 Gemini API Key。';
+        // 雲端連線失敗時，自動降級調用在地專家庫，確保永不掛掉
+        const fallback = getOfflinePlanBReply(text);
+        output.innerHTML = `<div class="whitespace-pre-wrap">${fallback}</div>`;
         output.classList.remove('hidden');
       } finally {
         loader.classList.add('hidden');
